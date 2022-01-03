@@ -3,7 +3,7 @@ import React from 'react';
 import './scss/style.scss';
 
 import Header from "./components/Header/Header";
-import Sidabar from "./components/sidebar/Sidabar";
+import Sidebar from "./components/Sidebar/Sidebar";
 import Profile from "./components/Profile/Profile";
 
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
           <Header />
           <div className="page">
               <div className="container">
-                  <Sidabar />
+                  <Sidebar />
                   <div className="content">
                       <Profile />
                   </div>
