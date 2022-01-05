@@ -1,14 +1,24 @@
 import React from "react";
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Link
+} from "react-router-dom";
 
-const Sidebar = () => {
+export  function Sidebar() {
 
 	return (
 		<>
 			<section className="sidebar">
 				<nav className="menu">
 					<ul className="menu__wrap">
-						<li className="menu__item">Profile</li>
-						<li className="menu__item">Messages</li>
+						<li className="menu__item">
+							<Link to={`/profile`}>Profile</Link>
+						</li>
+						<li className="menu__item">
+							<Link to={`/dialogs`}>Dialogs</Link>
+						</li>
 						<li className="menu__item">News</li>
 						<li className="menu__item">Music</li>
 					</ul>
@@ -17,5 +27,3 @@ const Sidebar = () => {
 		</>
 	)
 }
-
-export default Sidebar;

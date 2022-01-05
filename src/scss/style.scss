@@ -76,3 +76,83 @@
 	}
 }
 
+//для компонетны Dialogs
+
+.dialogs {
+	//display: flex;
+	align-items: center;
+
+	.new-messages {
+		display: flex;
+		margin-top: 25px;
+
+		& img {
+			width: 80px;
+			border-radius: 10px;
+			margin-right: 10px;
+		}
+	}
+
+
+
+
+
+	.message {
+		display: flex;
+		max-width: 450px;
+		align-items: end;
+
+	}
+
+	.message .imgWrap {
+		display: flex;
+		width: 200px;
+
+	}
+
+	.message .imgWrap img {
+		margin: 0 auto;
+		width: 50px;
+		height: 50px;
+		border-radius: 100%;
+
+	}
+
+	.message .messageWrap {
+		border-radius: 8px 8px 8px 0;
+		background-color: rgba(0,0,0, .3);
+		width: 100%;
+		position: relative;
+		padding: 20px 10px;
+	}
+
+	.message .messageWrap:after {
+		content: '';
+		position: absolute;
+		left: -20px;
+		bottom: 0;
+		border-bottom: 15px solid rgba(0,0,0, .3);
+		border-left: 20px solid transparent;
+
+	}
+
+	.message .messageWrap .userName {
+		color: blue;
+	}
+
+	.message .messageWrap .userTxt {
+		color: white;
+		margin-top: 15px;
+	}
+
+	.message .messageWrap .messageTime {
+		position: absolute;
+		font-size: 12px;
+		bottom: 5px;
+		right: 5px;
+		color: rgba(255,255,255,.6);
+	}
+
+
+}
+

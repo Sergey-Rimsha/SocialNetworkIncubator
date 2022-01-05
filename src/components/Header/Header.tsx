@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../img/logo.svg";
 
-const Header = () => {
+export function Header() {
 
 	return (
 		<header className="header">

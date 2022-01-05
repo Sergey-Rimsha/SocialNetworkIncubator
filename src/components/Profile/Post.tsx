@@ -7,7 +7,7 @@ const Post = () => {
 	return (
 		<div className="posts">
 			<div className="new-post">
-				<textarea name="new-post" id="#" placeholder="your news..." >
+				<textarea name="new-post" placeholder="your news..." >
 				</textarea>
 				<div className="new-post__btn">
 					<button>Send</button>

@@ -2,7 +2,7 @@ import React from "react";
 import UserImg from "../../img/ava_default.jpg";
 import Post from "./Post";
 
-const Profile = () => {
+export function Profile() {
 
 	return (
 		<section className="profile">
@@ -32,5 +32,3 @@ const Profile = () => {
 		</section>
 	)
 }
-
-export default Profile
