@@ -1,4 +1,6 @@
-export type StateType = {
+
+
+type StateType = {
 	dialogsPage: DialogsType
 	profilePage: PostType
 }
@@ -56,4 +58,12 @@ export const state: StateType = {
 			{id: 4, message: 'Dada', likesCount: 11}
 		]
 	}
+}
+
+
+export const addPost = (mess:string) => {
+	state.profilePage.posts.push(
+		{id: 5, message: mess, likesCount: 0}
+	)
+	console.log(state.profilePage.posts);
 }

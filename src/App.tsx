@@ -13,10 +13,38 @@ import {Sidebar} from "./components/Sidebar/Sidebar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 
-import {state} from "./state/state"
+type RootStateType = {
+	state: StateType
+	addPost: object
+}
+type StateType = {
+	dialogsPage: DialogsType
+	profilePage: PostType
+}
+type DialogsType = {
+	chatUsers: Array<InUser>
+	messages: Array<InMessage>
+}
+type InUser = {
+	id: number
+	name: string
+}
+type InMessage = {
+	id: number
+	name: string
+	message: string
+}
+type PostType = {
+	posts: Array<InPost>
+}
+type InPost = {
+	id: number
+	message: string
+	likesCount: number
+}
 
 
-const App = () => {
+const App: React.FC<RootStateType> = (props) => {
 	return (
 		<Router>
 			<div className="App">
@@ -26,8 +54,15 @@ const App = () => {
 						<Sidebar />
 						<div className="content">
 							<Routes>
-								<Route path={`/profile`} element={<Profile profilePage={state.profilePage} />}/>
-								<Route path={`/dialogs`} element={<Dialogs dialogsPage={state.dialogsPage} />}/>
+								<Route
+									path={`/profile`}
+									element={
+									<Profile
+										profilePage={props.state.profilePage}
+										addPost={props.addPost}
+									/>
+								}								/>
+								<Route path={`/dialogs`} element={<Dialogs dialogsPage={props.state.dialogsPage} />}/>
 							</Routes>
 						</div>
 					</div>

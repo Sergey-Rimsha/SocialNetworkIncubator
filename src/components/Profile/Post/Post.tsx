@@ -1,6 +1,5 @@
 import React from "react";
 import UserImg from "../../../img/ava_default.jpg";
-import {NewPost} from "../NewPost/NewPost";
 
 type InPost = {
 	id: number

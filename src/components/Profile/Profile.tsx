@@ -6,6 +6,7 @@ import {NewPost} from "./NewPost/NewPost";
 
 type StateType = {
 	profilePage: PostType
+	addPost: object
 }
 
 type PostType = {
@@ -28,7 +29,7 @@ export function Profile(props: StateType) {
 				<ProfileInfo />
 			</div>
 
-			<NewPost />
+			<NewPost addPost={props.addPost} />
 
 			{
 				props.profilePage.posts.map((post) => {
