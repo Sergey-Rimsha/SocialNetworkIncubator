@@ -2,17 +2,25 @@ import React from "react";
 import UserImg from "../../../img/ava_default.jpg";
 import {NewPost} from "../NewPost/NewPost";
 
-export function Post() {
+type InPost = {
+	id: number
+	message: string
+	likesCount: number
+}
+
+export function Post(props: InPost) {
 
 	return (
 		<div className="posts">
-			<NewPost />
 			<div className="user-post">
 				<div className="user-post__user-img">
 					<img src={UserImg} alt="user_img"/>
 				</div>
 				<div className="user-post__text">
-					Hello world!!!
+					{props.message}
+				</div>
+				<div className="user-post__like">
+					{`likes: ${props.likesCount}`}
 				</div>
 			</div>
 		</div>

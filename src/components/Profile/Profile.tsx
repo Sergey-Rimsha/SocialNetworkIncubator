@@ -2,8 +2,22 @@ import React from "react";
 import UserImg from "../../img/ava_default.jpg";
 import {Post} from "./Post/Post";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {NewPost} from "./NewPost/NewPost";
 
-export function Profile() {
+type StateType = {
+	profilePage: PostType
+}
+
+type PostType = {
+	posts: Array<InPost>
+}
+type InPost = {
+	id: number
+	message: string
+	likesCount: number
+}
+
+export function Profile(props: StateType) {
 
 	return (
 		<section className="profile">
@@ -13,7 +27,20 @@ export function Profile() {
 				</div>
 				<ProfileInfo />
 			</div>
-			<Post />
+
+			<NewPost />
+
+			{
+				props.profilePage.posts.map((post) => {
+					return (
+						<Post
+							id={post.id}
+							message={post.message}
+							likesCount={post.likesCount}
+						/>
+					)
+				})
+			}
 		</section>
 	)
 }

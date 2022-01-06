@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route
+	BrowserRouter as Router,
+	Routes,
+	Route
 } from "react-router-dom";
 
 // import './App.css';
@@ -17,24 +17,24 @@ import {state} from "./state/state"
 
 
 const App = () => {
-  return (
-      <Router>
-          <div className="App">
-              <Header />
-              <div className="page">
-                  <div className="container">
-                      <Sidebar />
-                      <div className="content">
-                          <Routes>
-                              <Route path={`/profile`} element={<Profile />}/>
-							  <Route path={`/dialogs`} element={<Dialogs dialogs={state.dialogs} />}/>
-                          </Routes>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </Router>
-  );
+	return (
+		<Router>
+			<div className="App">
+				<Header />
+				<div className="page">
+					<div className="container">
+						<Sidebar />
+						<div className="content">
+							<Routes>
+								<Route path={`/profile`} element={<Profile profilePage={state.profilePage} />}/>
+								<Route path={`/dialogs`} element={<Dialogs dialogsPage={state.dialogsPage} />}/>
+							</Routes>
+						</div>
+					</div>
+				</div>
+			</div>
+		</Router>
+	);
 }
 
 export default App;
