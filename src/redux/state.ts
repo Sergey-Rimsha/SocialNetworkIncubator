@@ -1,3 +1,4 @@
+import {renderApp} from "../index";
 
 
 type StateType = {
@@ -61,9 +62,11 @@ export const state: StateType = {
 }
 
 
-export const addPost = (mess:string) => {
+export const addPost = (mess: string) => {
 	state.profilePage.posts.push(
 		{id: 5, message: mess, likesCount: 0}
 	)
 	console.log(state.profilePage.posts);
+	renderApp();
 }
+

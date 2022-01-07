@@ -5,12 +5,26 @@ import App from './App';
 // import reportWebVitals from './reportWebVitals';
 import {addPost, state} from './redux/state';
 
-ReactDOM.render(
-    <React.StrictMode>
-        <App state={state} addPost={addPost} />
-	</React.StrictMode>,
-    document.getElementById('root')
-);
+export let renderApp = () => {
+	return (
+		ReactDOM.render(
+			<React.StrictMode>
+				<App state={state} addPost={addPost} />
+			</React.StrictMode>,
+			document.getElementById('root')
+		)
+	)
+}
+
+renderApp();
+
+// ReactDOM.render(
+//     <React.StrictMode>
+// 		{rerenderApp}
+// 		<App state={state} addPost={addPost} />
+// 	</React.StrictMode>,
+//     document.getElementById('root')
+// );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
