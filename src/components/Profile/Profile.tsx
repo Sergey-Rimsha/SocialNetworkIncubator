@@ -4,9 +4,11 @@ import {Post} from "./Post/Post";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {NewPost} from "./NewPost/NewPost";
 
+import {AddPostType} from "../../render";
+
 type StateType = {
 	profilePage: PostType
-	addPost: object
+	addPost: AddPostType
 }
 
 type PostType = {

@@ -5,7 +5,6 @@ import {
 	Route
 } from "react-router-dom";
 
-// import './App.css';
 import './scss/style.scss';
 
 import {Header} from "./components/Header/Header";
@@ -13,9 +12,15 @@ import {Sidebar} from "./components/Sidebar/Sidebar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 
+import {AddPostType} from "./render";
+
+// type on change --- ----- -- - -- -
+type OnChangeMessagePostType = (text: string) => void
+
 type RootStateType = {
 	state: StateType
-	addPost: object
+	addPost: AddPostType
+	onChangeMessagePost: OnChangeMessagePostType
 }
 type StateType = {
 	dialogsPage: DialogsType
@@ -60,8 +65,8 @@ const App: React.FC<RootStateType> = (props) => {
 									<Profile
 										profilePage={props.state.profilePage}
 										addPost={props.addPost}
-									/>
-								}								/>
+									/>}
+								/>
 								<Route path={`/dialogs`} element={<Dialogs dialogsPage={props.state.dialogsPage} />}/>
 							</Routes>
 						</div>

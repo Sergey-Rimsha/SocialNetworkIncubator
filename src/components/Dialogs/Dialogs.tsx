@@ -23,7 +23,7 @@ type InMessage = {
 
 export function Dialogs (props: PropsType) {
 
-	let message = props.dialogsPage.messages.map((mess) => {
+	let message = props.dialogsPage.messages.map((mess: InMessage) => {
 		return (
 			<div className="message" >
 				<div className="imgWrap">
@@ -48,7 +48,7 @@ export function Dialogs (props: PropsType) {
 		<div className="dialogs-wrap">
 			<div className="user-chat-wrap">
 				{
-					props.dialogsPage.chatUsers.map((user:any) => {
+					props.dialogsPage.chatUsers.map((user: InUser) => {
 						return <ChatUsers userId={user.id} userName={user.name} />
 					})
 				}

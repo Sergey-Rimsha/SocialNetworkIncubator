@@ -2,8 +2,12 @@ import React from "react";
 import UserImg from "../../../img/ava_default.jpg";
 import {Link} from "react-router-dom";
 
-export function ChatUsers(props:any) {
-	console.log(props)
+type InUser = {
+	userId: number
+	userName: string
+}
+
+export function ChatUsers(props: InUser) {
 	return (
 		<>
 			<Link to={`$/${props.userId}`}>
