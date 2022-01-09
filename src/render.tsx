@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {addPost, onChangeMessagePost} from "./redux/state";
+import {addMessageChat, addPost, onChangeMessagePost, onChangeMessChat} from "./redux/state";
 
-export type AddPostType = (mess: string) => void
+export type AddPostType = () => void
+
 type StateType = {
 	dialogsPage: DialogsType
 	profilePage: PostType
@@ -12,6 +13,7 @@ type StateType = {
 type DialogsType = {
 	chatUsers: Array<InUser>
 	messages: Array<InMessage>
+	changeMessChat: string
 }
 type InUser = {
 	id: number
@@ -24,6 +26,7 @@ type InMessage = {
 }
 type PostType = {
 	posts: Array<InPost>
+	changeMessage: string
 }
 type InPost = {
 	id: number
@@ -42,6 +45,8 @@ export let renderApp = (state: StateType) => {
 					state={state}
 					addPost={addPost}
 					onChangeMessagePost={onChangeMessagePost}
+					addMessageChat={addMessageChat}
+					onChangeMessChat={onChangeMessChat}
 				/>
 			</React.StrictMode>,
 			document.getElementById('root')

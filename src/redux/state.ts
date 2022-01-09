@@ -7,6 +7,7 @@ type StateType = {
 type DialogsType = {
 	chatUsers: Array<InUser>
 	messages: Array<InMessage>
+	changeMessChat: string
 }
 type InUser = {
 	id: number
@@ -41,10 +42,11 @@ export const state: StateType = {
 		messages: [
 			{id: 1, name: 'Sergey', message: 'hello world!!!'},
 			{id: 2, name: 'Vasa', message: 'it_incubator'},
-			{id: 1, name: 'Sasha', message: 'Hello Dimych'},
-			{id: 1, name: 'kiril', message: 'hay'},
-			{id: 1, name: 'Dima', message: 'he he he:)'}
-		]
+			{id: 3, name: 'Sasha', message: 'Hello Dimych'},
+			{id: 4, name: 'kiril', message: 'hay'},
+			{id: 5, name: 'Dima', message: 'he he he:)'}
+		],
+		changeMessChat: ''
 	},
 	profilePage: {
 		posts: [
@@ -57,10 +59,13 @@ export const state: StateType = {
 	}
 }
 
+// для добавления постов !!!
 
-export const addPost = (mess: string): void => {
+export const addPost = (): void => {
+	let mess: string = state.profilePage.changeMessage;
+	let newId: number = state.profilePage.posts.length + 1;
 	state.profilePage.posts.push(
-		{id: 5, message: mess, likesCount: 0}
+		{id: newId, message: mess, likesCount: 0}
 	)
 	state.profilePage.changeMessage = ""
 	console.log(state.profilePage.posts);
@@ -70,8 +75,31 @@ export const addPost = (mess: string): void => {
 
 export const onChangeMessagePost = (text: string): void => {
 	state.profilePage.changeMessage = text;
+	renderApp(state);
+}
+
+// для добовления new Message в чате !!!!
+
+export const addMessageChat = (): void => {
+	let newMessage = state.dialogsPage.changeMessChat;
+	let newId = state.dialogsPage.messages.length + 1;
+
+	state.dialogsPage.messages.push(
+		{id: newId, name: 'Current user', message: newMessage}
+	);
+
+	state.dialogsPage.changeMessChat = '';
+	renderApp(state);
 
 }
+
+export const onChangeMessChat = (text: string): void => {
+	state.dialogsPage.changeMessChat = text;
+
+	renderApp(state);
+}
+
+
 
 
 // типизация функций --->> пример

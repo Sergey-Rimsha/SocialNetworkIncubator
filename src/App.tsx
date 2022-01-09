@@ -15,12 +15,16 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {AddPostType} from "./render";
 
 // type on change --- ----- -- - -- -
-type OnChangeMessagePostType = (text: string) => void
+export type OnChangeMessagePostType = (text: string) => void
+export type OnChangeMessChatType = (text: string) => void
+export type AddMessageChatType = () => void
 
 type RootStateType = {
 	state: StateType
 	addPost: AddPostType
 	onChangeMessagePost: OnChangeMessagePostType
+	onChangeMessChat: OnChangeMessChatType
+	addMessageChat: AddMessageChatType
 }
 type StateType = {
 	dialogsPage: DialogsType
@@ -29,6 +33,7 @@ type StateType = {
 type DialogsType = {
 	chatUsers: Array<InUser>
 	messages: Array<InMessage>
+	changeMessChat: string
 }
 type InUser = {
 	id: number
@@ -41,6 +46,7 @@ type InMessage = {
 }
 type PostType = {
 	posts: Array<InPost>
+	changeMessage: string
 }
 type InPost = {
 	id: number
@@ -62,12 +68,21 @@ const App: React.FC<RootStateType> = (props) => {
 								<Route
 									path={`/profile`}
 									element={
-									<Profile
-										profilePage={props.state.profilePage}
-										addPost={props.addPost}
+										<Profile
+											profilePage={props.state.profilePage}
+											addPost={props.addPost}
+											onChangeMessagePost={props.onChangeMessagePost}
 									/>}
 								/>
-								<Route path={`/dialogs`} element={<Dialogs dialogsPage={props.state.dialogsPage} />}/>
+								<Route
+									path={`/dialogs`}
+									element={
+										<Dialogs
+											dialogsPage={props.state.dialogsPage}
+											addMessageChat={props.addMessageChat}
+											onChangeMessChat={props.onChangeMessChat}
+										/>}
+								/>
 							</Routes>
 						</div>
 					</div>

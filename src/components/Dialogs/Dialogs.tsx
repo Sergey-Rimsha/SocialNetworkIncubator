@@ -2,13 +2,17 @@ import React from "react";
 import UserImg from "../../img/ava_default.jpg";
 import {ChatUsers} from "./ChatUsers/ChatUsers";
 import {NewMessages} from "./NewMessages/NewMessages";
+import {AddMessageChatType, OnChangeMessChatType} from "../../App";
 
 type PropsType = {
 	dialogsPage: DialogsType
+	onChangeMessChat: OnChangeMessChatType
+	addMessageChat: AddMessageChatType
 }
 type DialogsType = {
 	chatUsers: Array<InUser>
 	messages: Array<InMessage>
+	changeMessChat: string
 }
 type InUser = {
 	id: number
@@ -55,7 +59,11 @@ export function Dialogs (props: PropsType) {
 			</div>
 			<div className="dialogs">
 				{message}
-				<NewMessages />
+				<NewMessages
+					changeMessChat={props.dialogsPage.changeMessChat}
+					onChangeMessChat={props.onChangeMessChat}
+					addMessageChat={props.addMessageChat}
+				/>
 			</div>
 		</div>
 	)

@@ -1,7 +1,24 @@
 import React from "react";
 import UserImg from "../../../img/ava_default.jpg";
+import {AddMessageChatType, OnChangeMessChatType} from "../../../App";
 
-export function NewMessages() {
+type NewMessagesPropsType = {
+	changeMessChat: string
+	onChangeMessChat: OnChangeMessChatType
+	addMessageChat: AddMessageChatType
+}
+
+
+export function NewMessages(props: NewMessagesPropsType) {
+
+	const addNewMessage = (): void => {
+		props.addMessageChat();
+	}
+
+	const onChangeMess = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
+		let text: string = event.target.value;
+		props.onChangeMessChat(text)
+	}
 
 	return (
 		<div className="new-messages">
@@ -10,9 +27,9 @@ export function NewMessages() {
 				<div className="dialogs__user-name">
 					Sergey Rimsha
 				</div>
-				<textarea name="dialogs-message" placeholder="your message..." />
+				<textarea value={props.changeMessChat} onChange={onChangeMess} name="dialogs-message" placeholder="your message..." />
 				<div className="dialogs__btn">
-					<button>Send</button>
+					<button onClick={addNewMessage} >Send</button>
 				</div>
 			</div>
 		</div>

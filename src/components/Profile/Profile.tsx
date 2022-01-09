@@ -5,14 +5,16 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {NewPost} from "./NewPost/NewPost";
 
 import {AddPostType} from "../../render";
+import {OnChangeMessagePostType} from "../../App";
 
 type StateType = {
 	profilePage: PostType
 	addPost: AddPostType
+	onChangeMessagePost: OnChangeMessagePostType
 }
-
 type PostType = {
 	posts: Array<InPost>
+	changeMessage: string
 }
 type InPost = {
 	id: number
@@ -31,7 +33,10 @@ export function Profile(props: StateType) {
 				<ProfileInfo />
 			</div>
 
-			<NewPost addPost={props.addPost} />
+			<NewPost
+				changeMessage={props.profilePage.changeMessage}
+				addPost={props.addPost}
+				onChangeMessagePost={props.onChangeMessagePost}/>
 
 			{
 				props.profilePage.posts.map((post) => {
