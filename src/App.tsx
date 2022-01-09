@@ -12,7 +12,7 @@ import {Sidebar} from "./components/Sidebar/Sidebar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 
-import {AddPostType} from "./render";
+import {AddPostType} from "./index";
 
 // type on change --- ----- -- - -- -
 export type OnChangeMessagePostType = (text: string) => void

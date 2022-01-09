@@ -1,5 +1,3 @@
-import {renderApp} from "../render";
-
 type StateType = {
 	dialogsPage: DialogsType
 	profilePage: PostType
@@ -28,8 +26,11 @@ type InPost = {
 	likesCount: number
 }
 
+let rerenderEntireTree = (state:StateType) => {
+	console.log('render')
+}
 
-export const state: StateType = {
+export let state: StateType = {
 	dialogsPage: {
 		chatUsers: [
 			{id: 1, name: 'Sergey'},
@@ -70,12 +71,12 @@ export const addPost = (): void => {
 	state.profilePage.changeMessage = ""
 	console.log(state.profilePage.posts);
 
-	renderApp(state);
+	rerenderEntireTree(state);
 }
 
 export const onChangeMessagePost = (text: string): void => {
 	state.profilePage.changeMessage = text;
-	renderApp(state);
+	rerenderEntireTree(state);
 }
 
 // для добовления new Message в чате !!!!
@@ -89,14 +90,19 @@ export const addMessageChat = (): void => {
 	);
 
 	state.dialogsPage.changeMessChat = '';
-	renderApp(state);
+	rerenderEntireTree(state);
 
 }
 
 export const onChangeMessChat = (text: string): void => {
 	state.dialogsPage.changeMessChat = text;
 
-	renderApp(state);
+	rerenderEntireTree(state);
+}
+
+
+export const subscribe = (observe: any) => {
+	rerenderEntireTree = observe;
 }
 
 

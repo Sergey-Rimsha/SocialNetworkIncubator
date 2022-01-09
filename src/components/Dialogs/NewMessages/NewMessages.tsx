@@ -15,7 +15,7 @@ export function NewMessages(props: NewMessagesPropsType) {
 		props.addMessageChat();
 	}
 
-	const onChangeMess = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
+		const onChangeMess = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
 		let text: string = event.target.value;
 		props.onChangeMessChat(text)
 	}

@@ -1,6 +1,6 @@
 import React from "react";
 
-import {AddPostType} from "../../../render";
+import {AddPostType} from "../../../index";
 import {OnChangeMessagePostType} from "../../../App";
 
 type PropsType = {

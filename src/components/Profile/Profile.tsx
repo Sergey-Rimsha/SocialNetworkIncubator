@@ -4,7 +4,7 @@ import {Post} from "./Post/Post";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {NewPost} from "./NewPost/NewPost";
 
-import {AddPostType} from "../../render";
+import {AddPostType} from "../../index";
 import {OnChangeMessagePostType} from "../../App";
 
 type StateType = {
