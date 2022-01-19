@@ -4,22 +4,11 @@ import {Post} from "./Post/Post";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {NewPost} from "./NewPost/NewPost";
 
-import {AddPostType} from "../../index";
-import {OnChangeMessagePostType} from "../../App";
+import {ActionType, PostType} from "../../redux/state";
 
 type StateType = {
 	profilePage: PostType
-	addPost: AddPostType
-	onChangeMessagePost: OnChangeMessagePostType
-}
-type PostType = {
-	posts: Array<InPost>
-	changeMessage: string
-}
-type InPost = {
-	id: number
-	message: string
-	likesCount: number
+	dispatch: (action: ActionType) => void
 }
 
 export function Profile(props: StateType) {
@@ -35,8 +24,8 @@ export function Profile(props: StateType) {
 
 			<NewPost
 				changeMessage={props.profilePage.changeMessage}
-				addPost={props.addPost}
-				onChangeMessagePost={props.onChangeMessagePost}/>
+				dispatch={props.dispatch}
+			/>
 
 			{
 				props.profilePage.posts.map((post) => {

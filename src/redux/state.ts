@@ -2,13 +2,16 @@ export type StoreType = {
 	_state: StateType
 	getState: () => StateType
 	_callSubscriber: (state: StateType) => void
-	addPost: () => void
-	onChangeMessagePost: (text: string) => void
-	addMessageChat: () => void
-	onChangeMessChat: (text: string) => void
 	subscribe: (observe: any) => void
+	dispatch: (action: ActionType) => void
 
 }
+
+export type ActionType = {
+	type: 'ADD-MESSAGE-CHAT' | 'ON-CHANGE-MESS-CHAT' | 'ADD-POST' | 'ON-CHANGE-MESS-POST'
+	text?: any
+}
+
 export type StateType = {
 	dialogsPage: DialogsType
 	profilePage: PostType
@@ -76,49 +79,36 @@ export let store: StoreType = {
 		console.log('render')
 	},
 
-	// для добавления постов !!!
-
-	addPost() {
-		let mess: string = this._state.profilePage.changeMessage;
-		let newId: number = this._state.profilePage.posts.length + 1;
-		this._state.profilePage.posts.push(
-			{id: newId, message: mess, likesCount: 0}
-		)
-		this._state.profilePage.changeMessage = ""
-		console.log(this._state.profilePage.posts);
-
-		this._callSubscriber(this._state);
-	},
-
-	onChangeMessagePost(text) {
-		this._state.profilePage.changeMessage = text;
-		this._callSubscriber(this._state);
-	},
-
-	// для добовления new Message в чате !!!!
-
-	addMessageChat() {
-		let newMessage = this._state.dialogsPage.changeMessChat;
-		let newId = this._state.dialogsPage.messages.length + 1;
-
-		this._state.dialogsPage.messages.push(
-			{id: newId, name: 'Current user', message: newMessage}
-		);
-
-		this._state.dialogsPage.changeMessChat = '';
-		this._callSubscriber(this._state);
-
-	},
-
-	onChangeMessChat(text) {
-		this._state.dialogsPage.changeMessChat = text;
-
-		this._callSubscriber(this._state);
-	},
-
-
 	subscribe(observe) {
 		this._callSubscriber = observe;
+	},
+
+	dispatch(action) {
+		if (action.type === 'ADD-MESSAGE-CHAT') {
+			let newMessage = this._state.dialogsPage.changeMessChat;
+			let newId = this._state.dialogsPage.messages.length + 1;
+			this._state.dialogsPage.messages.push(
+				{id: newId, name: 'Current user', message: newMessage}
+			);
+			this._state.dialogsPage.changeMessChat = '';
+			this._callSubscriber(this._state);
+		} else if (action.type === 'ON-CHANGE-MESS-CHAT') {
+			this._state.dialogsPage.changeMessChat = action.text;
+			this._callSubscriber(this._state);
+		} else if (action.type === 'ADD-POST') {
+			let mess: string = this._state.profilePage.changeMessage;
+			let newId: number = this._state.profilePage.posts.length + 1;
+			this._state.profilePage.posts.push(
+				{id: newId, message: mess, likesCount: 0}
+			)
+			this._state.profilePage.changeMessage = ""
+			console.log(this._state.profilePage.posts);
+
+			this._callSubscriber(this._state);
+		} else if (action.type === 'ON-CHANGE-MESS-POST') {
+			this._state.profilePage.changeMessage = action.text;
+			this._callSubscriber(this._state);
+		}
 	}
 
 }

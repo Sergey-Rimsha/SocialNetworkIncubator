@@ -1,23 +1,22 @@
 import React from "react";
 import UserImg from "../../../img/ava_default.jpg";
-import {AddMessageChatType, OnChangeMessChatType} from "../../../App";
+import {ActionType} from "../../../redux/state";
 
 type NewMessagesPropsType = {
 	changeMessChat: string
-	onChangeMessChat: OnChangeMessChatType
-	addMessageChat: AddMessageChatType
+	dispatch: (action: ActionType) => void
 }
 
 
 export function NewMessages(props: NewMessagesPropsType) {
 
 	const addNewMessage = (): void => {
-		props.addMessageChat();
+		props.dispatch({type: 'ADD-MESSAGE-CHAT'})
 	}
 
-		const onChangeMess = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
-		let text: string = event.target.value;
-		props.onChangeMessChat(text)
+	const onChangeMess = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
+		let text: string = event.currentTarget.value;
+		props.dispatch({type: 'ON-CHANGE-MESS-CHAT', text: text})
 	}
 
 	return (

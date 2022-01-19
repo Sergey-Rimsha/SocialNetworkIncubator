@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import {StateType, store} from "./redux/state";
 
-export type AddPostType = () => void
 
 export let rerenderEntireTree = (state: StateType) => {
 	return (
@@ -12,10 +11,7 @@ export let rerenderEntireTree = (state: StateType) => {
 			<React.StrictMode>
 				<App
 					state={state}
-					addPost={store.addPost.bind(store)}
-					onChangeMessagePost={store.onChangeMessagePost.bind(store)}
-					addMessageChat={store.addMessageChat.bind(store)}
-					onChangeMessChat={store.onChangeMessChat.bind(store)}
+					dispatch={store.dispatch.bind(store)}
 				/>
 			</React.StrictMode>,
 			document.getElementById('root')

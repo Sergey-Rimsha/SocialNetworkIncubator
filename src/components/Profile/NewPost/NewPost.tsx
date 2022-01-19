@@ -1,23 +1,22 @@
 import React from "react";
 
-import {AddPostType} from "../../../index";
-import {OnChangeMessagePostType} from "../../../App";
+import {ActionType} from "../../../redux/state";
 
 type PropsType = {
-	addPost: AddPostType
 	changeMessage: string
-	onChangeMessagePost: OnChangeMessagePostType
+	dispatch: (action: ActionType) => void
 }
 
 
 export function NewPost(props: PropsType) {
 
 	const addNewPost = () => {
-		props.addPost();
+		props.dispatch({type: 'ADD-POST'});
 	}
 
 	const onChangeText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-		props.onChangeMessagePost(event.target.value)
+		let text = event.currentTarget.value;
+		props.dispatch({type: 'ON-CHANGE-MESS-POST', text: text})
 	}
 
 	return (
