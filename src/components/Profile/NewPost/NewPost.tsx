@@ -1,6 +1,6 @@
 import React from "react";
 
-import {ActionType} from "../../../redux/state";
+import {ActionType, addPostAC, onChangeMessPostAC} from "../../../redux/state";
 
 type PropsType = {
 	changeMessage: string
@@ -11,12 +11,12 @@ type PropsType = {
 export function NewPost(props: PropsType) {
 
 	const addNewPost = () => {
-		props.dispatch({type: 'ADD-POST'});
+		props.dispatch(addPostAC());
 	}
 
 	const onChangeText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		let text = event.currentTarget.value;
-		props.dispatch({type: 'ON-CHANGE-MESS-POST', text: text})
+		props.dispatch(onChangeMessPostAC(text))
 	}
 
 	return (

@@ -1,3 +1,5 @@
+import {text} from "stream/consumers";
+
 export type StoreType = {
 	_state: StateType
 	getState: () => StateType
@@ -111,6 +113,28 @@ export let store: StoreType = {
 		}
 	}
 
+}
+
+// actionCreates -- message chat
+
+export const addMessageChatAC = (): ActionType => ({type: 'ADD-MESSAGE-CHAT'})
+
+export const onChangeMessChatAC = (text: string): ActionType => {
+	return {
+		type: 'ON-CHANGE-MESS-CHAT',
+		text: text
+	}
+}
+
+// actionCreates -- post
+
+export const addPostAC = (): ActionType => ({type: 'ADD-POST'})
+
+export const onChangeMessPostAC = (text: string): ActionType => {
+	return {
+		type: 'ON-CHANGE-MESS-POST',
+		text: text
+	}
 }
 
 ///-------------------------------------------------------------------------------------------------------
