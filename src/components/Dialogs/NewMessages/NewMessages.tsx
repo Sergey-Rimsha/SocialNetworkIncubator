@@ -1,6 +1,7 @@
 import React from "react";
 import UserImg from "../../../img/ava_default.jpg";
-import {ActionType, addMessageChatAC, onChangeMessChatAC} from "../../../redux/state";
+import {ActionType} from "../../../redux/store";
+import {addMessageChatAC, onChangeMessChatAC} from "../../../redux/reducerDialogs";
 
 type NewMessagesPropsType = {
 	changeMessChat: string
@@ -10,13 +11,16 @@ type NewMessagesPropsType = {
 
 export function NewMessages(props: NewMessagesPropsType) {
 
-	const addNewMessage = (): any => {
+	const addNewMessage = () => {
 		props.dispatch(addMessageChatAC())
 	}
 
 	const onChangeMess = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
 		let text: string = event.currentTarget.value;
-		props.dispatch(onChangeMessChatAC(text))
+		if (text) {
+			props.dispatch(onChangeMessChatAC(text))
+		}
+
 	}
 
 	return (

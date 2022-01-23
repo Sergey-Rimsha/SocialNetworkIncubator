@@ -2,7 +2,7 @@ import React from "react";
 import UserImg from "../../img/ava_default.jpg";
 import {ChatUsers} from "./ChatUsers/ChatUsers";
 import {NewMessages} from "./NewMessages/NewMessages";
-import {ActionType, DialogsType, InMessage, InUser} from "../../redux/state";
+import {ActionType, DialogsType, InMessage, InUser} from "../../redux/store";
 
 type PropsType = {
 	dialogsPage: DialogsType

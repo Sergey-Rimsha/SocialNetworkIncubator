@@ -4,7 +4,7 @@ import {Post} from "./Post/Post";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {NewPost} from "./NewPost/NewPost";
 
-import {ActionType, PostType} from "../../redux/state";
+import {ActionType, PostType} from "../../redux/store";
 
 type StateType = {
 	profilePage: PostType
