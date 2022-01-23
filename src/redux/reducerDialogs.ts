@@ -1,7 +1,25 @@
-import {ActionType, DialogsType} from "./store";
+import {ActionType, DialogsType} from "./store_old_v";
 
+let initalState: DialogsType = {
+	chatUsers: [
+		{id: 1, name: 'Sergey'},
+		{id: 2, name: 'Vasa'},
+		{id: 3, name: 'Sasha'},
+		{id: 4, name: 'Vovan'},
+		{id: 5, name: 'kiril'},
+		{id: 6, name: 'Dima'},
+	],
+	messages: [
+		{id: 1, name: 'Sergey', message: 'hello world!!!'},
+		{id: 2, name: 'Vasa', message: 'it_incubator'},
+		{id: 3, name: 'Sasha', message: 'Hello Dimych'},
+		{id: 4, name: 'kiril', message: 'hay'},
+		{id: 5, name: 'Dima', message: 'he he he:)'}
+	],
+	changeMessChat: ''
+}
 
-export const reducerDialogs = (state: DialogsType, action: ActionType) => {
+export const reducerDialogs = (state = initalState, action: ActionType) => {
 
 	switch (action.type) {
 		case "ADD-MESSAGE-CHAT":

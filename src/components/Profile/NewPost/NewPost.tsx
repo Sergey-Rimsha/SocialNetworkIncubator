@@ -1,6 +1,6 @@
 import React from "react";
 
-import {ActionType} from "../../../redux/store";
+import {ActionType} from "../../../redux/store_old_v";
 import {addPostAC, onChangeMessPostAC} from "../../../redux/reducerProfile";
 
 type PropsType = {

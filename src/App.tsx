@@ -12,7 +12,7 @@ import {Sidebar} from "./components/Sidebar/Sidebar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 
-import {ActionType, StateType} from "./redux/store";
+import {ActionType, StateType} from "./redux/store_old_v";
 
 type RootStateType = {
 	state: StateType
