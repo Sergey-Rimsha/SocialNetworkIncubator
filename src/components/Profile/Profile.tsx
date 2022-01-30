@@ -4,14 +4,26 @@ import {Post} from "./Post/Post";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {NewPost} from "./NewPost/NewPost";
 
-import {ActionType, PostType} from "../../redux/store";
+import {PostType} from "../../redux/store";
 
 type StateType = {
 	profilePage: PostType
-	dispatch: (action: ActionType) => void
+	addNewPost: () => void
+	onChangeHandlerPostText: (text: string) => void
 }
 
 export function Profile(props: StateType) {
+
+	let posts = props.profilePage.posts.map((post, i) => {
+		return (
+			<Post
+				key={i}
+				id={post.id}
+				message={post.message}
+				likesCount={post.likesCount}
+			/>
+		)
+	})
 
 	return (
 		<section className="profile">
@@ -24,20 +36,9 @@ export function Profile(props: StateType) {
 
 			<NewPost
 				changeMessage={props.profilePage.changeMessage}
-				dispatch={props.dispatch}
-			/>
-
-			{
-				props.profilePage.posts.map((post) => {
-					return (
-						<Post
-							id={post.id}
-							message={post.message}
-							likesCount={post.likesCount}
-						/>
-					)
-				})
-			}
+				addNewPost={props.addNewPost}
+				oChangeHandlerPostText={props.onChangeHandlerPostText}/>
+			{posts}
 		</section>
 	)
 }

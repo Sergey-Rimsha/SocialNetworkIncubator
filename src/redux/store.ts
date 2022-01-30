@@ -3,9 +3,9 @@ import {reducerDialogs} from "./reducerDialogs";
 import {reducerProfile} from "./reducerProfile";
 
 export type StoreType = {
-	_state: StateType
+	// state: StateType
 	getState: () => StateType
-	_callSubscriber: (state: StateType) => void
+	// callSubscriber: (state: StateType) => void
 	subscribe: (observe: any) => void
 	dispatch: (action: ActionType) => void
 
@@ -17,8 +17,8 @@ export type ActionType = {
 }
 
 export type StateType = {
-	profilePage: PostType
 	dialogsPage: DialogsType
+	profilePage: PostType
 }
 export type DialogsType = {
 	chatUsers: Array<InUser>
