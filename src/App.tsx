@@ -12,16 +12,15 @@ import {Sidebar} from "./components/Sidebar/Sidebar";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
 
-import {StoreType} from "./redux/store";
 
-type RootStateType = {
-	store: StoreType
-	// state: StateType
-	// dispatch: (action: ActionType) => void
-}
+// type RootStateType = {
+// 	store: StoreType
+// 	// state: StateType
+// 	// dispatch: (action: ActionType) => void
+// }
 
 
-const App: React.FC<RootStateType> = (props) => {
+const App = () => {
 	return (
 		<Router>
 			<div className="App">
@@ -35,14 +34,14 @@ const App: React.FC<RootStateType> = (props) => {
 									path={`/profile`}
 									element={
 										<ProfileContainer
-											store={props.store}
+											// store={props.store}
 										/>}
 								/>
 								<Route
 									path={`/dialogs`}
 									element={
 										<DialogsContainer
-											store={props.store}
+											// store={props.store}
 										/>}
 								/>
 							</Routes>

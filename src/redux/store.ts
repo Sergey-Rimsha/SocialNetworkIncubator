@@ -7,8 +7,13 @@ export type StoreType = {
 	getState: () => StateType
 	// callSubscriber: (state: StateType) => void
 	subscribe: (observe: any) => void
-	dispatch: (action: ActionType) => void
+	dispatch: DispatchType
 
+}
+
+
+export type DispatchType ={
+	dispatch: (action: ActionType) => void
 }
 
 export type ActionType = {
