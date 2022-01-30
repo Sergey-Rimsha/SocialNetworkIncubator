@@ -12,7 +12,7 @@ import {Sidebar} from "./components/Sidebar/Sidebar";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
 
-import {StateType, StoreType} from "./redux/store";
+import {StoreType} from "./redux/store";
 
 type RootStateType = {
 	store: StoreType
