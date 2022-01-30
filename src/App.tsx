@@ -9,14 +9,15 @@ import './scss/style.scss';
 
 import {Header} from "./components/Header/Header";
 import {Sidebar} from "./components/Sidebar/Sidebar";
-import {Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {ProfileContainer} from "./components/Profile/ProfileContainer";
 
-import {ActionType, StateType} from "./redux/store_old_v";
+import {StateType, StoreType} from "./redux/store";
 
 type RootStateType = {
-	state: StateType
-	dispatch: (action: ActionType) => void
+	store: StoreType
+	// state: StateType
+	// dispatch: (action: ActionType) => void
 }
 
 
@@ -33,19 +34,15 @@ const App: React.FC<RootStateType> = (props) => {
 								<Route
 									path={`/profile`}
 									element={
-										<Profile
-											profilePage={props.state.profilePage}
-											// addPost={props.addPost}
-											// onChangeMessagePost={props.onChangeMessagePost}
-											dispatch={props.dispatch}
-									/>}
+										<ProfileContainer
+											store={props.store}
+										/>}
 								/>
 								<Route
 									path={`/dialogs`}
 									element={
-										<Dialogs
-											dialogsPage={props.state.dialogsPage}
-											dispatch={props.dispatch}
+										<DialogsContainer
+											store={props.store}
 										/>}
 								/>
 							</Routes>

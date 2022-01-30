@@ -1,24 +1,22 @@
 import React from "react";
 
-import {ActionType} from "../../../redux/store_old_v";
-import {addPostAC, onChangeMessPostAC} from "../../../redux/reducerProfile";
-
 type PropsType = {
 	changeMessage: string
-	dispatch: (action: ActionType) => void
+	addNewPost: () => void
+	oChangeHandlerPostText: (text: string) => void
 }
 
 
 export function NewPost(props: PropsType) {
 
-	const addNewPost = () => {
-		props.dispatch(addPostAC());
+	const onClickHandler = () => {
+		props.addNewPost()
 	}
 
 	const onChangeText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		let text = event.currentTarget.value;
 		if (text) {
-			props.dispatch(onChangeMessPostAC(text))
+			props.oChangeHandlerPostText(text)
 		}
 	}
 
@@ -29,7 +27,7 @@ export function NewPost(props: PropsType) {
 				<textarea onChange={onChangeText} value={props.changeMessage} name="new-post" placeholder="your news..." />
 			</div>
 			<div className="new-post__btn">
-				<button onClick={addNewPost} >Send</button>
+				<button onClick={onClickHandler} >Send</button>
 			</div>
 		</div>
 	)

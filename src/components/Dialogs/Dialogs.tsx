@@ -1,20 +1,23 @@
 import React from "react";
 import UserImg from "../../img/ava_default.jpg";
 import {ChatUsers} from "./ChatUsers/ChatUsers";
-import {NewMessages} from "./NewMessages/NewMessages";
-import {ActionType, DialogsType, InMessage, InUser} from "../../redux/store";
+import {SendMessage} from "./SendMessage/SendMessage";
+import {DialogsType, InMessage, InUser} from "../../redux/store";
 
 type PropsType = {
+
 	dialogsPage: DialogsType
-	dispatch: (action: ActionType) => void
+	sendMessage: () => void
+	onChangeHandler: (text: string) => void
+
 }
 
 
 export function Dialogs (props: PropsType) {
 
-	let message = props.dialogsPage.messages.map((mess: InMessage) => {
+	let message = props.dialogsPage.messages.map((mess: InMessage, i) => {
 		return (
-			<div className="message" >
+			<div key={i} className="message" >
 				<div className="imgWrap">
 					<img className="messageImg" src={UserImg} alt="user_img"/>
 				</div>
@@ -37,16 +40,17 @@ export function Dialogs (props: PropsType) {
 		<div className="dialogs-wrap">
 			<div className="user-chat-wrap">
 				{
-					props.dialogsPage.chatUsers.map((user: InUser) => {
-						return <ChatUsers userId={user.id} userName={user.name} />
+					props.dialogsPage.chatUsers.map((user: InUser, i) => {
+						return <ChatUsers key={i} userId={user.id} userName={user.name} />
 					})
 				}
 			</div>
 			<div className="dialogs">
 				{message}
-				<NewMessages
+				<SendMessage
 					changeMessChat={props.dialogsPage.changeMessChat}
-					dispatch={props.dispatch}
+					sendMessage={props.sendMessage}
+					onChangeHandler={props.onChangeHandler}
 				/>
 			</div>
 		</div>
