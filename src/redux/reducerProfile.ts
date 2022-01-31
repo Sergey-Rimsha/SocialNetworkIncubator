@@ -15,19 +15,26 @@ let initialState: PostType = {
 export const reducerProfile = (state= initialState, action: ActionType ) => {
 
 	switch (action.type) {
-		case "ADD-POST":
-			let mess: string = state.changeMessage;
-			let newId: number = state.posts.length + 1;
-			state.posts.push(
+		case "ADD-POST": {
+			let stateCopy = {...state};
+			stateCopy.posts = [...state.posts]
+			let mess: string = stateCopy.changeMessage;
+			let newId: number = stateCopy.posts.length + 1;
+			stateCopy.posts.push(
 				{id: newId, message: mess, likesCount: 0}
 			);
-			state.changeMessage = "";
-			return state;
-		case "ON-CHANGE-MESS-POST":
+			stateCopy.changeMessage = "";
+			return stateCopy;
+		}
+
+		case "ON-CHANGE-MESS-POST": {
+			let stateCopy = {...state}
 			if (action.text) {
-				state.changeMessage = action.text;
+				stateCopy.changeMessage = action.text;
 			}
-			return state;
+			return stateCopy;
+		}
+
 		default:
 			return state;
 	}

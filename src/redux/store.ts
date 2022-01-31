@@ -3,17 +3,15 @@ import {reducerDialogs} from "./reducerDialogs";
 import {reducerProfile} from "./reducerProfile";
 
 export type StoreType = {
-	// state: StateType
 	getState: () => StateType
-	// callSubscriber: (state: StateType) => void
-	subscribe: (observe: any) => void
+	// subscribe: (observe: any) => void
 	dispatch: DispatchType
 
 }
 
 
 export type DispatchType ={
-	dispatch: (action: ActionType) => void
+	dispatch: (action: ActionType) => ActionType
 }
 
 export type ActionType = {

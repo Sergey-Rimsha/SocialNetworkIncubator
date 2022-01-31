@@ -29,7 +29,7 @@ import {DialogsType, StateType} from "../../redux/store";
 
 
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: StateType) => {
 	return {
 		profilePage: state.profilePage
 	}
@@ -39,12 +39,10 @@ const mapDispatchToProps = (dispatch: any) => {
 	return {
 		addNewPost: () => {
 			dispatch(addPostAC());
-			console.log('text')
 		},
 		onChangeHandlerPostText: (text:string) => {
 			let action = onChangeMessPostAC(text)
 			dispatch(action)
-			console.log(text)
 		}
 	}
 }

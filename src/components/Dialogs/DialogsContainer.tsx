@@ -1,5 +1,5 @@
 
-import {DialogsType, DispatchType, PostType} from "../../redux/store";
+import {DialogsType, DispatchType, PostType, StateType} from "../../redux/store";
 import {Dialogs} from "./Dialogs";
 import {addMessageChatAC, onChangeMessChatAC} from "../../redux/reducerDialogs";
 import {connect} from "react-redux";
@@ -31,13 +31,14 @@ import {connect} from "react-redux";
 
 
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: StateType) => {
 	return {
 		dialogsPage: state.dialogsPage
 	}
 }
 
 const mapDispatchToProps = (dispatch: any) => {
+
 	return {
 		sendMessage: () => {
 			dispatch(addMessageChatAC())
