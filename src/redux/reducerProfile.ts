@@ -1,5 +1,8 @@
-import {ActionType, PostType} from "./store";
+import {PostType} from "./store";
 
+
+
+export type ActionProfileType = ReturnType<typeof addPostAC> | ReturnType<typeof onChangeMessPostAC>
 
 let initialState: PostType = {
 	posts: [
@@ -12,7 +15,7 @@ let initialState: PostType = {
 }
 
 
-export const reducerProfile = (state= initialState, action: ActionType ) => {
+export const reducerProfile = (state= initialState, action: ActionProfileType ) => {
 
 	switch (action.type) {
 		case "ADD-POST": {
@@ -43,11 +46,12 @@ export const reducerProfile = (state= initialState, action: ActionType ) => {
 
 // actionCreates -- post
 
-export const addPostAC = (): ActionType => ({type: 'ADD-POST'})
 
-export const onChangeMessPostAC = (text: string): ActionType => {
+export const addPostAC = () => ({type: 'ADD-POST'} as const)
+
+export const onChangeMessPostAC = (text: string) => {
 	return {
 		type: 'ON-CHANGE-MESS-POST',
 		text: text
-	}
+	} as const
 }

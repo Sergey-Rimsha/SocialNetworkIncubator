@@ -5,19 +5,19 @@ import {reducerProfile} from "./reducerProfile";
 export type StoreType = {
 	getState: () => StateType
 	// subscribe: (observe: any) => void
-	dispatch: DispatchType
+	// dispatch: DispatchType
 
 }
 
 
-export type DispatchType ={
-	dispatch: (action: ActionType) => ActionType
-}
+// export type DispatchType ={
+// 	dispatch: (action: ActionType) => ActionType
+// }
 
-export type ActionType = {
-	type: 'ADD-MESSAGE-CHAT' | 'ON-CHANGE-MESS-CHAT' | 'ADD-POST' | 'ON-CHANGE-MESS-POST'
-	text?: string
-}
+// export type ActionType = {
+// 	type: 'ADD-MESSAGE-CHAT' | 'ON-CHANGE-MESS-CHAT' | 'ADD-POST' | 'ON-CHANGE-MESS-POST'
+// 	text?: string
+// }
 
 export type StateType = {
 	dialogsPage: DialogsType

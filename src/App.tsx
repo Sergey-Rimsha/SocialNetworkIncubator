@@ -13,13 +13,6 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
 
 
-// type RootStateType = {
-// 	store: StoreType
-// 	// state: StateType
-// 	// dispatch: (action: ActionType) => void
-// }
-
-
 const App = () => {
 	return (
 		<Router>

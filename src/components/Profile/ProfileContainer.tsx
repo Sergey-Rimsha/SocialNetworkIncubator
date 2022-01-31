@@ -1,7 +1,7 @@
 import {Profile} from "./Profile";
 import {addPostAC, onChangeMessPostAC} from "../../redux/reducerProfile";
 import {connect} from "react-redux";
-import {DialogsType, StateType} from "../../redux/store";
+import {StateType} from "../../redux/store";
 
 
 // type DispatchType = {

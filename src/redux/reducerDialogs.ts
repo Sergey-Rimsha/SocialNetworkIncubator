@@ -1,4 +1,7 @@
-import {ActionType, DialogsType} from "./store";
+import {DialogsType} from "./store";
+
+export type ActionDialogsType = ReturnType<typeof addMessageChatAC> | ReturnType<typeof onChangeMessChatAC>
+
 
 let initialState: DialogsType = {
 	chatUsers: [
@@ -19,7 +22,7 @@ let initialState: DialogsType = {
 	changeMessChat: ''
 }
 
-export const reducerDialogs = (state = initialState, action: ActionType) => {
+export const reducerDialogs = (state = initialState, action: ActionDialogsType) => {
 
 	switch (action.type) {
 		case "ADD-MESSAGE-CHAT": {
@@ -50,11 +53,12 @@ export const reducerDialogs = (state = initialState, action: ActionType) => {
 
 // actionCreates -- message chat
 
-export const addMessageChatAC = (): ActionType => ({type: 'ADD-MESSAGE-CHAT'})
 
-export const onChangeMessChatAC = (text: string): ActionType => {
+export const addMessageChatAC = () => ({type: 'ADD-MESSAGE-CHAT'} as const)
+
+export const onChangeMessChatAC = (text: string) => {
 	return {
 		type: 'ON-CHANGE-MESS-CHAT',
 		text: text
-	}
+	} as const
 }
