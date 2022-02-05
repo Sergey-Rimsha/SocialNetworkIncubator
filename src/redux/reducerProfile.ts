@@ -19,8 +19,7 @@ export const reducerProfile = (state= initialState, action: ActionProfileType ) 
 
 	switch (action.type) {
 		case "ADD-POST": {
-			let stateCopy = {...state};
-			stateCopy.posts = [...state.posts]
+			let stateCopy = {...state, posts: [...state.posts]};
 			let mess: string = stateCopy.changeMessage;
 			let newId: number = stateCopy.posts.length + 1;
 			stateCopy.posts.push(

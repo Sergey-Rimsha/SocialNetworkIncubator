@@ -27,14 +27,14 @@ export const reducerDialogs = (state = initialState, action: ActionDialogsType) 
 	switch (action.type) {
 		case "ADD-MESSAGE-CHAT": {
 			let stateCopy = {...state};
-			stateCopy.messages = [...state.messages];
 			let newMessage = stateCopy.changeMessChat;
 			let newId = stateCopy.messages.length + 1;
-			stateCopy.messages.push(
-				{id: newId, name: 'Current user', message: newMessage}
-			);
-			stateCopy.changeMessChat = '';
-			return stateCopy;
+
+			let newMessagePush = {id: newId, name: 'Current user', message: newMessage}
+
+			let newStateCopy = {...state, messages: [newMessagePush, ...state.messages]}
+			newStateCopy.changeMessChat = '';
+			return newStateCopy;
 		}
 
 		case 'ON-CHANGE-MESS-CHAT': {
