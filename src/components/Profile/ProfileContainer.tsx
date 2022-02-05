@@ -1,32 +1,7 @@
 import {Profile} from "./Profile";
 import {addPostAC, onChangeMessPostAC} from "../../redux/reducerProfile";
 import {connect} from "react-redux";
-import {StateType} from "../../redux/store";
-
-
-// type DispatchType = {
-// 	dispatch: (action: ActionType) => void
-// }
-
-// export function ProfileContainer(props: StateType) {
-//
-// 	const addNewPost = () => {
-// 		props.store.dispatch(addPostAC());
-// 	}
-//
-// 	const onChangeHandlerPostText = (text:string) => {
-// 		props.store.dispatch(onChangeMessPostAC(text))
-// 	}
-//
-// 	return (
-// 		<Profile
-// 			addNewPost={addNewPost}
-// 			onChangeHandlerPostText={onChangeHandlerPostText}
-// 			profilePage={props.store.getState().profilePage}
-// 		/>
-// 	)
-// }
-
+import {StateType, StoreDispatchType} from "../../redux/store";
 
 
 const mapStateToProps = (state: StateType) => {
@@ -35,7 +10,7 @@ const mapStateToProps = (state: StateType) => {
 	}
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: StoreDispatchType) => {
 	return {
 		addNewPost: () => {
 			dispatch(addPostAC());

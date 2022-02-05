@@ -1,34 +1,8 @@
 
-import {StateType} from "../../redux/store";
+import {StateType, StoreDispatchType} from "../../redux/store";
 import {Dialogs} from "./Dialogs";
 import {addMessageChatAC, onChangeMessChatAC} from "../../redux/reducerDialogs";
 import {connect} from "react-redux";
-
-// type PropsType = {
-// 	store: StoreType
-// }
-
-//
-// function DialogsContainerS () {
-//
-// 	const sendMessage = () => {
-// 		props.store.dispatch(addMessageChatAC())
-// 	}
-//
-// 	const onChangeHandler = (text: string) => {
-// 		props.store.dispatch(onChangeMessChatAC(text))
-// 	}
-//
-//
-// 	return (
-// 		<Dialogs
-// 			sendMessage={sendMessage}
-// 			onChangeHandler={onChangeHandler}
-// 			dialogsPage={props.store.getState().dialogsPage}
-// 		/>
-// 	)
-// }
-
 
 
 const mapStateToProps = (state: StateType) => {
@@ -37,7 +11,7 @@ const mapStateToProps = (state: StateType) => {
 	}
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: StoreDispatchType) => {
 
 	return {
 		sendMessage: () => {

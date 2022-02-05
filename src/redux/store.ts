@@ -47,6 +47,9 @@ export type InPost = {
 	likesCount: number
 }
 
+
+export type StoreDispatchType = typeof store.dispatch
+
 let reducers = combineReducers({
 	dialogsPage: reducerDialogs,
 	profilePage: reducerProfile
