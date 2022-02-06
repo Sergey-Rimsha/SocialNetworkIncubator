@@ -16,6 +16,9 @@ export  function Sidebar() {
 						<li className="menu__item">
 							<Link to={`/dialogs`}>Dialogs</Link>
 						</li>
+						<li className="menu__item">
+							<Link to={`/users`}>Users</Link>
+						</li>
 						<li className="menu__item">News</li>
 						<li className="menu__item">Music</li>
 					</ul>

@@ -11,6 +11,7 @@ import {Header} from "./components/Header/Header";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
+import {UsersPageContainer} from "./components/UsersPage/UsersPage";
 
 
 const App = () => {
@@ -34,6 +35,13 @@ const App = () => {
 									path={`/dialogs`}
 									element={
 										<DialogsContainer
+											// store={props.store}
+										/>}
+								/>
+								<Route
+									path={`/users`}
+									element={
+										<UsersPageContainer
 											// store={props.store}
 										/>}
 								/>

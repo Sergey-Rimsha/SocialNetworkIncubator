@@ -1,27 +1,12 @@
 import {combineReducers, createStore} from "redux";
 import {reducerDialogs} from "./reducerDialogs";
 import {reducerProfile} from "./reducerProfile";
-
-export type StoreType = {
-	getState: () => StateType
-	// subscribe: (observe: any) => void
-	// dispatch: DispatchType
-
-}
-
-
-// export type DispatchType ={
-// 	dispatch: (action: ActionType) => ActionType
-// }
-
-// export type ActionType = {
-// 	type: 'ADD-MESSAGE-CHAT' | 'ON-CHANGE-MESS-CHAT' | 'ADD-POST' | 'ON-CHANGE-MESS-POST'
-// 	text?: string
-// }
+import {reducerUsers, StateUsersType} from "./reducerUsers";
 
 export type StateType = {
 	dialogsPage: DialogsType
 	profilePage: PostType
+	usersPage: StateUsersType
 }
 export type DialogsType = {
 	chatUsers: Array<InUser>
@@ -52,7 +37,8 @@ export type StoreDispatchType = typeof store.dispatch
 
 let reducers = combineReducers({
 	dialogsPage: reducerDialogs,
-	profilePage: reducerProfile
+	profilePage: reducerProfile,
+	usersPage: reducerUsers
 })
 
 export let store = createStore(reducers);

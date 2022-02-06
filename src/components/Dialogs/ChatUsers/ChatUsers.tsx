@@ -10,7 +10,7 @@ type InUser = {
 export function ChatUsers(props: InUser) {
 	return (
 		<>
-			<Link to={`$/${props.userId}`}>
+			<Link to={`/${props.userId}`}>
 				<div className="chat-users">
 					<img src={UserImg} alt="user_img"/>
 					<div className="user-name">{props.userName}</div>
