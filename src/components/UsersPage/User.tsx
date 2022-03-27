@@ -18,7 +18,7 @@ export function User(props: UserType & UserPropsType) {
 				<img src={UserImg} alt=""/>
 			</div>
 			<div className="user-info">
-				<div>{props.name}</div>
+				<div>name: {props.name}</div>
 				<div>status: {props.status}</div>
 			</div>
 			<div className="user-info">

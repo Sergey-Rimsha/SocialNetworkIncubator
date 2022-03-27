@@ -6,23 +6,28 @@ export type StateUsersType = {
 export type UserType = {
 	id: number
 	name: string
-	status: string
+	status: string | null
 	country: string
 	city: string
 	follow: boolean
 }
 
-export type ActionUsersType = ReturnType<typeof followUsersAC> | ReturnType<typeof unFollowUserAC>
+export type ActionUsersType = ReturnType<typeof followUsersAC>
+	| ReturnType<typeof unFollowUserAC>
+	| ReturnType<typeof addUsersAC>
+
+// const initialState: StateUsersType = {
+// 	users: [
+// 		{id: 1, name: 'Sergey', status: 'Hello', country:'Belarus', city:'Borisov', follow: false},
+// 		{id: 2, name: 'Gena', status: 'Hello men', country:'Belarus', city:'Minsk', follow: false},
+// 		{id: 3, name: 'Sasha', status: 'Hello gays', country:'Ukraine', city:'Kiev', follow: true},
+// 		{id: 4, name: 'Misha', status: 'Yo Yo Yo', country:'Belarus', city:'Borisov', follow: false},
+// 	]
+// };
 
 const initialState: StateUsersType = {
-	users: [
-		{id: 1, name: 'Sergey', status: 'Hello', country:'Belarus', city:'Borisov', follow: false},
-		{id: 2, name: 'Gena', status: 'Hello men', country:'Belarus', city:'Minsk', follow: false},
-		{id: 3, name: 'Sasha', status: 'Hello gays', country:'Ukraine', city:'Kiev', follow: true},
-		{id: 4, name: 'Misha', status: 'Yo Yo Yo', country:'Belarus', city:'Borisov', follow: false},
-	]
+	users: []
 };
-
 
 export const reducerUsers = (state = initialState, action: ActionUsersType) => {
 
@@ -49,6 +54,12 @@ export const reducerUsers = (state = initialState, action: ActionUsersType) => {
 				})
 			}
 		}
+		case 'ADD_USERS': {
+
+			return {
+				users: action.usersAC
+			}
+		}
 		default:
 			return state
 
@@ -73,3 +84,26 @@ export const unFollowUserAC = (userId: number) => {
 		id: userId
 	} as const
 };
+
+export type UsersGetType = {
+	users: Array<UserGetType>
+}
+
+export type UserGetType = {
+	followed: boolean
+	name: string
+	id: number
+	photos: {
+		large: null | string
+		small: null | string
+	}
+	status: null | string
+	uniqueUrlName: null | string
+}
+
+export const addUsersAC = (users: UserGetType) => {
+	return {
+		type: 'ADD_USERS',
+		usersAC: users
+	} as const
+}

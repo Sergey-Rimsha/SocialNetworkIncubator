@@ -1,14 +1,16 @@
 import React from "react";
-import {StateType, StoreDispatchType} from "../../redux/store";
-
-import {followUsersAC, StateUsersType, unFollowUserAC} from "../../redux/reducerUsers";
 import {connect} from "react-redux";
+import * as axios from "axios";
+
+import {StateType, StoreDispatchType} from "../../redux/store";
+import {addUsersAC, followUsersAC, StateUsersType, unFollowUserAC} from "../../redux/reducerUsers";
 import {User} from "./User";
 
 type UsersPagePropsType = {
 	usersPage: StateUsersType
 	followUsers: (userId: number) => void
 	unFollowUser: (userId: number) => void
+	addUsers: (users: any) => void
 }
 
 
@@ -22,8 +24,18 @@ export function UsersPage (props: UsersPagePropsType) {
 		}
 	}
 
+	const getApiUsers = () => {
+		const axios = require('axios');
+		axios.get('https://social-network.samuraijs.com/api/1.0/users')
+			.then((response: axios.AxiosResponse)=> {
+				props.addUsers(response.data.items);
+			})
+	}
+
 	return (
 		<div>
+			<button onClick={getApiUsers} >get users</button>
+
 			{
 				props.usersPage.users.map((u, ) => {
 					return (
@@ -45,6 +57,8 @@ export function UsersPage (props: UsersPagePropsType) {
 }
 
 
+
+
 const mapStateToProps = (state: StateType) => {
 	return {
 		usersPage: state.usersPage
@@ -58,6 +72,9 @@ const mapDispatchToProps = (dispatch: StoreDispatchType) => {
 		},
 		unFollowUser: (userId: number) => {
 			dispatch(unFollowUserAC(userId))
+		},
+		addUsers: (users: any) => {
+			dispatch(addUsersAC(users))
 		}
 	}
 }

@@ -13,6 +13,7 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {UsersPageContainer} from "./components/UsersPage/UsersPage";
 
+const asdas = 'asd';
 
 const App = () => {
 	return (
