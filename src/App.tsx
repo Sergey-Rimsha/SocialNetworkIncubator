@@ -11,7 +11,7 @@ import {Header} from "./components/Header/Header";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
-import {UsersPageContainer} from "./components/UsersPage/UsersPage";
+import {UsersPageContainer} from "./components/UsersPage/UsersPageContainer";
 
 const asdas = 'asd';
 

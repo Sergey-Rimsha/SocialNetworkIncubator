@@ -4,26 +4,20 @@ export type StateUsersType = {
 }
 
 export type UserType = {
-	id: number
+	followed: boolean
 	name: string
-	status: string | null
-	country: string
-	city: string
-	follow: boolean
+	id: number
+	photos: {
+		large: null | string
+		small: null | string
+	}
+	status: null | string
+	uniqueUrlName: null | string
 }
 
-export type ActionUsersType = ReturnType<typeof followUsersAC>
-	| ReturnType<typeof unFollowUserAC>
-	| ReturnType<typeof addUsersAC>
+export type ActionUsersType = ReturnType<typeof followedUserAC>
+	| ReturnType<typeof setUsersAC>
 
-// const initialState: StateUsersType = {
-// 	users: [
-// 		{id: 1, name: 'Sergey', status: 'Hello', country:'Belarus', city:'Borisov', follow: false},
-// 		{id: 2, name: 'Gena', status: 'Hello men', country:'Belarus', city:'Minsk', follow: false},
-// 		{id: 3, name: 'Sasha', status: 'Hello gays', country:'Ukraine', city:'Kiev', follow: true},
-// 		{id: 4, name: 'Misha', status: 'Yo Yo Yo', country:'Belarus', city:'Borisov', follow: false},
-// 	]
-// };
 
 const initialState: StateUsersType = {
 	users: []
@@ -32,31 +26,21 @@ const initialState: StateUsersType = {
 export const reducerUsers = (state = initialState, action: ActionUsersType) => {
 
 	switch (action.type) {
-		case 'FOLLOW': {
+		case 'FOLLOWED': {
 			return {
 				...state,
-				...state.users.map(u => {
-					if (u.id === action.id) {
-						u.follow = true
+				users: state.users.map(user => {
+					if (user.id === action.id) {
+						return {...user, followed: !user.followed}
 					}
-					return u
+					return user;
 				})
 			}
 		}
-		case 'UNFOLLOW': {
-			return {
-				...state,
-				...state.users.map(u => {
-					if (u.id === action.id) {
-						u.follow = false
-					}
-					return u
-				})
-			}
-		}
-		case 'ADD_USERS': {
 
+		case 'SET_USERS': {
 			return {
+				...state,
 				users: action.usersAC
 			}
 		}
@@ -71,39 +55,17 @@ export const reducerUsers = (state = initialState, action: ActionUsersType) => {
 
 // -- actionCreator -- users follow/unFollow
 
-export const followUsersAC = (userId: number) => {
+
+export const setUsersAC = (users: UserType) => {
 	return {
-		type: 'FOLLOW',
-		id: userId
-	} as const
-};
-
-export const unFollowUserAC = (userId: number) => {
-	return {
-		type: 'UNFOLLOW',
-		id: userId
-	} as const
-};
-
-export type UsersGetType = {
-	users: Array<UserGetType>
-}
-
-export type UserGetType = {
-	followed: boolean
-	name: string
-	id: number
-	photos: {
-		large: null | string
-		small: null | string
-	}
-	status: null | string
-	uniqueUrlName: null | string
-}
-
-export const addUsersAC = (users: UserGetType) => {
-	return {
-		type: 'ADD_USERS',
+		type: 'SET_USERS',
 		usersAC: users
 	} as const
-}
+};
+
+export const followedUserAC = (userId: number) => {
+	return {
+		type: 'FOLLOWED',
+		id: userId
+	} as const
+};
