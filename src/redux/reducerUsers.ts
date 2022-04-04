@@ -1,6 +1,13 @@
 
 export type StateUsersType = {
-	users: Array<UserType>
+	items: Array<UserType>
+	totalCount: number
+	page: PageType
+}
+
+export type PageType = {
+	userPageSize: number
+	currentPage: number
 }
 
 export type UserType = {
@@ -17,10 +24,16 @@ export type UserType = {
 
 export type ActionUsersType = ReturnType<typeof followedUserAC>
 	| ReturnType<typeof setUsersAC>
+	| ReturnType<typeof setCurrentPageAC>
 
 
 const initialState: StateUsersType = {
-	users: []
+	items: [],
+	page: {
+		userPageSize: 10,
+		currentPage: 5,
+	},
+	totalCount: 1,
 };
 
 export const reducerUsers = (state = initialState, action: ActionUsersType) => {
@@ -29,7 +42,7 @@ export const reducerUsers = (state = initialState, action: ActionUsersType) => {
 		case 'FOLLOWED': {
 			return {
 				...state,
-				users: state.users.map(user => {
+				items: state.items.map(user => {
 					if (user.id === action.id) {
 						return {...user, followed: !user.followed}
 					}
@@ -41,7 +54,15 @@ export const reducerUsers = (state = initialState, action: ActionUsersType) => {
 		case 'SET_USERS': {
 			return {
 				...state,
-				users: action.usersAC
+				items: action.usersAC,
+				totalCount: action.totalCount,
+			}
+		}
+		case 'SET_CURRENT_PAGE': {
+			return {
+				...state,
+				page: {...state.page, currentPage: action.currentPage}
+
 			}
 		}
 		default:
@@ -56,10 +77,11 @@ export const reducerUsers = (state = initialState, action: ActionUsersType) => {
 // -- actionCreator -- users follow/unFollow
 
 
-export const setUsersAC = (users: UserType) => {
+export const setUsersAC = (users: StateUsersType) => {
 	return {
 		type: 'SET_USERS',
-		usersAC: users
+		usersAC: users.items,
+		totalCount: users.totalCount,
 	} as const
 };
 
@@ -69,3 +91,10 @@ export const followedUserAC = (userId: number) => {
 		id: userId
 	} as const
 };
+
+export const setCurrentPageAC = (currentPage: number) => {
+	return {
+		type: 'SET_CURRENT_PAGE',
+		currentPage
+	} as const
+}
