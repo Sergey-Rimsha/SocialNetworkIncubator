@@ -27,13 +27,13 @@ export function User(props: UserPropsType) {
 				<img src={userPhotoSrc} alt="userPhoto"/>
 			</div>
 			<div className="user-info">
-				<div>name: {props.name}</div>
+				<div className="user-info__name">{props.name}</div>
 				<div>status: {props.status}</div>
 			</div>
-			<div className="user-info">
-				<div>country: {"props.country"}</div>
-				<div>city: {"props.city"}</div>
-			</div>
+			{/*<div className="user-info">*/}
+			{/*	<div>country: {"props.country"}</div>*/}
+			{/*	<div>city: {"props.city"}</div>*/}
+			{/*</div>*/}
 
 			<button onClick={onClickHandlerFollow}>{!props.followed ? 'follow' : 'unfollow' }</button>
 

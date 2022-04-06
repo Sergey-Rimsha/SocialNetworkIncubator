@@ -2,6 +2,7 @@ import React from "react";
 import * as axios from "axios";
 import {StateUsersType} from "../../redux/reducerUsers";
 import {User} from "./User";
+import {Pagination} from "../Pagination/Pagination";
 
 type UsersPagePropsType = {
     usersPage: StateUsersType
@@ -25,7 +26,7 @@ export class UsersPageClass extends React.Component<UsersPagePropsType> {
         console.log(this.props.usersPage)
     }
 
-    onPageChanged = (pageNumber:number, countUsers: number) => {
+    onPageChanged = (pageNumber:number, countUsers = 10) => {
         this.props.setCurrentPage(pageNumber);
         const axios = require('axios');
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${countUsers}`)
@@ -40,37 +41,17 @@ export class UsersPageClass extends React.Component<UsersPagePropsType> {
     }
 
 
-
     render() {
-
-        const userPageSize = this.props.usersPage.page.userPageSize;
-        const pageUsersCount = Math.ceil(this.props.usersPage.totalCount / userPageSize);
-        const currentPage = this.props.usersPage.page.currentPage;
-
-
-        console.log(currentPage);
-        console.log(this.props.usersPage)
-        let page = [];
-
-        for (let i = 1; i < pageUsersCount; i++) {
-            page.push(i);
-        }
 
         return (
             <div>
                 <div>
-                    {page.map(p => {
-                        if (currentPage + 5 > p) {
-                            return (
-                                <span>
-                                    ..
-                                    <span onClick={() => this.onPageChanged(p, userPageSize)}>{p}</span>
-                                </span>
-                            )
-                        } else {
-                            return ''
-                        }
-                    })}
+                    <Pagination
+                        totalCount={this.props.usersPage.totalCount}
+                        userPageSize={this.props.usersPage.page.userPageSize}
+                        currentPage={this.props.usersPage.page.currentPage}
+                        onPageChanged={this.onPageChanged}
+                    />
                 </div>
                 {
                     this.props.usersPage.items.map((u,) => {

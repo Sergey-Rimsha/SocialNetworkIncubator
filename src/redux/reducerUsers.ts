@@ -31,7 +31,7 @@ const initialState: StateUsersType = {
 	items: [],
 	page: {
 		userPageSize: 10,
-		currentPage: 5,
+		currentPage: 1,
 	},
 	totalCount: 1,
 };
