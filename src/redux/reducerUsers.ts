@@ -1,8 +1,9 @@
 
 export type StateUsersType = {
 	items: Array<UserType>
-	totalCount: number
 	page: PageType
+	totalCount: number
+	isFetching: boolean
 }
 
 export type PageType = {
@@ -25,6 +26,7 @@ export type UserType = {
 export type ActionUsersType = ReturnType<typeof followedUserAC>
 	| ReturnType<typeof setUsersAC>
 	| ReturnType<typeof setCurrentPageAC>
+	| ReturnType<typeof setIsFetchingAC>
 
 
 const initialState: StateUsersType = {
@@ -34,6 +36,7 @@ const initialState: StateUsersType = {
 		currentPage: 1,
 	},
 	totalCount: 1,
+	isFetching: false,
 };
 
 export const reducerUsers = (state = initialState, action: ActionUsersType) => {
@@ -63,6 +66,12 @@ export const reducerUsers = (state = initialState, action: ActionUsersType) => {
 				...state,
 				page: {...state.page, currentPage: action.currentPage}
 
+			}
+		}
+		case "SET_IS_FETCHING": {
+			return {
+				...state,
+				isFetching: action.isFetching,
 			}
 		}
 		default:
@@ -96,5 +105,12 @@ export const setCurrentPageAC = (currentPage: number) => {
 	return {
 		type: 'SET_CURRENT_PAGE',
 		currentPage
+	} as const
+}
+
+export const setIsFetchingAC = (isFetching: boolean) => {
+	return {
+		type: 'SET_IS_FETCHING',
+		isFetching,
 	} as const
 }

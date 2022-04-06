@@ -1,13 +1,14 @@
 import {connect} from "react-redux";
 
 import {StateType, StoreDispatchType} from "../../redux/store";
-import {followedUserAC, setCurrentPageAC, setUsersAC} from "../../redux/reducerUsers";
+import {followedUserAC, setCurrentPageAC, setIsFetchingAC, setUsersAC} from "../../redux/reducerUsers";
 import {UsersPageClass} from "./UsersPageClass";
 
 
 const mapStateToProps = (state: StateType) => {
 	return {
-		usersPage: state.usersPage
+		usersPage: state.usersPage,
+		isFetching: state.usersPage.isFetching,
 	}
 }
 
@@ -21,6 +22,9 @@ const mapDispatchToProps = (dispatch: StoreDispatchType) => {
 		},
 		setCurrentPage: (currentPage: number) => {
 			dispatch(setCurrentPageAC(currentPage));
+		},
+		setIsFetching: (isFetching: boolean) => {
+			dispatch(setIsFetchingAC(isFetching))
 		}
 	}
 }
