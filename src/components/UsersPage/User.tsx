@@ -19,7 +19,7 @@ export function User(props: UserPropsType) {
 		props.onClickHandler(props.id)
 	}
 
-	const userPhotoSrc = UserImg || props.userPhoto || '';
+	const userPhotoSrc = props.userPhoto || UserImg;
 
 	return (
 		<div className="user-box">
