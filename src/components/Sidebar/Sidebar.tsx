@@ -1,29 +1,46 @@
 import React from "react";
-import {
-	Link
-} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
-export  function Sidebar() {
+export function Sidebar() {
+
+	const setActive = ({isActive}: any) => (isActive ? "menu__item_active" : "");
 
 	return (
 		<>
 			<section className="sidebar">
 				<nav className="menu">
-					<ul className="menu__wrap">
-						<li className="menu__item">
-							<Link to={`/profile`}>Profile</Link>
-						</li>
-						<li className="menu__item">
-							<Link to={`/dialogs`}>Dialogs</Link>
-						</li>
-						<li className="menu__item">
-							<Link to={`/users`}>Users</Link>
-						</li>
-						<li className="menu__item">News</li>
-						<li className="menu__item">Music</li>
-					</ul>
+					<div className="menu__item">
+						<NavLink
+							className={setActive}
+							to={`/profile`}>
+							Profile
+						</NavLink>
+					</div>
+					<div className="menu__item">
+						<NavLink
+							className={setActive}
+							to={`/dialogs`}>
+							Dialogs
+						</NavLink>
+					</div>
+					<div className="menu__item">
+						<NavLink
+							className={setActive}
+							to={`/users`}>
+							Users
+						</NavLink>
+					</div>
+					<div className="menu__item">
+						<NavLink
+							className={setActive}
+							to={`/news`}>
+							News
+						</NavLink>
+					</div>
 				</nav>
 			</section>
 		</>
 	)
 }
+
+

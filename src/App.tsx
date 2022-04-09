@@ -13,8 +13,6 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {UsersPageContainer} from "./components/UsersPage/UsersPageContainer";
 
-const asdas = 'asd';
-
 const App = () => {
 	return (
 		<Router>
@@ -28,23 +26,17 @@ const App = () => {
 								<Route
 									path={`/profile`}
 									element={
-										<ProfileContainer
-											// store={props.store}
-										/>}
+										<ProfileContainer/>}
 								/>
 								<Route
 									path={`/dialogs`}
 									element={
-										<DialogsContainer
-											// store={props.store}
-										/>}
+										<DialogsContainer/>}
 								/>
 								<Route
 									path={`/users`}
 									element={
-										<UsersPageContainer
-											// store={props.store}
-										/>}
+										<UsersPageContainer/>}
 								/>
 							</Routes>
 						</div>

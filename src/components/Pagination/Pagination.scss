@@ -1,13 +1,23 @@
 .pagination {
 	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: white;
+	padding: 20px;
+	border-radius: 15px;
+	font-size: 20px;
 
 	& button {
-		margin-right: 5px;
+		color: white;
+		width: 50px;
+		height: 30px;
+		background: linear-gradient(to right, #7CB8F7, #2A8BF2);
+		border: none;
+		border-radius: 10px;
 	}
 
 	& span {
-		margin-right: 5px;
-		font-size: 18px;
+		margin: 0 5px;
 	}
 
 	.active {
