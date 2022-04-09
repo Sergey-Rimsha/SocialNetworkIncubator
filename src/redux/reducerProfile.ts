@@ -1,10 +1,50 @@
-import {PostType} from "./store";
 
+export type ProfileStateType = {
+	user: UserType
+	posts: Array<PostType>
+	changeMessage: string
+}
+export type UserType = {
+	aboutMe: string | null
+	fullName: string
+	lookingForAJob: boolean
+	lookingForAJobDescription: string | null
+	userId: number
+	contacts: ContactsType
+	photos: PhotosType
+}
+export type PhotosType = {
+	large: string
+	small: string
+}
+export type ContactsType = {
+	[key: string]: string
+}
+export type PostType = {
+	id: number
+	message: string
+	likesCount: number
+}
 
+export type ActionProfileType = ReturnType<typeof addPost>
+	| ReturnType<typeof onChangeMessPost>
+	| ReturnType<typeof setUserProfile>
 
-export type ActionProfileType = ReturnType<typeof addPostAC> | ReturnType<typeof onChangeMessPostAC>
-
-let initialState: PostType = {
+let initialState: any = {
+	user: {
+		aboutMe: '',
+		fullName: '',
+		lookingForAJob: true,
+		lookingForAJobDescription: '',
+		userId: 2,
+		photos: {
+			large: '',
+			small: '',
+		},
+		contacts: {
+			['key']: '',
+		},
+	},
 	posts: [
 		{id: 1, message: 'Hi, how are you?', likesCount: 12},
 		{id: 2, message: 'It\'s my first post', likesCount: 11},
@@ -15,7 +55,7 @@ let initialState: PostType = {
 }
 
 
-export const reducerProfile = (state= initialState, action: ActionProfileType ) => {
+export const reducerProfile = (state= initialState, action: ActionProfileType ):any => {
 
 	switch (action.type) {
 		case "ADD-POST": {
@@ -36,6 +76,12 @@ export const reducerProfile = (state= initialState, action: ActionProfileType ) 
 			}
 			return stateCopy;
 		}
+		case "SET_USER_PROFILE": {
+			return {
+				...state,
+				user: action.user,
+			}
+		}
 
 		default:
 			return state;
@@ -46,11 +92,18 @@ export const reducerProfile = (state= initialState, action: ActionProfileType ) 
 // actionCreates -- post
 
 
-export const addPostAC = () => ({type: 'ADD-POST'} as const)
+export const addPost = () => ({type: 'ADD-POST'} as const)
 
-export const onChangeMessPostAC = (text: string) => {
+export const onChangeMessPost = (text: string) => {
 	return {
 		type: 'ON-CHANGE-MESS-POST',
 		text: text
+	} as const
+}
+
+export const setUserProfile = (user: UserType) => {
+	return {
+		type: 'SET_USER_PROFILE',
+		user
 	} as const
 }

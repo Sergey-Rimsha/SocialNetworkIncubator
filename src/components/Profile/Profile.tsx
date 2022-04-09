@@ -3,16 +3,17 @@ import UserImg from "../../img/ava_default.jpg";
 import {Post} from "./Post/Post";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {NewPost} from "./NewPost/NewPost";
+import {ProfileStateType} from "../../redux/reducerProfile";
 
-import {PostType} from "../../redux/store";
 
 type StateType = {
-	profilePage: PostType
+	profilePage: ProfileStateType
 	addNewPost: () => void
 	onChangeHandlerPostText: (text: string) => void
 }
 
 export function Profile(props: StateType) {
+	console.log(props)
 
 	let posts = props.profilePage.posts.map((post, i) => {
 		return (
@@ -25,13 +26,15 @@ export function Profile(props: StateType) {
 		)
 	})
 
+	const userPhoto: string = props.profilePage.user.photos.large;
+
 	return (
 		<section className="profile">
 			<div className="user">
 				<div className="user__img">
-					<img src={UserImg} alt="user-img"/>
+					<img src={userPhoto || UserImg} alt="user-img"/>
 				</div>
-				<ProfileInfo />
+				<ProfileInfo user={props.profilePage.user} />
 			</div>
 
 			<NewPost

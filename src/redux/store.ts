@@ -1,11 +1,11 @@
 import {combineReducers, createStore} from "redux";
 import {reducerDialogs} from "./reducerDialogs";
-import {reducerProfile} from "./reducerProfile";
+import {ProfileStateType, reducerProfile} from "./reducerProfile";
 import {reducerUsers, StateUsersType} from "./reducerUsers";
 
 export type StateType = {
 	dialogsPage: DialogsType
-	profilePage: PostType
+	profilePage: ProfileStateType
 	usersPage: StateUsersType
 }
 export type DialogsType = {
@@ -35,10 +35,10 @@ export type InPost = {
 
 export type StoreDispatchType = typeof store.dispatch
 
-let reducers = combineReducers({
+let rootStore = combineReducers({
 	dialogsPage: reducerDialogs,
 	profilePage: reducerProfile,
 	usersPage: reducerUsers
 })
 
-export let store = createStore(reducers);
+export let store = createStore(rootStore);

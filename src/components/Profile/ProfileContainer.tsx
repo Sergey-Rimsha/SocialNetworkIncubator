@@ -1,7 +1,40 @@
-import {Profile} from "./Profile";
-import {addPostAC, onChangeMessPostAC} from "../../redux/reducerProfile";
+import React from "react";
 import {connect} from "react-redux";
-import {StateType, StoreDispatchType} from "../../redux/store";
+import * as axios from "axios";
+import {Profile} from "./Profile";
+import {addPost, onChangeMessPost, ProfileStateType, setUserProfile, UserType} from "../../redux/reducerProfile";
+import {StateType} from "../../redux/store";
+
+type ProfileClassType = {
+	profilePage: ProfileStateType
+	addPost: () => void
+	onChangeMessPost: (text: string) => void
+	setUserProfile: (user: UserType) => void
+}
+
+class ProfileClass extends React.Component<ProfileClassType> {
+
+	componentDidMount() {
+		const axios = require('axios');
+		axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+			.then((response: axios.AxiosResponse) => {
+				this.props.setUserProfile(response.data);
+				console.log(response.data);
+			})
+	}
+
+	render() {
+		return (
+			<>
+				<Profile
+					profilePage={this.props.profilePage}
+					addNewPost={this.props.addPost}
+					onChangeHandlerPostText={this.props.onChangeMessPost}
+				/>
+			</>
+		)
+	}
+}
 
 
 const mapStateToProps = (state: StateType) => {
@@ -10,18 +43,7 @@ const mapStateToProps = (state: StateType) => {
 	}
 }
 
-const mapDispatchToProps = (dispatch: StoreDispatchType) => {
-	return {
-		addNewPost: () => {
-			dispatch(addPostAC());
-		},
-		onChangeHandlerPostText: (text:string) => {
-			let action = onChangeMessPostAC(text)
-			dispatch(action)
-		}
-	}
-}
 
 
-export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile)
+export const ProfileContainer = connect(mapStateToProps, {addPost,onChangeMessPost,setUserProfile,})(ProfileClass)
 
