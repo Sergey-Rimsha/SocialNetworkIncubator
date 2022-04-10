@@ -1,49 +1,51 @@
-import React from "react";
-import {connect} from "react-redux";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import * as axios from "axios";
 import {Profile} from "./Profile";
-import {addPost, onChangeMessPost, ProfileStateType, setUserProfile, UserType} from "../../redux/reducerProfile";
+import {
+	ActionProfileType,
+	addPost,
+	onChangeMessPost,
+	ProfileStateType,
+	setUserProfile
+} from "../../redux/reducerProfile";
 import {StateType} from "../../redux/store";
+import {useParams} from "react-router-dom";
+import {Dispatch} from "redux";
 
-type ProfileClassType = {
-	profilePage: ProfileStateType
-	addPost: () => void
-	onChangeMessPost: (text: string) => void
-	setUserProfile: (user: UserType) => void
-}
+export const ProfileContainer = () => {
 
-class ProfileClass extends React.Component<ProfileClassType> {
+	const profilePage = useSelector((state: StateType): ProfileStateType => state.profilePage);
 
-	componentDidMount() {
+	const dispatch = useDispatch<Dispatch<ActionProfileType>>();
+
+	const params = useParams();
+
+	useEffect(() => {
 		const axios = require('axios');
-		axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
-			.then((response: axios.AxiosResponse) => {
-				this.props.setUserProfile(response.data);
-				console.log(response.data);
-			})
-	}
+		axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${params.userId || 2}`)
+		.then((response: axios.AxiosResponse) => {
+			dispatch(setUserProfile(response.data))
+			// console.log(response.data);
+		})
+	}, []);
 
-	render() {
-		return (
-			<>
-				<Profile
-					profilePage={this.props.profilePage}
-					addNewPost={this.props.addPost}
-					onChangeHandlerPostText={this.props.onChangeMessPost}
-				/>
-			</>
-		)
-	}
+	const addNewPost = () => {
+		dispatch(addPost());
+	};
+		const onChangeHandlerPostText = (text: string) => {
+		dispatch(onChangeMessPost(text))
+	};
+
+
+	return (
+		<>
+			<Profile
+				profilePage={profilePage}
+				addNewPost={addNewPost}
+				onChangeHandlerPostText={onChangeHandlerPostText}
+			/>
+		</>
+	)
 }
-
-
-const mapStateToProps = (state: StateType) => {
-	return {
-		profilePage: state.profilePage
-	}
-}
-
-
-
-export const ProfileContainer = connect(mapStateToProps, {addPost,onChangeMessPost,setUserProfile,})(ProfileClass)
 

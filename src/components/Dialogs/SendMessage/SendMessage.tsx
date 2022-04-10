@@ -26,13 +26,15 @@ export function SendMessage (props: NewMessagesPropsType) {
 	return (
 		<div className="new-messages">
 			<img src={UserImg} alt="user_img"/>
-			<div className="dialogs__box">
-				<div className="dialogs__user-name">
+			<div className="new-messages__dialogs">
+				<div className="new-messages__dialogs_name">
 					Sergey Rimsha
 				</div>
-				<textarea value={props.changeMessChat} onChange={onChangeHandlerMess} name="dialogs-message" placeholder="your message..." />
-				<div className="dialogs__btn">
-					<button onClick={onClickHandler} >Send</button>
+				<div className={"form"}>
+					<textarea className={"form__textArea"} value={props.changeMessChat} onChange={onChangeHandlerMess} name="dialogs-message" placeholder="your message..." />
+
+					<button className="form__btn" onClick={onClickHandler} >Send</button>
+
 				</div>
 			</div>
 		</div>

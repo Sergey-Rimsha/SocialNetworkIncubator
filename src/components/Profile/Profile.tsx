@@ -13,8 +13,6 @@ type StateType = {
 }
 
 export function Profile(props: StateType) {
-	console.log(props)
-
 	let posts = props.profilePage.posts.map((post, i) => {
 		return (
 			<Post

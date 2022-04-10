@@ -32,9 +32,9 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
 			<div className="user__lookingForAJob">
 				{props.user.lookingForAJob ? props.user.lookingForAJobDescription : ''}
 			</div>
-			<div className="user__education">
-				БГПК
-			</div>
+			{/*<div className="user__education">*/}
+			{/*	БГПК*/}
+			{/*</div>*/}
 			{/*<div className="user__web-site">*/}
 			{/*	<a href="https://github.com/Sergey-Rimsha">https://github.com/Sergey-Rimsha</a>*/}
 			{/*</div>*/}

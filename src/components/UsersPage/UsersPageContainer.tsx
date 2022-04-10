@@ -1,87 +1,78 @@
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import {StateType} from "../../redux/store";
-import {addUsers, followedUser, setCurrentPage, setIsFetching, setTotalCount, UserType} from "../../redux/reducerUsers";
-import React from "react";
+import {
+	ActionUsersType,
+	addUsers,
+	followedUser,
+	setCurrentPage,
+	setIsFetching,
+	setTotalCount,
+	StateUsersType
+} from "../../redux/reducerUsers";
+import React, {useEffect} from "react";
 import * as axios from "axios";
 import {UsersPage} from "./UsersPage";
 import {Preloader} from "../Preloader/Preloader";
+import {Dispatch} from "redux";
 
-type UsersPagePropsType = {
-	users: Array<UserType>,
-	totalCount: number
-	userPageSize: number
-	currentPage: number
-	isFetching: boolean
-	followedUser: (userId: number) => void
-	addUsers: (users: Array<UserType>) => void
-	setCurrentPage: (currentPage: number) => void
-	setIsFetching: (isFetching: boolean) => void
-	setTotalCount: (totalCount: number) => void
-}
+export const UsersPageContainer = () => {
 
-export class UsersPageClass extends React.Component<UsersPagePropsType> {
+	const {
+		users,
+		currentPage,
+		userPageSize,
+		isFetching,
+		totalCount,
+	} = useSelector<StateType, StateUsersType>((state) => state.usersPage);
 
-	componentDidMount() {
-		this.props.setIsFetching(true);
-		let currentPage = this.props.currentPage;
-		let userPageSize = this.props.userPageSize;
+	const dispatch = useDispatch<Dispatch<ActionUsersType>>();
+
+	const dispatchWrap = (response: any) => {
+		dispatch(addUsers(response.data.items));
+		dispatch(setTotalCount(response.data.totalCount));
+		dispatch(setIsFetching(false));
+	}
+
+	useEffect(() => {
+		dispatch(setIsFetching(true));
+
 		const axios = require('axios');
 		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${userPageSize}`)
 			.then((response: axios.AxiosResponse) => {
-				this.props.addUsers(response.data.items);
-				this.props.setTotalCount(response.data.totalCount);
-				this.props.setIsFetching(false);
+				dispatchWrap(response);
 			});
-	}
+	}, []);
 
-	onPageChanged = (pageNumber:number, countUsers = 10) => {
-		this.props.setIsFetching(true);
-		this.props.setCurrentPage(pageNumber);
+	const onPageChanged = (pageNumber: number, countUsers = 10) => {
+		dispatch(setIsFetching(true));
+		dispatch(setCurrentPage(pageNumber));
+
 		const axios = require('axios');
 		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${countUsers}`)
 			.then((response: axios.AxiosResponse) => {
-				this.props.addUsers(response.data.items);
-				this.props.setTotalCount(response.data.totalCount);
-				this.props.setIsFetching(false);
+				dispatchWrap(response);
 			});
 	}
 
-	onClickHandler = (userId: number) => {
-		this.props.followedUser(userId);
+	const onClickHandler = (userId: number) => {
+		dispatch(followedUser(userId));
 	}
 
-	render() {
-		return (
-			<>
-				{this.props.isFetching ? <Preloader/> : null}
-				<UsersPage
-					users={this.props.users}
-					totalCount={this.props.totalCount}
-					userPageSize={this.props.userPageSize}
-					currentPage={this.props.currentPage}
-					onClickHandler={this.onClickHandler}
-					onPageChanged={this.onPageChanged}
-				/>
-			</>
-		)
-	}
+	return (
+		<>
+			{isFetching ? <Preloader/> : null}
+			<UsersPage
+				users={users}
+				totalCount={totalCount}
+				userPageSize={userPageSize}
+				currentPage={currentPage}
+				onClickHandler={onClickHandler}
+				onPageChanged={onPageChanged}
+			/>
+		</>
+	)
+
 }
-
-
-const mapStateToProps = (state: StateType) => {
-	return {
-		users: state.usersPage.users,
-		totalCount: state.usersPage.totalCount,
-		userPageSize: state.usersPage.userPageSize,
-		currentPage: state.usersPage.currentPage,
-		isFetching: state.usersPage.isFetching,
-	}
-}
-export const UsersPageContainer = connect(mapStateToProps, {followedUser,
-	addUsers,
-	setCurrentPage,
-	setIsFetching,
-	setTotalCount})(UsersPageClass);
 
 

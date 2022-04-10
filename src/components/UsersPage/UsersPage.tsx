@@ -2,6 +2,7 @@ import React from "react";
 import {UserType} from "../../redux/reducerUsers";
 import {User} from "./User";
 import {Pagination} from "../Pagination/Pagination";
+import {NavLink} from "react-router-dom";
 
 type UsersPagePropsType = {
     users: Array<UserType>,
@@ -27,17 +28,16 @@ export const UsersPage = (props: UsersPagePropsType) => {
             {
                 props.users.map((u) => {
                     return (
-                        <User
-                            key={u.id}
-                            id={u.id}
-                            name={u.name}
-                            status={u.status}
-                            userPhoto={u.photos.small}
-                            // country={u.country}
-                            // city={u.city}
-                            followed={u.followed}
-                            onClickHandler={props.onClickHandler}
-                        />
+                       <User
+                           id={u.id}
+                           name={u.name}
+                           status={u.status}
+                           userPhoto={u.photos.small}
+                           // country={u.country}
+                           // city={u.city}
+                           followed={u.followed}
+                           onClickHandler={props.onClickHandler}
+                       />
                     )
                 })
             }

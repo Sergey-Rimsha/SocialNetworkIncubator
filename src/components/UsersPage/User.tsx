@@ -1,8 +1,8 @@
 import React from "react";
 import UserImg from "../../img/ava_default.jpg";
+import {NavLink} from "react-router-dom";
 
 type UserPropsType = {
-	key: number
 	id: number
 	name: string
 	status: string | null
@@ -23,9 +23,13 @@ export function User(props: UserPropsType) {
 
 	return (
 		<div className="user-box">
-			<div className="user-img">
-				<img src={userPhotoSrc} alt="userPhoto"/>
-			</div>
+
+			<NavLink to={`/profile/${props.id}`}>
+				<div className="user-img">
+					<img src={userPhotoSrc} alt="userPhoto"/>
+				</div>
+			</NavLink>
+
 			<div className="user-info">
 				<div className="user-info__name">{props.name}</div>
 				<div>status: {props.status}</div>
