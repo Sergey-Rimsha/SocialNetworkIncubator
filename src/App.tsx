@@ -1,23 +1,18 @@
 import React from 'react';
-import {
-	BrowserRouter as Router,
-	Routes,
-	Route
-} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 import './scss/style.scss';
-
-import {Header} from "./components/Header/Header";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {UsersPageContainer} from "./components/UsersPage/UsersPageContainer";
+import {HeaderContainer} from "./components/Header/HeaderContainer";
 
 const App = () => {
 	return (
 		<Router>
 			<div className="App">
-				<Header />
+				<HeaderContainer />
 				<div className="page">
 					<div className="container">
 						<Sidebar />

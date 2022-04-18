@@ -23,7 +23,7 @@ export const ProfileContainer = () => {
 
 	useEffect(() => {
 		const axios = require('axios');
-		axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${params.userId || 2}`)
+		axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${params.userId || 16778}`)
 		.then((response: axios.AxiosResponse) => {
 			dispatch(setUserProfile(response.data))
 			// console.log(response.data);
