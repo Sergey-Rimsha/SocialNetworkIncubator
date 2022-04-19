@@ -15,6 +15,7 @@ import * as axios from "axios";
 import {UsersPage} from "./UsersPage";
 import {Preloader} from "../Preloader/Preloader";
 import {Dispatch} from "redux";
+import {AxiosResponse} from "axios";
 
 export const UsersPageContainer = () => {
 
@@ -38,7 +39,9 @@ export const UsersPageContainer = () => {
 		dispatch(setIsFetching(true));
 
 		const axios = require('axios');
-		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${userPageSize}`)
+		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${userPageSize}`, {
+			withCredentials: true
+		})
 			.then((response: axios.AxiosResponse) => {
 				dispatchWrap(response);
 			});
@@ -49,15 +52,48 @@ export const UsersPageContainer = () => {
 		dispatch(setCurrentPage(pageNumber));
 
 		const axios = require('axios');
-		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${countUsers}`)
+		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${countUsers}`, {
+			withCredentials: true
+		})
 			.then((response: axios.AxiosResponse) => {
 				dispatchWrap(response);
 			});
 	}
 
-	const onClickHandler = (userId: number) => {
-		dispatch(followedUser(userId));
+	const onFollowUsers = (userId: number) => {
+		const axios = require('axios');
+		axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,{}, {
+			withCredentials: true,
+			headers:     {
+				"API-KEY": "31e5f258-a64c-4753-8a60-acee980643ae"
+			}
+
+		})
+			.then((response: axios.AxiosResponse) => {
+				if (response.data.resultCode === 0) {
+					console.log(response.data)
+				}
+			})
 	}
+
+	const unFollowUsers = (userId: number) => {
+		const axios = require('axios');
+		axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
+			withCredentials: true,
+			headers:     {
+				"API-KEY": "31e5f258-a64c-4753-8a60-acee980643ae"
+			}
+
+		})
+			.then((response: axios.AxiosResponse) => {
+				console.log(response)
+			})
+	}
+
+	// const onClickHandler = (userId: number) => {
+	// 	// dispatch(followedUser(userId));
+	// 	onFollowUsers(userId)
+	// }
 
 	return (
 		<>
@@ -67,8 +103,9 @@ export const UsersPageContainer = () => {
 				totalCount={totalCount}
 				userPageSize={userPageSize}
 				currentPage={currentPage}
-				onClickHandler={onClickHandler}
+				onFollowUsers={onFollowUsers}
 				onPageChanged={onPageChanged}
+				unFollowUsers={unFollowUsers}
 			/>
 		</>
 	)

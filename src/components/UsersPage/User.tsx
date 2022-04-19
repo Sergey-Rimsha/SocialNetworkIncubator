@@ -8,7 +8,8 @@ type UserPropsType = {
 	status: string | null
 	followed: boolean
 	userPhoto: string | null
-	onClickHandler: (userId: number) => void
+	onFollowUsers: (userId: number) => void
+	unFollowUsers: (userId: number) => void
 }
 
 
@@ -16,7 +17,10 @@ type UserPropsType = {
 export function User(props: UserPropsType) {
 
 	const onClickHandlerFollow = () => {
-		props.onClickHandler(props.id)
+		props.onFollowUsers(props.id)
+	}
+	const onClickHandlerUnFollow = () => {
+		props.unFollowUsers(props.id)
 	}
 
 	const userPhotoSrc = props.userPhoto || UserImg;
@@ -38,8 +42,11 @@ export function User(props: UserPropsType) {
 			{/*	<div>country: {"props.country"}</div>*/}
 			{/*	<div>city: {"props.city"}</div>*/}
 			{/*</div>*/}
-
-			<button onClick={onClickHandlerFollow}>{!props.followed ? 'follow' : 'unfollow' }</button>
+			{
+				!props.followed ?
+					<button onClick={onClickHandlerFollow}>follow</button> :
+					<button onClick={onClickHandlerUnFollow}>unfollow</button>
+			}
 
 		</div>
 	)

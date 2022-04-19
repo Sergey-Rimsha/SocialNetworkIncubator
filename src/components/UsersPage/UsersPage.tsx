@@ -9,7 +9,8 @@ type UsersPagePropsType = {
     totalCount: number
     userPageSize: number
     currentPage: number
-    onClickHandler: (userId: number) => void
+    onFollowUsers: (userId: number) => void
+    unFollowUsers: (userId: number) => void
     onPageChanged: (pageNumber:number, countUsers?: number) => void
 }
 
@@ -29,6 +30,7 @@ export const UsersPage = (props: UsersPagePropsType) => {
                 props.users.map((u) => {
                     return (
                        <User
+                           key={u.id}
                            id={u.id}
                            name={u.name}
                            status={u.status}
@@ -36,7 +38,8 @@ export const UsersPage = (props: UsersPagePropsType) => {
                            // country={u.country}
                            // city={u.city}
                            followed={u.followed}
-                           onClickHandler={props.onClickHandler}
+                           onFollowUsers={props.onFollowUsers}
+                           unFollowUsers={props.unFollowUsers}
                        />
                     )
                 })

@@ -20,18 +20,12 @@ export const authReducer = (state:AuthInitialStateType = initialState, action: A
 
 	switch (action.type) {
 		case "SET_AUTH": {
-			console.log(action)
-			console.log(action.type)
 			return {
 				...state,
 				...action.date
-				// id: action.date.id,
-				// email: action.date.email,
-				// login: action.date.login,
 			}
 		}
 		case "SET_IS_AUTH": {
-			// console.log(action)
 			return {
 				...state,
 				isAuth: action.isAuth
@@ -44,7 +38,6 @@ export const authReducer = (state:AuthInitialStateType = initialState, action: A
 
 
 export const setAuth = (date: AuthInitialStateType) => {
-	console.log(date)
 	return {
 		type: 'SET_AUTH',
 		date,

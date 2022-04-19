@@ -13,8 +13,6 @@ export const HeaderContainer = () => {
 
 	const auth = useSelector<StateType, AuthInitialStateType>(state => state.auth);
 
-	console.log(auth)
-
 	useEffect(() => {
 		dispatch(setIsAuthLogin(false));
 		const axios = require('axios');
@@ -22,7 +20,6 @@ export const HeaderContainer = () => {
 			withCredentials: true
 		})
 			.then((response: axios.AxiosResponse) => {
-				dispatch(setIsAuthLogin(true));
 				if (response.data.resultCode === 0) {
 					dispatch(setIsAuthLogin(true));
 					dispatch(setAuth(response.data.data));
