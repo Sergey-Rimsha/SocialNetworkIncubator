@@ -1,6 +1,6 @@
 import {DialogsType, StateType} from "../../redux/store";
 import {Dialogs} from "./Dialogs";
-import {ActionDialogsType, addMessageChatAC, onChangeMessChatAC} from "../../redux/reducerDialogs";
+import {ActionDialogsType, addMessageChatAC, onChangeMessChatAC} from "../../redux/dialogsReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {Dispatch} from "redux";
 

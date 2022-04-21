@@ -8,10 +8,11 @@ import {
 	onChangeMessPost,
 	ProfileStateType,
 	setUserProfile
-} from "../../redux/reducerProfile";
+} from "../../redux/profileReducer";
 import {StateType} from "../../redux/store";
 import {useParams} from "react-router-dom";
 import {Dispatch} from "redux";
+import {usersApi} from "../../api/api";
 
 export const ProfileContainer = () => {
 
@@ -22,18 +23,24 @@ export const ProfileContainer = () => {
 	const params = useParams();
 
 	useEffect(() => {
-		const axios = require('axios');
-		axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${params.userId || 16778}`)
-		.then((response: axios.AxiosResponse) => {
-			dispatch(setUserProfile(response.data))
-			// console.log(response.data);
-		})
+		const userId = params.userId || '16778';
+		usersApi.getProfile(userId)
+			.then((data) => {
+				dispatch(setUserProfile(data))
+			})
+		// const axios = require('axios');
+		// axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${params.userId || 16778}`)
+		// .then((response: axios.AxiosResponse) => {
+		// 	dispatch(setUserProfile(response.data))
+		// 	// console.log(response.data);
+		// })
 	}, []);
 
 	const addNewPost = () => {
 		dispatch(addPost());
 	};
-		const onChangeHandlerPostText = (text: string) => {
+
+	const onChangeHandlerPostText = (text: string) => {
 		dispatch(onChangeMessPost(text))
 	};
 

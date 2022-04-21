@@ -22,7 +22,7 @@ let initialState: DialogsType = {
 	changeMessChat: ''
 }
 
-export const reducerDialogs = (state = initialState, action: ActionDialogsType) => {
+export const dialogsReducer = (state = initialState, action: ActionDialogsType) => {
 
 	switch (action.type) {
 		case "ADD-MESSAGE-CHAT": {

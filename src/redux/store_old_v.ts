@@ -1,5 +1,5 @@
-// import {reducerDialogs} from "./reducerDialogs";
-// import {reducerProfile} from "./reducerProfile";
+// import {dialogsReducer} from "./dialogsReducer";
+// import {profileReducer} from "./profileReducer";
 //
 // export type StoreType = {
 // 	_state: StateType
@@ -88,8 +88,8 @@
 //
 // 	dispatch(action) {
 //
-// 		this._state.dialogsPage = reducerDialogs(this._state.dialogsPage, action);
-// 		this._state.profilePage = reducerProfile(this._state.profilePage, action);
+// 		this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+// 		this._state.profilePage = profileReducer(this._state.profilePage, action);
 // 		this._callSubscriber(this._state);
 //
 // 	}

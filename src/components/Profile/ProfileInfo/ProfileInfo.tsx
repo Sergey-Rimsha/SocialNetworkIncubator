@@ -1,5 +1,5 @@
 import React from "react";
-import {UserType} from "../../../redux/reducerProfile";
+import {UserType} from "../../../redux/profileReducer";
 
 type ProfileInfoPropsType = {
 	user: UserType

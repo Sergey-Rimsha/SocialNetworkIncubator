@@ -1,5 +1,5 @@
 import React from "react";
-import {UserType} from "../../redux/reducerUsers";
+import {UserType} from "../../redux/usersReducer";
 import {User} from "./User";
 import {Pagination} from "../Pagination/Pagination";
 import {NavLink} from "react-router-dom";

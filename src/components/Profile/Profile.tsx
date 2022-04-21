@@ -3,7 +3,7 @@ import UserImg from "../../img/ava_default.jpg";
 import {Post} from "./Post/Post";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {NewPost} from "./NewPost/NewPost";
-import {ProfileStateType} from "../../redux/reducerProfile";
+import {ProfileStateType} from "../../redux/profileReducer";
 
 
 type StateType = {

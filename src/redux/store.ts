@@ -1,7 +1,7 @@
 import {combineReducers, createStore} from "redux";
-import {reducerDialogs} from "./reducerDialogs";
-import {ProfileStateType, reducerProfile} from "./reducerProfile";
-import {reducerUsers, StateUsersType} from "./reducerUsers";
+import {dialogsReducer} from "./dialogsReducer";
+import {ProfileStateType, profileReducer} from "./profileReducer";
+import {usersReducer, StateUsersType} from "./usersReducer";
 import {AuthInitialStateType, authReducer} from "./authReducer";
 
 export type StateType = {
@@ -38,9 +38,9 @@ export type InPost = {
 export type StoreDispatchType = typeof store.dispatch
 
 let rootStore = combineReducers({
-	dialogsPage: reducerDialogs,
-	profilePage: reducerProfile,
-	usersPage: reducerUsers,
+	dialogsPage: dialogsReducer,
+	profilePage: profileReducer,
+	usersPage: usersReducer,
 	auth: authReducer,
 })
 

@@ -5,6 +5,7 @@ export type StateUsersType = {
 	currentPage: number
 	totalCount: number
 	isFetching: boolean
+
 }
 
 export type UserType = {
@@ -34,7 +35,7 @@ const initialState: StateUsersType = {
 	isFetching: false,
 };
 
-export const reducerUsers = (state = initialState, action: ActionUsersType):StateUsersType => {
+export const usersReducer = (state = initialState, action: ActionUsersType):StateUsersType => {
 	switch (action.type) {
 		case 'FOLLOWED': {
 			return {
