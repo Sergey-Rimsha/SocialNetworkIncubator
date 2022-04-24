@@ -2,13 +2,14 @@ import React from "react";
 import {UserType} from "../../redux/usersReducer";
 import {User} from "./User";
 import {Pagination} from "../Pagination/Pagination";
-import {NavLink} from "react-router-dom";
 
 type UsersPagePropsType = {
     users: Array<UserType>,
     totalCount: number
     userPageSize: number
     currentPage: number
+    toggleUserId: number
+    toggleButton: boolean
     onFollowUsers: (userId: number) => void
     unFollowUsers: (userId: number) => void
     onPageChanged: (pageNumber:number, countUsers?: number) => void
@@ -32,6 +33,8 @@ export const UsersPage = (props: UsersPagePropsType) => {
                        <User
                            key={u.id}
                            id={u.id}
+                           toggleUserId={props.toggleUserId}
+                           toggleButton={props.toggleButton}
                            name={u.name}
                            status={u.status}
                            userPhoto={u.photos.small}

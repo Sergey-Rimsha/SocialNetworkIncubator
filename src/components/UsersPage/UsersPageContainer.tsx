@@ -7,7 +7,7 @@ import {
 	setCurrentPage,
 	setIsFetching,
 	setTotalCount,
-	StateUsersType
+	StateUsersType, toggleIsButtons
 } from "../../redux/usersReducer";
 import React, {useEffect} from "react";
 import * as axios from "axios";
@@ -25,6 +25,8 @@ export const UsersPageContainer = () => {
 		isFetching,
 		totalCount,
 	} = useSelector<StateType, StateUsersType>((state) => state.usersPage);
+	const toggleUserId = useSelector<StateType, number>((state) => state.usersPage.toggleIsButtons.userId);
+	const toggleButton = useSelector<StateType, boolean>((state) => state.usersPage.toggleIsButtons.disableButton);
 
 	const dispatch = useDispatch<Dispatch<ActionUsersType>>();
 
@@ -51,16 +53,20 @@ export const UsersPageContainer = () => {
 	}
 
 	const onFollowUsers = (userId: number) => {
+		dispatch(toggleIsButtons(userId, true));
 		usersApi.followUser(userId)
 			.then(() => {
 				onPageChanged(currentPage);
+				dispatch(toggleIsButtons(userId, false));
 			})
 	}
 
 	const unFollowUsers = (userId: number) => {
+		dispatch(toggleIsButtons(userId, true));
 		usersApi.unFollowUser(userId)
 			.then(() => {
-				onPageChanged(currentPage)
+				onPageChanged(currentPage);
+				dispatch(toggleIsButtons(userId, false));
 			})
 	}
 
@@ -77,6 +83,8 @@ export const UsersPageContainer = () => {
 				totalCount={totalCount}
 				userPageSize={userPageSize}
 				currentPage={currentPage}
+				toggleUserId={toggleUserId}
+				toggleButton={toggleButton}
 				onFollowUsers={onFollowUsers}
 				onPageChanged={onPageChanged}
 				unFollowUsers={unFollowUsers}

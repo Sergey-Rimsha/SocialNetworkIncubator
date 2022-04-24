@@ -10,6 +10,9 @@ type UserPropsType = {
 	userPhoto: string | null
 	onFollowUsers: (userId: number) => void
 	unFollowUsers: (userId: number) => void
+
+	toggleUserId: number
+	toggleButton: boolean
 }
 
 
@@ -24,6 +27,8 @@ export function User(props: UserPropsType) {
 	}
 
 	const userPhotoSrc = props.userPhoto || UserImg;
+
+	const btnActive = props.id === props.toggleUserId ? props.toggleButton : false;
 
 	return (
 		<div className="user-box">
@@ -44,8 +49,8 @@ export function User(props: UserPropsType) {
 			{/*</div>*/}
 			{
 				!props.followed ?
-					<button onClick={onClickHandlerFollow}>follow</button> :
-					<button onClick={onClickHandlerUnFollow}>unfollow</button>
+					<button disabled={btnActive} onClick={onClickHandlerFollow}>follow</button> :
+					<button disabled={btnActive} onClick={onClickHandlerUnFollow}>unfollow</button>
 			}
 
 		</div>

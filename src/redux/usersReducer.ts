@@ -5,7 +5,12 @@ export type StateUsersType = {
 	currentPage: number
 	totalCount: number
 	isFetching: boolean
+	toggleIsButtons: ToggleIsButtonsType
+}
 
+export type ToggleIsButtonsType = {
+	userId: number
+	disableButton: boolean
 }
 
 export type UserType = {
@@ -25,6 +30,7 @@ export type ActionUsersType = ReturnType<typeof followedUser>
 	| ReturnType<typeof setCurrentPage>
 	| ReturnType<typeof setIsFetching>
 	| ReturnType<typeof setTotalCount>
+	| ReturnType<typeof toggleIsButtons>
 
 
 const initialState: StateUsersType = {
@@ -33,6 +39,12 @@ const initialState: StateUsersType = {
 	currentPage: 1,
 	totalCount: 1,
 	isFetching: false,
+	toggleIsButtons: {
+		userId: 1,
+		disableButton: false
+	}
+
+		
 };
 
 export const usersReducer = (state = initialState, action: ActionUsersType):StateUsersType => {
@@ -69,10 +81,35 @@ export const usersReducer = (state = initialState, action: ActionUsersType):Stat
 				isFetching: action.isFetching,
 			}
 		}
-		case "SET_TOTAL_COUNT": {
+		case 'SET_TOTAL_COUNT': {
 			return {
 				...state,
 				totalCount: action.totalCount
+			}
+		}
+		case "TOGGLE_IS_BUTTONS": {
+
+			const newEventUser:ToggleIsButtonsType = {
+				userId: action.userId,
+				disableButton: action.isToggle
+			};
+
+			return {
+				...state,
+				toggleIsButtons: {
+					...state.toggleIsButtons,
+					userId: action.userId,
+					disableButton: action.isToggle
+				}
+
+
+				// ...state.toggleIsButtons.map((user) => {
+				// 	if (user.userId === action.userId) {
+				// 		user.disableButton = action.isToggle
+				// 	} else {
+				// 		return user
+				// 	}
+				// })
 			}
 		}
 
@@ -119,5 +156,13 @@ export const setTotalCount = (totalCount: number) => {
 	return {
 		type: 'SET_TOTAL_COUNT',
 		totalCount,
+	} as const
+}
+
+export const toggleIsButtons = (userId: number, isToggle: boolean) => {
+	return {
+		type: 'TOGGLE_IS_BUTTONS',
+		userId,
+		isToggle
 	} as const
 }

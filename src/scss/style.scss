@@ -398,4 +398,8 @@
 		background: linear-gradient(to right, #7CB8F7, #2A8BF2);
 		border-radius: 10px;
 	}
+
+	& button:disabled {
+		opacity: 70%;
+	}
 }
