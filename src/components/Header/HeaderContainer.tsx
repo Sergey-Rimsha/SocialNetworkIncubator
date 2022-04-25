@@ -1,38 +1,24 @@
 import React, {useEffect} from "react";
 import {Header} from "./Header";
-import * as axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
-import {ActionAuthType, AuthInitialStateType, setAuth, setIsAuthLogin} from "../../redux/authReducer";
-import {Dispatch} from "redux";
-import {StateType} from "../../redux/store";
+import {AuthInitialStateType, setAuthLoginTC} from "../../redux/authReducer";
+import {AppRootStateType, AppThunkType} from "../../redux/store";
 
+type DispatchType = (arg: AppThunkType) => void
 
 export const HeaderContainer = () => {
 
-	const dispatch = useDispatch<Dispatch<ActionAuthType>>();
+	const dispatch = useDispatch<DispatchType>();
 
-	const auth = useSelector<StateType, AuthInitialStateType>(state => state.auth);
+	const auth = useSelector<AppRootStateType, AuthInitialStateType>(state => state.auth);
 
 	useEffect(() => {
-		dispatch(setIsAuthLogin(false));
-		const axios = require('axios');
-		axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,{
-			withCredentials: true
-		})
-			.then((response: axios.AxiosResponse) => {
-				if (response.data.resultCode === 0) {
-					dispatch(setIsAuthLogin(true));
-					dispatch(setAuth(response.data.data));
-				}
-			})
-			.catch(() => {
-				dispatch(setIsAuthLogin(false));
-			})
+		dispatch(setAuthLoginTC());
 	}, []);
 
 	return (
 		<>
-			<Header auth={auth} />
+			<Header auth={auth}/>
 		</>
 	)
 }

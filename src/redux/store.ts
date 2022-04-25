@@ -1,41 +1,23 @@
-import {combineReducers, createStore} from "redux";
-import {dialogsReducer} from "./dialogsReducer";
-import {ProfileStateType, profileReducer} from "./profileReducer";
-import {usersReducer, StateUsersType} from "./usersReducer";
-import {AuthInitialStateType, authReducer} from "./authReducer";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import {ActionDialogsType, dialogsReducer} from "./dialogsReducer";
+import {ActionProfileType, profileReducer} from "./profileReducer";
+import {ActionUsersType, usersReducer} from "./usersReducer";
+import {ActionAuthType, authReducer} from "./authReducer";
+import thunk, {ThunkAction} from "redux-thunk";
 
-export type StateType = {
-	dialogsPage: DialogsType
-	profilePage: ProfileStateType
-	usersPage: StateUsersType
-	auth: AuthInitialStateType
-}
-export type DialogsType = {
-	chatUsers: Array<InUser>
-	messages: Array<InMessage>
-	changeMessChat: string
-}
-export type InUser = {
-	id: number
-	name: string
-}
-export type InMessage = {
-	id: number
-	name: string
-	message: string
-}
-export type PostType = {
-	posts: Array<InPost>
-	changeMessage: string
-}
-export type InPost = {
-	id: number
-	message: string
-	likesCount: number
-}
 
+export type AppRootStateType = ReturnType<typeof rootStore>
 
 export type StoreDispatchType = typeof store.dispatch
+
+export type AppActionStateType = ActionProfileType
+	| ActionUsersType
+	| ActionDialogsType
+	| ActionAuthType
+
+export type AppThunkType = ThunkAction<void, AppRootStateType, unknown, AppActionStateType>
+
+
 
 let rootStore = combineReducers({
 	dialogsPage: dialogsReducer,
@@ -44,4 +26,4 @@ let rootStore = combineReducers({
 	auth: authReducer,
 })
 
-export let store = createStore(rootStore);
+export let store = createStore(rootStore, applyMiddleware(thunk));

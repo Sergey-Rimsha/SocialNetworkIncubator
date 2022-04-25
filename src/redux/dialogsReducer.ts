@@ -1,4 +1,18 @@
-import {DialogsType} from "./store";
+
+export type DialogsType = {
+	chatUsers: Array<InUser>
+	messages: Array<InMessage>
+	changeMessChat: string
+}
+export type InUser = {
+	id: number
+	name: string
+}
+export type InMessage = {
+	id: number
+	name: string
+	message: string
+}
 
 export type ActionDialogsType = ReturnType<typeof addMessageChatAC> | ReturnType<typeof onChangeMessChatAC>
 

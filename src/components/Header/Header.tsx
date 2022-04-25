@@ -8,7 +8,6 @@ export type HeaderPropsType = {
 }
 
 export const Header = (props: HeaderPropsType) => {
-
 	return (
 		<header className="header">
 			<div className="container">

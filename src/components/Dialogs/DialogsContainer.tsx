@@ -1,13 +1,13 @@
-import {DialogsType, StateType} from "../../redux/store";
+import {AppRootStateType} from "../../redux/store";
 import {Dialogs} from "./Dialogs";
-import {ActionDialogsType, addMessageChatAC, onChangeMessChatAC} from "../../redux/dialogsReducer";
+import {ActionDialogsType, addMessageChatAC, DialogsType, onChangeMessChatAC} from "../../redux/dialogsReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {Dispatch} from "redux";
 
 
 export const DialogsContainer = () => {
 
-	const dialogsPage = useSelector<StateType, DialogsType>((state) => state.dialogsPage)
+	const dialogsPage = useSelector<AppRootStateType, DialogsType>((state) => state.dialogsPage)
 
 	const dispatch = useDispatch<Dispatch<ActionDialogsType>>();
 

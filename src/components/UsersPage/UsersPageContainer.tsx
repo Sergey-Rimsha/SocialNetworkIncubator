@@ -1,20 +1,19 @@
 import {useDispatch, useSelector} from "react-redux";
 
-import {StateType} from "../../redux/store";
+import {AppRootStateType, AppThunkType} from "../../redux/store";
 import {
 	ActionUsersType,
-	addUsers,
-	setCurrentPage,
-	setIsFetching,
-	setTotalCount,
-	StateUsersType, toggleIsButtons
+	followUsersTC,
+	StateUsersType,
+	thunkOnPageChanged,
+	unFollowUsersTC
 } from "../../redux/usersReducer";
 import React, {useEffect} from "react";
-import * as axios from "axios";
 import {UsersPage} from "./UsersPage";
 import {Preloader} from "../Preloader/Preloader";
-import {Dispatch} from "redux";
-import {usersApi} from "../../api/api";
+
+// type DispatchType = Dispatch<ActionUsersType> | any
+type DispatchType = (arg: AppThunkType) => ActionUsersType
 
 export const UsersPageContainer = () => {
 
@@ -24,50 +23,26 @@ export const UsersPageContainer = () => {
 		userPageSize,
 		isFetching,
 		totalCount,
-	} = useSelector<StateType, StateUsersType>((state) => state.usersPage);
-	const toggleUserId = useSelector<StateType, number>((state) => state.usersPage.toggleIsButtons.userId);
-	const toggleButton = useSelector<StateType, boolean>((state) => state.usersPage.toggleIsButtons.disableButton);
+	} = useSelector<AppRootStateType, StateUsersType>((state) => state.usersPage);
+	const toggleUserId = useSelector<AppRootStateType, number>((state) => state.usersPage.toggleIsButtons.userId);
+	const toggleButton = useSelector<AppRootStateType, boolean>((state) => state.usersPage.toggleIsButtons.disableButton);
 
-	const dispatch = useDispatch<Dispatch<ActionUsersType>>();
-
-	const dispatchWrap = (response: axios.AxiosResponse) => {
-		dispatch(addUsers(response.data.items));
-		dispatch(setTotalCount(response.data.totalCount));
-		dispatch(setIsFetching(false));
-	}
+	const dispatch = useDispatch<DispatchType>();
 
 	useEffect(() => {
-		dispatch(setIsFetching(true));
-		usersApi.usersPage(currentPage, userPageSize).then((response) => {
-			dispatchWrap(response);
-		})
+		dispatch(thunkOnPageChanged(currentPage, userPageSize));
 	}, []);
 
 	const onPageChanged = (pageNumber: number, countUsers = 10) => {
-		dispatch(setIsFetching(true));
-		dispatch(setCurrentPage(pageNumber));
-
-		usersApi.usersPage(pageNumber, countUsers).then((response) => {
-			dispatchWrap(response);
-		})
+				dispatch(thunkOnPageChanged(pageNumber, countUsers));
 	}
 
 	const onFollowUsers = (userId: number) => {
-		dispatch(toggleIsButtons(userId, true));
-		usersApi.followUser(userId)
-			.then(() => {
-				onPageChanged(currentPage);
-				dispatch(toggleIsButtons(userId, false));
-			})
+		dispatch(followUsersTC(userId, currentPage, userPageSize))
 	}
 
 	const unFollowUsers = (userId: number) => {
-		dispatch(toggleIsButtons(userId, true));
-		usersApi.unFollowUser(userId)
-			.then(() => {
-				onPageChanged(currentPage);
-				dispatch(toggleIsButtons(userId, false));
-			})
+		dispatch(unFollowUsersTC(userId, currentPage, userPageSize))
 	}
 
 	// const onClickHandler = (userId: number) => {

@@ -1,39 +1,30 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import * as axios from "axios";
 import {Profile} from "./Profile";
 import {
 	ActionProfileType,
 	addPost,
 	onChangeMessPost,
 	ProfileStateType,
-	setUserProfile
+	setUserProfileTC
 } from "../../redux/profileReducer";
-import {StateType} from "../../redux/store";
+import {AppRootStateType} from "../../redux/store";
 import {useParams} from "react-router-dom";
 import {Dispatch} from "redux";
-import {usersApi} from "../../api/api";
+
+type DispatchType = Dispatch<ActionProfileType | any>
 
 export const ProfileContainer = () => {
 
-	const profilePage = useSelector((state: StateType): ProfileStateType => state.profilePage);
+	const profilePage = useSelector((state: AppRootStateType): ProfileStateType => state.profilePage);
 
-	const dispatch = useDispatch<Dispatch<ActionProfileType>>();
+	const dispatch = useDispatch<DispatchType>();
 
 	const params = useParams();
 
 	useEffect(() => {
 		const userId = params.userId || '16778';
-		usersApi.getProfile(userId)
-			.then((data) => {
-				dispatch(setUserProfile(data))
-			})
-		// const axios = require('axios');
-		// axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${params.userId || 16778}`)
-		// .then((response: axios.AxiosResponse) => {
-		// 	dispatch(setUserProfile(response.data))
-		// 	// console.log(response.data);
-		// })
+		dispatch(setUserProfileTC(userId))
 	}, []);
 
 	const addNewPost = () => {

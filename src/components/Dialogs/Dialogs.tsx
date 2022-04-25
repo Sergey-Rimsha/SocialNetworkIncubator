@@ -2,14 +2,12 @@ import React from "react";
 import UserImg from "../../img/ava_default.jpg";
 import {ChatUsers} from "./ChatUsers/ChatUsers";
 import {SendMessage} from "./SendMessage/SendMessage";
-import {DialogsType, InMessage, InUser} from "../../redux/store";
+import {DialogsType, InMessage, InUser} from "../../redux/dialogsReducer";
 
 type PropsType = {
-
 	dialogsPage: DialogsType
 	sendMessage: () => void
 	onChangeHandler: (text: string) => void
-
 }
 
 

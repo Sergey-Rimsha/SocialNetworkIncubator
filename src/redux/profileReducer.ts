@@ -1,3 +1,5 @@
+import {usersApi} from "../api/api";
+import {AppThunkType} from "./store";
 
 export type ProfileStateType = {
 	user: UserType
@@ -106,4 +108,13 @@ export const setUserProfile = (user: UserType) => {
 		type: 'SET_USER_PROFILE',
 		user
 	} as const
+}
+
+// Thunk
+
+export const setUserProfileTC = (userId: string): AppThunkType => (dispatch) => {
+	usersApi.getProfile(userId)
+		.then((data) => {
+			dispatch(setUserProfile(data))
+		})
 }

@@ -1,3 +1,5 @@
+import {AppThunkType} from "./store";
+import {usersApi} from "../api/api";
 
 export type AuthInitialStateType = {
 	id: number
@@ -51,3 +53,25 @@ export const setIsAuthLogin = (isAuth: boolean) => {
 		isAuth,
 	} as const
 }
+
+
+//Thunk
+
+export const setAuthLoginTC = (): AppThunkType => (dispatch) => {
+
+	dispatch(setIsAuthLogin(false));
+
+	usersApi.authLoginMe()
+		.then((response) => {
+			if (response.data.resultCode === 0) {
+				dispatch(setIsAuthLogin(true));
+				dispatch(setAuth(response.data.data));
+			}
+		})
+		.catch((e) => {
+			dispatch(setIsAuthLogin(false));
+			throw new Error(e);
+		})
+}
+
+

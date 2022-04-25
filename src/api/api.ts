@@ -44,4 +44,11 @@ export const usersApi = {
 			})
 	},
 
+	authLoginMe() {
+		return instance.get(`auth/me`)
+			.then((response) => {
+				return response;
+			})
+	},
+
 }

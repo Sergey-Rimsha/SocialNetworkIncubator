@@ -1,3 +1,5 @@
+import {usersApi} from "../api/api";
+import {AppThunkType} from "./store";
 
 export type StateUsersType = {
 	users: Array<UserType>
@@ -44,10 +46,10 @@ const initialState: StateUsersType = {
 		disableButton: false
 	}
 
-		
+
 };
 
-export const usersReducer = (state = initialState, action: ActionUsersType):StateUsersType => {
+export const usersReducer = (state = initialState, action: ActionUsersType): StateUsersType => {
 	switch (action.type) {
 		case 'FOLLOWED': {
 			return {
@@ -88,12 +90,6 @@ export const usersReducer = (state = initialState, action: ActionUsersType):Stat
 			}
 		}
 		case "TOGGLE_IS_BUTTONS": {
-
-			const newEventUser:ToggleIsButtonsType = {
-				userId: action.userId,
-				disableButton: action.isToggle
-			};
-
 			return {
 				...state,
 				toggleIsButtons: {
@@ -101,15 +97,6 @@ export const usersReducer = (state = initialState, action: ActionUsersType):Stat
 					userId: action.userId,
 					disableButton: action.isToggle
 				}
-
-
-				// ...state.toggleIsButtons.map((user) => {
-				// 	if (user.userId === action.userId) {
-				// 		user.disableButton = action.isToggle
-				// 	} else {
-				// 		return user
-				// 	}
-				// })
 			}
 		}
 
@@ -118,7 +105,6 @@ export const usersReducer = (state = initialState, action: ActionUsersType):Stat
 
 	}
 };
-
 
 
 // -- actionCreator -- users follow/unFollow
@@ -165,4 +151,37 @@ export const toggleIsButtons = (userId: number, isToggle: boolean) => {
 		userId,
 		isToggle
 	} as const
+}
+
+// thunk Creators
+
+export const thunkOnPageChanged = (pageNumber: number, userPageSize: number): AppThunkType => (dispatch) => {
+
+	dispatch(setIsFetching(true));
+	dispatch(setCurrentPage(pageNumber));
+
+	usersApi.usersPage(pageNumber, userPageSize)
+		.then((response) => {
+			dispatch(addUsers(response.data.items));
+			dispatch(setTotalCount(response.data.totalCount));
+			dispatch(setIsFetching(false));
+		});
+}
+
+export const followUsersTC = (userId: number, currentPage: number, userPageSize: number): AppThunkType => (dispatch) => {
+	dispatch(toggleIsButtons(userId, true));
+	usersApi.followUser(userId)
+		.then(() => {
+			dispatch(toggleIsButtons(userId, false));
+			dispatch(thunkOnPageChanged(currentPage, userPageSize));
+		})
+}
+export const unFollowUsersTC = (userId: number, currentPage: number, userPageSize: number): AppThunkType => (dispatch) => {
+	dispatch(toggleIsButtons(userId, true));
+	usersApi.unFollowUser(userId)
+		.then(() => {
+			dispatch(toggleIsButtons(userId, false));
+			dispatch(thunkOnPageChanged(currentPage, userPageSize));
+		})
+
 }
