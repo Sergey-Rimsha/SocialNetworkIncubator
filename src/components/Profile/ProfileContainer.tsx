@@ -9,14 +9,17 @@ import {
 	setUserProfileTC
 } from "../../redux/profileReducer";
 import {AppRootStateType} from "../../redux/store";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Dispatch} from "redux";
 
 type DispatchType = Dispatch<ActionProfileType | any>
 
 export const ProfileContainer = () => {
 
+	const navigate = useNavigate();
+
 	const profilePage = useSelector((state: AppRootStateType): ProfileStateType => state.profilePage);
+	const isAuth = useSelector<AppRootStateType>(state => state.auth.isAuth);
 
 	const dispatch = useDispatch<DispatchType>();
 
@@ -26,6 +29,10 @@ export const ProfileContainer = () => {
 		const userId = params.userId || '16778';
 		dispatch(setUserProfileTC(userId))
 	}, []);
+
+	useEffect(() => {
+		if (!isAuth) navigate('/');
+	}, [])
 
 	const addNewPost = () => {
 		dispatch(addPost());

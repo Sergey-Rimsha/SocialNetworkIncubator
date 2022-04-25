@@ -11,11 +11,14 @@ import {
 import React, {useEffect} from "react";
 import {UsersPage} from "./UsersPage";
 import {Preloader} from "../Preloader/Preloader";
+import {useNavigate} from "react-router-dom";
 
 // type DispatchType = Dispatch<ActionUsersType> | any
 type DispatchType = (arg: AppThunkType) => ActionUsersType
 
 export const UsersPageContainer = () => {
+
+	const navigate = useNavigate();
 
 	const {
 		users,
@@ -27,14 +30,20 @@ export const UsersPageContainer = () => {
 	const toggleUserId = useSelector<AppRootStateType, number>((state) => state.usersPage.toggleIsButtons.userId);
 	const toggleButton = useSelector<AppRootStateType, boolean>((state) => state.usersPage.toggleIsButtons.disableButton);
 
+	const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
+
 	const dispatch = useDispatch<DispatchType>();
 
 	useEffect(() => {
 		dispatch(thunkOnPageChanged(currentPage, userPageSize));
 	}, []);
 
+	useEffect(() => {
+		if (!isAuth) navigate('/')
+	}, [isAuth]);
+
 	const onPageChanged = (pageNumber: number, countUsers = 10) => {
-				dispatch(thunkOnPageChanged(pageNumber, countUsers));
+		dispatch(thunkOnPageChanged(pageNumber, countUsers));
 	}
 
 	const onFollowUsers = (userId: number) => {
