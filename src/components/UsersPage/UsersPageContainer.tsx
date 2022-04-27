@@ -8,17 +8,18 @@ import {
 	thunkOnPageChanged,
 	unFollowUsersTC
 } from "../../redux/usersReducer";
-import React, {useEffect} from "react";
+import React, {Component, ComponentType, useEffect} from "react";
 import {UsersPage} from "./UsersPage";
 import {Preloader} from "../Preloader/Preloader";
-import {useNavigate} from "react-router-dom";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 // type DispatchType = Dispatch<ActionUsersType> | any
 type DispatchType = (arg: AppThunkType) => ActionUsersType
 
-export const UsersPageContainer = () => {
+const UsersPageContainer = () => {
 
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	const {
 		users,
@@ -30,7 +31,7 @@ export const UsersPageContainer = () => {
 	const toggleUserId = useSelector<AppRootStateType, number>((state) => state.usersPage.toggleIsButtons.userId);
 	const toggleButton = useSelector<AppRootStateType, boolean>((state) => state.usersPage.toggleIsButtons.disableButton);
 
-	const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
+	// const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
 
 	const dispatch = useDispatch<DispatchType>();
 
@@ -38,9 +39,9 @@ export const UsersPageContainer = () => {
 		dispatch(thunkOnPageChanged(currentPage, userPageSize));
 	}, []);
 
-	useEffect(() => {
-		if (!isAuth) navigate('/')
-	}, [isAuth]);
+	// useEffect(() => {
+	// 	if (!isAuth) navigate('/')
+	// }, [isAuth]);
 
 	const onPageChanged = (pageNumber: number, countUsers = 10) => {
 		dispatch(thunkOnPageChanged(pageNumber, countUsers));
@@ -77,5 +78,8 @@ export const UsersPageContainer = () => {
 	)
 
 }
+
+
+export default compose<ComponentType>(withAuthRedirect)(UsersPageContainer)
 
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {ComponentType, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Profile} from "./Profile";
 import {
@@ -10,11 +10,12 @@ import {
 } from "../../redux/profileReducer";
 import {AppRootStateType} from "../../redux/store";
 import {useNavigate, useParams} from "react-router-dom";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type DispatchType = Dispatch<ActionProfileType | any>
 
-export const ProfileContainer = () => {
+const ProfileContainer = () => {
 
 	const navigate = useNavigate();
 
@@ -32,7 +33,7 @@ export const ProfileContainer = () => {
 
 	useEffect(() => {
 		if (!isAuth) navigate('/');
-	}, [])
+	}, [isAuth, navigate])
 
 	const addNewPost = () => {
 		dispatch(addPost());
@@ -53,4 +54,7 @@ export const ProfileContainer = () => {
 		</>
 	)
 }
+
+
+export default compose<ComponentType>(withAuthRedirect)(ProfileContainer)
 

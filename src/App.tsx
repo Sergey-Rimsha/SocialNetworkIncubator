@@ -3,10 +3,11 @@ import {Route, Routes} from "react-router-dom";
 
 import './scss/style.scss';
 import {Sidebar} from "./components/Sidebar/Sidebar";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {ProfileContainer} from "./components/Profile/ProfileContainer";
-import {UsersPageContainer} from "./components/UsersPage/UsersPageContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import UsersPageContainer from "./components/UsersPage/UsersPageContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
+import {AuthContainer} from "./components/Auth/AuthContainer";
 
 const App = () => {
 
@@ -37,6 +38,11 @@ const App = () => {
 								path={`/users`}
 								element={
 									<UsersPageContainer/>}
+							/>
+							<Route
+								path={`/auth`}
+								element={
+									<AuthContainer/>}
 							/>
 						</Routes>
 					</div>

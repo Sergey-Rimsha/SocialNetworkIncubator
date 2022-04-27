@@ -2,12 +2,13 @@ import {AppRootStateType} from "../../redux/store";
 import {Dialogs} from "./Dialogs";
 import {ActionDialogsType, addMessageChatAC, DialogsType, onChangeMessChatAC} from "../../redux/dialogsReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import {ComponentType, useEffect} from "react";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
-export const DialogsContainer = () => {
+const DialogsContainer = () => {
 
 	const navigate = useNavigate();
 
@@ -40,5 +41,8 @@ export const DialogsContainer = () => {
 		</>
 	)
 }
+
+
+export default compose<ComponentType>(withAuthRedirect)(DialogsContainer)
 
 
