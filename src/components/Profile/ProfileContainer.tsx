@@ -17,10 +17,7 @@ type DispatchType = Dispatch<ActionProfileType | any>
 
 const ProfileContainer = () => {
 
-	const navigate = useNavigate();
-
 	const profilePage = useSelector((state: AppRootStateType): ProfileStateType => state.profilePage);
-	const isAuth = useSelector<AppRootStateType>(state => state.auth.isAuth);
 
 	const dispatch = useDispatch<DispatchType>();
 
@@ -30,10 +27,6 @@ const ProfileContainer = () => {
 		const userId = params.userId || '16778';
 		dispatch(setUserProfileTC(userId))
 	}, []);
-
-	useEffect(() => {
-		if (!isAuth) navigate('/');
-	}, [isAuth, navigate])
 
 	const addNewPost = () => {
 		dispatch(addPost());
