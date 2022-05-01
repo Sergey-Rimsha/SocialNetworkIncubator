@@ -8,6 +8,7 @@ import {ProfileStateType} from "../../redux/profileReducer";
 
 type StateType = {
 	profilePage: ProfileStateType
+	status: string
 	addNewPost: () => void
 	onChangeHandlerPostText: (text: string) => void
 }
@@ -32,7 +33,10 @@ export function Profile(props: StateType) {
 				<div className="user__img">
 					<img src={userPhoto || UserImg} alt="user-img"/>
 				</div>
-				<ProfileInfo user={props.profilePage.user} />
+				<ProfileInfo
+					status={props.status}
+					user={props.profilePage.user}
+				/>
 			</div>
 
 			<NewPost

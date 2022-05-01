@@ -51,4 +51,11 @@ export const usersApi = {
 			})
 	},
 
+	getUserStatus(userId: number) {
+		return instance.get(`/profile/status/${userId}`)
+			.then((res) => {
+				return res.data
+			})
+	}
+
 }

@@ -1,8 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 import s from "./AuthContainer.module.scss";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../redux/store";
 
 
 export const AuthContainer = () => {
+
+	const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth);
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (isAuth){
+			navigate(`/profile`)
+		}
+	}, [isAuth, navigate])
+
 	return (
 		<div className={s.auth}>
 			<h3>Login form</h3>

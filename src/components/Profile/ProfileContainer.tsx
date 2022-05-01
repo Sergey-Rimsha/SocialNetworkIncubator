@@ -5,7 +5,7 @@ import {
 	ActionProfileType,
 	addPost,
 	onChangeMessPost,
-	ProfileStateType,
+	ProfileStateType, setStatusUserTC,
 	setUserProfileTC
 } from "../../redux/profileReducer";
 import {AppRootStateType} from "../../redux/store";
@@ -18,6 +18,7 @@ type DispatchType = Dispatch<ActionProfileType | any>
 const ProfileContainer = () => {
 
 	const profilePage = useSelector((state: AppRootStateType): ProfileStateType => state.profilePage);
+	const status = useSelector<AppRootStateType, string>(state => state.profilePage.status)
 
 	const dispatch = useDispatch<DispatchType>();
 
@@ -40,6 +41,7 @@ const ProfileContainer = () => {
 	return (
 		<>
 			<Profile
+				status={status}
 				profilePage={profilePage}
 				addNewPost={addNewPost}
 				onChangeHandlerPostText={onChangeHandlerPostText}

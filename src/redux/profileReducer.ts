@@ -3,6 +3,7 @@ import {AppThunkType} from "./store";
 
 export type ProfileStateType = {
 	user: UserType
+	status: string
 	posts: Array<PostType>
 	changeMessage: string
 }
@@ -31,8 +32,9 @@ export type PostType = {
 export type ActionProfileType = ReturnType<typeof addPost>
 	| ReturnType<typeof onChangeMessPost>
 	| ReturnType<typeof setUserProfile>
+	| ReturnType<typeof setStatus>
 
-let initialState: any = {
+let initialState: ProfileStateType = {
 	user: {
 		aboutMe: '',
 		fullName: '',
@@ -47,6 +49,7 @@ let initialState: any = {
 			['key']: '',
 		},
 	},
+	status: '',
 	posts: [
 		{id: 1, message: 'Hi, how are you?', likesCount: 12},
 		{id: 2, message: 'It\'s my first post', likesCount: 11},
@@ -57,7 +60,7 @@ let initialState: any = {
 }
 
 
-export const profileReducer = (state= initialState, action: ActionProfileType ):any => {
+export const profileReducer = (state= initialState, action: ActionProfileType ): ProfileStateType => {
 
 	switch (action.type) {
 		case "ADD-POST": {
@@ -84,6 +87,13 @@ export const profileReducer = (state= initialState, action: ActionProfileType ):
 				user: action.user,
 			}
 		}
+		case "SET_STATUS": {
+			return {
+				...state,
+				status: action.status
+			}
+		}
+
 
 		default:
 			return state;
@@ -110,11 +120,30 @@ export const setUserProfile = (user: UserType) => {
 	} as const
 }
 
+export const setStatus = (status: string) => {
+	return {
+		type: 'SET_STATUS',
+		status
+	} as const
+}
+
 // Thunk
 
 export const setUserProfileTC = (userId: string): AppThunkType => (dispatch) => {
 	usersApi.getProfile(userId)
 		.then((data) => {
 			dispatch(setUserProfile(data))
+			return data.userId
+		})
+		.then((userId) => {
+			dispatch(setStatusUserTC(userId))
+		})
+
+}
+
+export const setStatusUserTC = (userId: number): AppThunkType => (dispatch) => {
+	usersApi.getUserStatus(userId)
+		.then((status) => {
+			dispatch(setStatus(status))
 		})
 }
