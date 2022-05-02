@@ -10,14 +10,14 @@ type PropsType = {
 export function NewPost(props: PropsType) {
 
 	const onClickHandler = () => {
-		props.addNewPost()
+		if (props.changeMessage) {
+			props.addNewPost()
+		}
 	}
 
 	const onChangeText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		let text = event.currentTarget.value;
-		if (text) {
-			props.oChangeHandlerPostText(text)
-		}
+		props.oChangeHandlerPostText(text)
 	}
 
 	return (

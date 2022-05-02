@@ -12,15 +12,14 @@ type NewMessagesPropsType = {
 export function SendMessage (props: NewMessagesPropsType) {
 
 	const onClickHandler = () => {
-		props.sendMessage()
+		if (props.changeMessChat) {
+			props.sendMessage()
+		}
 	}
 
 	const onChangeHandlerMess = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
 		let text: string = e.currentTarget.value;
-		if (text) {
-			props.onChangeHandler(text)
-		}
-
+		props.onChangeHandler(text)
 	}
 
 	return (
@@ -31,10 +30,13 @@ export function SendMessage (props: NewMessagesPropsType) {
 					Sergey Rimsha
 				</div>
 				<div className={"form"}>
-					<textarea className={"form__textArea"} value={props.changeMessChat} onChange={onChangeHandlerMess} name="dialogs-message" placeholder="your message..." />
-
-					<button className="form__btn" onClick={onClickHandler} >Send</button>
-
+					<textarea
+						className={"form__textArea"}
+						value={props.changeMessChat}
+						onChange={onChangeHandlerMess}
+						name="dialogs-message"
+						placeholder="your message..." />
+					<button className="form__btn" onClick={onClickHandler}>Send</button>
 				</div>
 			</div>
 		</div>

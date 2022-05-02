@@ -18,14 +18,16 @@ type DispatchType = Dispatch<ActionProfileType | any>
 const ProfileContainer = () => {
 
 	const profilePage = useSelector((state: AppRootStateType): ProfileStateType => state.profilePage);
-	const status = useSelector<AppRootStateType, string>(state => state.profilePage.status)
+	const status = useSelector<AppRootStateType, string>(state => state.profilePage.status);
+
+	const loginId = useSelector<AppRootStateType, number>(state => state.auth.id)
 
 	const dispatch = useDispatch<DispatchType>();
 
 	const params = useParams();
 
 	useEffect(() => {
-		const userId = params.userId || '16778';
+		const userId = params.userId || loginId.toString();
 		dispatch(setUserProfileTC(userId))
 	}, []);
 

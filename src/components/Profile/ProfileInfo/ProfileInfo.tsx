@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import {UserType} from "../../../redux/profileReducer";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../../redux/store";
 
 type ProfileInfoPropsType = {
 	status: string
@@ -9,6 +11,29 @@ type ProfileInfoPropsType = {
 export function ProfileInfo(props: ProfileInfoPropsType) {
 
 	const [editMode, setEditMode] = useState<boolean>(false);
+
+	const loginId = useSelector<AppRootStateType, number>(state => state.auth.id)
+
+	const onDoubleClick = () => {
+		if (props.user.userId === loginId) {
+			setEditMode(true)
+		}
+	}
+
+	const onBlurHandler = () => {
+		setEditMode(false)
+	}
+
+	const showStatus = () => {
+		return (
+			<>
+				{!editMode ?
+					<span onDoubleClick={onDoubleClick}>{`status: ${props.status || ''}`}</span>
+					: <input autoFocus={true} onBlur={onBlurHandler} value={props.status}/>
+				}
+			</>
+		)
+	}
 
 	const showContacts = () => {
 		return (
@@ -24,39 +49,18 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
 		)
 	}
 
-	const onActiveEditMode = () => {
-		setEditMode(true)
-	}
-
-	const onBlurEditMode = () => {
-		setEditMode(false)
-	}
-
-	const showStatus = () => {
-
-		return (
-			<>
-				{!editMode ?
-					<span onDoubleClick={onActiveEditMode}>{props.status}</span>
-					: <input autoFocus={true} onBlur={onBlurEditMode} value={props.status}/>
-				}
-			</>
-		)
-	}
-
 	return (
 		<div className="user__info">
 			<div className="user__name">
-				{props.user.fullName || 'Sergey Rimsha'}
+				{props.user.fullName}
 			</div>
 			<div className="user__status">
-				status: {showStatus()}
+				{showStatus()}
 			</div>
 			<div className="user__aboutMe">
 				{props.user.aboutMe || ''}
 			</div>
-			{props.user.lookingForAJob}
-			{props.user.lookingForAJobDescription}
+
 			<div className="user__lookingForAJob">
 				{props.user.lookingForAJob ? props.user.lookingForAJobDescription : ''}
 			</div>

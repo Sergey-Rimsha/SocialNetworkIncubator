@@ -75,11 +75,10 @@ export const profileReducer = (state= initialState, action: ActionProfileType ):
 		}
 
 		case "ON-CHANGE-MESS-POST": {
-			let stateCopy = {...state}
-			if (action.text) {
-				stateCopy.changeMessage = action.text;
+			return {
+				...state,
+				changeMessage: action.text
 			}
-			return stateCopy;
 		}
 		case "SET_USER_PROFILE": {
 			return {

@@ -51,11 +51,10 @@ export const dialogsReducer = (state = initialState, action: ActionDialogsType) 
 		}
 
 		case 'ON-CHANGE-MESS-CHAT': {
-			let stateCopy = {...state};
-			if (action.text) {
-				stateCopy.changeMessChat = action.text;
+			return {
+				...state,
+				changeMessChat: action.text,
 			}
-			return stateCopy;
 		}
 
 		default:
