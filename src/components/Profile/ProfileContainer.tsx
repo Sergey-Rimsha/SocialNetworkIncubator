@@ -5,11 +5,13 @@ import {
 	ActionProfileType,
 	addPost,
 	onChangeMessPost,
-	ProfileStateType, setStatusUserTC,
+	ProfileStateType,
+	putStatusUserTC,
+	setChangeStatus,
 	setUserProfileTC
 } from "../../redux/profileReducer";
 import {AppRootStateType} from "../../redux/store";
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
@@ -17,10 +19,10 @@ type DispatchType = Dispatch<ActionProfileType | any>
 
 const ProfileContainer = () => {
 
-	const profilePage = useSelector((state: AppRootStateType): ProfileStateType => state.profilePage);
+	const profilePage = useSelector<AppRootStateType, ProfileStateType>((state) => state.profilePage);
 	const status = useSelector<AppRootStateType, string>(state => state.profilePage.status);
-
-	const loginId = useSelector<AppRootStateType, number>(state => state.auth.id)
+	const loginId = useSelector<AppRootStateType, number>(state => state.auth.id);
+	const changeStatus = useSelector<AppRootStateType, string>(state => state.profilePage.changeStatus)
 
 	const dispatch = useDispatch<DispatchType>();
 
@@ -39,13 +41,26 @@ const ProfileContainer = () => {
 		dispatch(onChangeMessPost(text))
 	};
 
+	const onChangeStatusText = (text: string) => {
+		dispatch(setChangeStatus(text))
+	}
+
+	const addStatus = () => {
+		if (changeStatus !== status) {
+			dispatch(putStatusUserTC(changeStatus,loginId));
+		}
+	}
+
 
 	return (
 		<>
 			<Profile
 				status={status}
+				changeStatus={changeStatus}
 				profilePage={profilePage}
 				addNewPost={addNewPost}
+				addStatus={addStatus}
+				onChangeStatusText={onChangeStatusText}
 				onChangeHandlerPostText={onChangeHandlerPostText}
 			/>
 		</>

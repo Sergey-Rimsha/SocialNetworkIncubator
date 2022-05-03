@@ -2,6 +2,13 @@ import axios from "axios";
 
 // const axios = require('axios');
 
+
+export type ResponseType = {
+	resultCode: number
+	messages: string[]
+	data: object
+}
+
 const instance = axios.create ({
 	withCredentials: true,
 	baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -56,6 +63,13 @@ export const usersApi = {
 			.then((res) => {
 				return res.data
 			})
-	}
+	},
 
+	putUserStatus(status: string) {
+		return instance.put<ResponseType>(`/profile/status`, {status})
+			.then(res => {
+				return res.data
+			})
+	}
+///*
 }

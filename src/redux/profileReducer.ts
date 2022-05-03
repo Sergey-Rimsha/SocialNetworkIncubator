@@ -6,6 +6,7 @@ export type ProfileStateType = {
 	status: string
 	posts: Array<PostType>
 	changeMessage: string
+	changeStatus: string
 }
 export type UserType = {
 	aboutMe: string | null
@@ -33,6 +34,7 @@ export type ActionProfileType = ReturnType<typeof addPost>
 	| ReturnType<typeof onChangeMessPost>
 	| ReturnType<typeof setUserProfile>
 	| ReturnType<typeof setStatus>
+	| ReturnType<typeof setChangeStatus>
 
 let initialState: ProfileStateType = {
 	user: {
@@ -56,7 +58,8 @@ let initialState: ProfileStateType = {
 		{id: 3, message: 'Blabla', likesCount: 11},
 		{id: 4, message: 'Dada', likesCount: 11}
 	],
-	changeMessage: ''
+	changeMessage: '',
+	changeStatus: '',
 }
 
 
@@ -89,16 +92,23 @@ export const profileReducer = (state= initialState, action: ActionProfileType ):
 		case "SET_STATUS": {
 			return {
 				...state,
-				status: action.status
+				status: action.status,
+				changeStatus: action.status,
 			}
 		}
-
+		case "CHANGE_STATUS": {
+			return {
+				...state,
+				changeStatus: action.text
+			}
+		}
 
 		default:
 			return state;
 	}
-
 }
+
+
 
 // actionCreates -- post
 
@@ -126,6 +136,13 @@ export const setStatus = (status: string) => {
 	} as const
 }
 
+export const setChangeStatus = (text: string) => {
+	return {
+		type: 'CHANGE_STATUS',
+		text
+	} as const
+}
+
 // Thunk
 
 export const setUserProfileTC = (userId: string): AppThunkType => (dispatch) => {
@@ -144,5 +161,14 @@ export const setStatusUserTC = (userId: number): AppThunkType => (dispatch) => {
 	usersApi.getUserStatus(userId)
 		.then((status) => {
 			dispatch(setStatus(status))
+		})
+}
+
+export const putStatusUserTC = (status: string, userId: number): AppThunkType => (dispatch) => {
+	usersApi.putUserStatus(status)
+		.then((data) => {
+			if (data.resultCode === 0) {
+				dispatch(setStatusUserTC(userId))
+			}
 		})
 }

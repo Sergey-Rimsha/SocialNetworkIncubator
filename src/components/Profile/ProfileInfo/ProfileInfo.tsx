@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {UserType} from "../../../redux/profileReducer";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../redux/store";
@@ -6,13 +6,15 @@ import {AppRootStateType} from "../../../redux/store";
 type ProfileInfoPropsType = {
 	status: string
 	user: UserType
+	changeStatus: string
+	addStatus: () => void
+	onChangeStatusText: (text: string) => void
 }
 
 export function ProfileInfo(props: ProfileInfoPropsType) {
 
 	const [editMode, setEditMode] = useState<boolean>(false);
-
-	const loginId = useSelector<AppRootStateType, number>(state => state.auth.id)
+	const loginId = useSelector<AppRootStateType, number>(state => state.auth.id);
 
 	const onDoubleClick = () => {
 		if (props.user.userId === loginId) {
@@ -20,8 +22,13 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
 		}
 	}
 
+	const onChangeStatusText = (e: ChangeEvent<HTMLInputElement>) => {
+		props.onChangeStatusText(e.currentTarget.value);
+	}
+
 	const onBlurHandler = () => {
-		setEditMode(false)
+		setEditMode(false);
+		props.addStatus();
 	}
 
 	const showStatus = () => {
@@ -29,7 +36,7 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
 			<>
 				{!editMode ?
 					<span onDoubleClick={onDoubleClick}>{`status: ${props.status || ''}`}</span>
-					: <input autoFocus={true} onBlur={onBlurHandler} value={props.status}/>
+					: <input onChange={onChangeStatusText} autoFocus={true} onBlur={onBlurHandler} value={props.changeStatus}/>
 				}
 			</>
 		)

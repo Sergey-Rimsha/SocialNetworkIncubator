@@ -9,8 +9,11 @@ import {ProfileStateType} from "../../redux/profileReducer";
 type StateType = {
 	profilePage: ProfileStateType
 	status: string
+	changeStatus: string
 	addNewPost: () => void
+	addStatus: () => void
 	onChangeHandlerPostText: (text: string) => void
+	onChangeStatusText: (text: string) => void
 }
 
 export function Profile(props: StateType) {
@@ -35,7 +38,10 @@ export function Profile(props: StateType) {
 				</div>
 				<ProfileInfo
 					status={props.status}
+					changeStatus={props.changeStatus}
+					addStatus={props.addStatus}
 					user={props.profilePage.user}
+					onChangeStatusText={props.onChangeStatusText}
 				/>
 			</div>
 
