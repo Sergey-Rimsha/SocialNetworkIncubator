@@ -1,5 +1,5 @@
 import {AppThunkType} from "./store";
-import {usersApi} from "../api/api";
+import {authApi, AuthDataType, usersApi} from "../api/api";
 
 export type AuthInitialStateType = {
 	id: number
@@ -39,7 +39,13 @@ export const authReducer = (state:AuthInitialStateType = initialState, action: A
 }
 
 
-export const setAuth = (date: AuthInitialStateType) => {
+type SetAuthDataType = {
+	id: number
+	email: string
+	login: string
+}
+
+export const setAuth = (date: SetAuthDataType) => {
 	return {
 		type: 'SET_AUTH',
 		date,
@@ -61,11 +67,11 @@ export const setAuthLoginTC = (): AppThunkType => (dispatch) => {
 
 	dispatch(setIsAuthLogin(false));
 
-	usersApi.authLoginMe()
-		.then((response) => {
-			if (response.data.resultCode === 0) {
+	authApi.authLoginMe()
+		.then((data) => {
+			if (data.resultCode === 0) {
 				dispatch(setIsAuthLogin(true));
-				dispatch(setAuth(response.data.data));
+				dispatch(setAuth(data.data));
 			}
 		})
 		.catch((e) => {
@@ -74,4 +80,13 @@ export const setAuthLoginTC = (): AppThunkType => (dispatch) => {
 		})
 }
 
+
+export const authLoginTC = (data: AuthDataType): AppThunkType => (dispatch) => {
+	authApi.authLogin(data)
+		.then((res) => {
+			if (res.data.resultCode === 0) {
+				dispatch(setAuthLoginTC())
+			}
+		})
+}
 

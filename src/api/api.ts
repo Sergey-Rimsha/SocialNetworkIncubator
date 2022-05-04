@@ -3,10 +3,17 @@ import axios from "axios";
 // const axios = require('axios');
 
 
-export type ResponseType = {
+export type ResponseType<T> = {
+	data: T
 	resultCode: number
 	messages: string[]
-	data: object
+	fieldsErrors: string[]
+}
+
+type AuthUserType = {
+	id: number
+	email: string
+	login: string
 }
 
 const instance = axios.create ({
@@ -15,7 +22,30 @@ const instance = axios.create ({
 	headers:     {
 		"API-KEY": "31e5f258-a64c-4753-8a60-acee980643ae"
 	}
-})
+});
+
+export type AuthDataType = {
+	email: string,
+	password: string,
+	rememberMe: boolean
+}
+
+export const authApi = {
+
+	authLoginMe() {
+		return instance.get<ResponseType<AuthUserType>>(`auth/me`)
+			.then((res) => {
+				console.log(res)
+				return res.data
+			})
+	},
+
+
+	authLogin(data: AuthDataType) {
+		return instance.post<ResponseType<{userId: number}>>(`/auth/login`, {data})
+	},
+
+}
 
 
 export const usersApi = {
@@ -51,13 +81,6 @@ export const usersApi = {
 			})
 	},
 
-	authLoginMe() {
-		return instance.get(`auth/me`)
-			.then((response) => {
-				return response;
-			})
-	},
-
 	getUserStatus(userId: number) {
 		return instance.get(`/profile/status/${userId}`)
 			.then((res) => {
@@ -66,7 +89,7 @@ export const usersApi = {
 	},
 
 	putUserStatus(status: string) {
-		return instance.put<ResponseType>(`/profile/status`, {status})
+		return instance.put<ResponseType<{}>>(`/profile/status`, {status})
 			.then(res => {
 				return res.data
 			})

@@ -26,6 +26,14 @@
 		color: #707C97;
 	}
 
+	&__checkbox {
+		margin-bottom: 25px;
+
+		& span {
+			margin-left: 15px;
+		}
+	}
+
 	&__btnWrap {
 		display: flex;
 		justify-content: space-between;
