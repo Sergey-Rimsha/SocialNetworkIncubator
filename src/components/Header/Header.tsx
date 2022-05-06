@@ -25,7 +25,7 @@ export const Header = (props: HeaderPropsType) => {
 					</div>
 					<div>
 						{props.auth.isAuth ? props.auth.login : 'login'}
-						<button onClick={onClickLogout}>logout</button>
+						{props.auth.isAuth ? <button onClick={onClickLogout}>logout</button> : ''}
 					</div>
 				</div>
 			</div>

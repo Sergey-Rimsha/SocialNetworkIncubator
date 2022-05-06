@@ -94,7 +94,7 @@ export const authLogout = (): AppThunkType => (dispatch) => {
 	authApi.authLogout()
 		.then(res => {
 			if (res.data.resultCode === 0) {
-
+				dispatch(setIsAuthLogin(false))
 			}
 		})
 }
