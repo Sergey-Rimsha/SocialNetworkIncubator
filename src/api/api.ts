@@ -35,15 +35,24 @@ export const authApi = {
 	authLoginMe() {
 		return instance.get<ResponseType<AuthUserType>>(`auth/me`)
 			.then((res) => {
-				console.log(res)
+				// console.log(res)
 				return res.data
 			})
 	},
 
 
 	authLogin(data: AuthDataType) {
-		return instance.post<ResponseType<{userId: number}>>(`/auth/login`, {data})
+		const newData = {
+			email: data.email,
+			password: data.password,
+			rememberMe: false,
+		}
+		return instance.post<ResponseType<{userId: number}>>(`auth/login`,{})
 	},
+
+	authLogout() {
+		return instance.delete(`auth/login`)
+	}
 
 }
 

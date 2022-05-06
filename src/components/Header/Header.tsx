@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../img/logo.svg";
-import {AuthInitialStateType} from "../../redux/authReducer";
+import {AuthInitialStateType, authLogout} from "../../redux/authReducer";
+import {useDispatch} from "react-redux";
 
 
 export type HeaderPropsType = {
@@ -8,6 +9,13 @@ export type HeaderPropsType = {
 }
 
 export const Header = (props: HeaderPropsType) => {
+
+	const dispatch = useDispatch()
+
+	const onClickLogout = () => {
+		dispatch(authLogout())
+	}
+
 	return (
 		<header className="header">
 			<div className="container">
@@ -17,6 +25,7 @@ export const Header = (props: HeaderPropsType) => {
 					</div>
 					<div>
 						{props.auth.isAuth ? props.auth.login : 'login'}
+						<button onClick={onClickLogout}>logout</button>
 					</div>
 				</div>
 			</div>

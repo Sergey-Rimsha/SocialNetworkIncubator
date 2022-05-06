@@ -31,7 +31,12 @@ export const AuthContainer = () => {
 
 
 	const onSubmit = (formData: FormDataType) => {
-		// dispatch(authLoginTC(formData))
+		const email = formData.email;
+		const password = formData.password;
+		const rememberMe = formData.rememberMe || false;
+		dispatch(authLoginTC(formData))
+
+		console.log(formData)
 	}
 
 	return (

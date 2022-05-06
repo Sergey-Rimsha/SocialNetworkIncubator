@@ -19,6 +19,11 @@ const LoginForm = (props: any) => {
 						rememberMe
 					</span>
 				</div>
+
+				{/*	<div className={s.auth__btnWrap}>*/}
+				{/*		<button className={s.auth__btn} type="submit">login</button>*/}
+				{/*		<button className={s.auth__btn} type="submit">logout</button>*/}
+				{/*	</div>*/}
 				<button type="submit" className={s.auth__btn}>login</button>
 			</form>
 		</>

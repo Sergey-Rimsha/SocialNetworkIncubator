@@ -90,3 +90,11 @@ export const authLoginTC = (data: AuthDataType): AppThunkType => (dispatch) => {
 		})
 }
 
+export const authLogout = (): AppThunkType => (dispatch) => {
+	authApi.authLogout()
+		.then(res => {
+			if (res.data.resultCode === 0) {
+
+			}
+		})
+}
