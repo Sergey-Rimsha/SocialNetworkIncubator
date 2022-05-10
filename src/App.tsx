@@ -7,7 +7,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import UsersPageContainer from "./components/UsersPage/UsersPageContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
-import {AuthContainer} from "./components/Auth/AuthContainer";
+import {LoginContainer} from "./components/Auth/LoginContainer";
 
 const App = () => {
 
@@ -42,7 +42,7 @@ const App = () => {
 							<Route
 								path={`/auth`}
 								element={
-									<AuthContainer/>}
+									<LoginContainer/>}
 							/>
 						</Routes>
 					</div>
