@@ -4,6 +4,11 @@ import s from './LoginContainer.module.scss'
 import {FormDataType} from "./LoginContainer";
 
 
+type P = {
+	onClickLogout: () => void
+}
+
+
 const LoginForm = (props: InjectedFormProps<FormDataType>) => {
 
 	return (
@@ -28,7 +33,10 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
 						rememberMe
 					</span>
 				</div>
-				<button type="submit" className={s.auth__btn}>login</button>
+				<div className={s.auth__btnWrap}>
+					<button type="submit" className={s.auth__btn}>login</button>
+					{/*<button type="button" className={s.auth__btn} onClick={}>logout</button>*/}
+				</div>
 			</form>
 		</>
 	)

@@ -1,3 +1,6 @@
+@import "./variables";
+@import "mixins";
+
 @mixin colorWhite {
 	background-color: #FFFFFF;
 }
@@ -13,8 +16,8 @@
 .App {
 	//background-color: #DBDFF3;
 	background: linear-gradient(#DBDFF3, #FDFBFD);
-	@include textColor;
 	min-height: 100vh;
+	@include primaryFont(500, 18px, $primaryTextColor);
 }
 
 .container {
@@ -30,7 +33,7 @@
 	display: flex;
 	height: 74px;
 	align-items: center;
-	@include colorWhite;
+	background-color: $bgColor;
 
 	&__block {
 		display: flex;
@@ -40,6 +43,13 @@
 
 	&__logo {
 		width: 95px;
+	}
+
+	&__login {
+
+		& a {
+			text-decoration: none;
+		}
 	}
 }
 
@@ -53,7 +63,7 @@
 .sidebar {
 	min-width: 200px;
 	height: 450px;
-	@include colorWhite;
+	background-color: $bgColor;
 	margin-right: 20px;
 	border-radius: 10px;
 	box-shadow: 0 0 1px gray;
@@ -73,7 +83,7 @@
 			font-size: 20px;
 			padding-left: 20px;
 			text-decoration: none;
-			color: #707C97;
+			color: $primaryTextColor;
 		}
 	}
 
@@ -84,12 +94,12 @@
 
 	.user {
 		display: flex;
-		background-color: white;
+		background-color: $bgColor;
 		box-shadow: 0 0 1px gray;
 		width: 100%;
 		padding: 15px;
 		border-radius: 15px;
-		font-size: 18px;
+
 
 		&__img {
 			height: 200px;
@@ -104,10 +114,17 @@
 		}
 
 		&__info {
+
 			margin-left: 25px;
+			font-weight: 500;
+
 		}
 		&__name {
-			font-weight: bold;
+			font-size: 24px;
+			font-weight: 700;
+		}
+		&__status {
+			margin-top: 15px;
 		}
 
 	}
@@ -142,13 +159,13 @@
 
 			& button {
 				width: 80px;
-				height: 30px;
+				height: 35px;
 				border: none;
 				color: white;
 				text-align: center;
 				text-decoration: none;
 				font-size: 16px;
-				background: linear-gradient(to right, #7CB8F7, #2A8BF2);
+				@include bgButtonGradient();
 				border-radius: 10px;
 			}
 		}
@@ -216,8 +233,6 @@
 
 		.user-name {
 			margin-left: 20px;
-			@include textColor;
-			//font-weight: bold;
 			font-size: 20px;
 		}
 	}
@@ -306,7 +321,6 @@
 			&__dialogs {
 
 				&_name {
-					@include textColor;
 					font-size: 18px;
 				}
 
@@ -331,8 +345,8 @@
 						color: white;
 						text-align: center;
 						text-decoration: none;
-						font-size: 16px;
-						background: linear-gradient(to right, #7CB8F7, #2A8BF2);
+						font-size: 18px;
+						@include bgButtonGradient();
 						border-radius: 10px;
 
 					}
@@ -395,7 +409,7 @@
 		text-decoration: none;
 		display: inline-block;
 		font-size: 18px;
-		background: linear-gradient(to right, #7CB8F7, #2A8BF2);
+		@include bgButtonGradient();
 		border-radius: 10px;
 	}
 

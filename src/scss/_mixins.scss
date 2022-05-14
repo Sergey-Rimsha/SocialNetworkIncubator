@@ -1,0 +1,13 @@
+
+
+@mixin primaryFont($weight, $size, $color) {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: $weight;
+	font-size: $size;
+	color: $color;
+	line-height: 1.3;
+}
+
+@mixin bgButtonGradient() {
+	background: linear-gradient(to right, #7CB8F7, #2A8BF2);
+}
