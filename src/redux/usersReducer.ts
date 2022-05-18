@@ -1,12 +1,12 @@
 import {usersApi} from "../api/api";
 import {AppThunkType} from "./store";
+import {setIsFetching} from "./utilsReducer";
 
 export type StateUsersType = {
 	users: Array<UserType>
 	userPageSize: number
 	currentPage: number
 	totalCount: number
-	isFetching: boolean
 	toggleIsButtons: ToggleIsButtonsType
 }
 
@@ -40,7 +40,6 @@ const initialState: StateUsersType = {
 	userPageSize: 10,
 	currentPage: 1,
 	totalCount: 1,
-	isFetching: false,
 	toggleIsButtons: {
 		userId: 1,
 		disableButton: false
@@ -76,12 +75,6 @@ export const usersReducer = (state = initialState, action: ActionUsersType): Sta
 				currentPage: action.currentPage
 			}
 
-		}
-		case 'TOGGLE_IS_FETCHING': {
-			return {
-				...state,
-				isFetching: action.isFetching,
-			}
 		}
 		case 'SET_TOTAL_COUNT': {
 			return {
@@ -131,13 +124,6 @@ export const setCurrentPage = (currentPage: number) => {
 	} as const
 }
 
-export const setIsFetching = (isFetching: boolean) => {
-	return {
-		type: 'TOGGLE_IS_FETCHING',
-		isFetching,
-	} as const
-}
-
 export const setTotalCount = (totalCount: number) => {
 	return {
 		type: 'SET_TOTAL_COUNT',
@@ -170,18 +156,28 @@ export const thunkOnPageChanged = (pageNumber: number, userPageSize: number): Ap
 
 export const followUsersTC = (userId: number, currentPage: number, userPageSize: number): AppThunkType => (dispatch) => {
 	dispatch(toggleIsButtons(userId, true));
+	dispatch(setIsFetching(true));
 	usersApi.followUser(userId)
-		.then(() => {
-			dispatch(toggleIsButtons(userId, false));
-			dispatch(thunkOnPageChanged(currentPage, userPageSize));
+		.then((data) => {
+			if (data.resultCode === 0) {
+				dispatch(toggleIsButtons(userId, false));
+				dispatch(thunkOnPageChanged(currentPage, userPageSize));
+			}
+
+			dispatch(setIsFetching(false));
 		})
 }
 export const unFollowUsersTC = (userId: number, currentPage: number, userPageSize: number): AppThunkType => (dispatch) => {
 	dispatch(toggleIsButtons(userId, true));
+	dispatch(setIsFetching(true));
 	usersApi.unFollowUser(userId)
-		.then(() => {
-			dispatch(toggleIsButtons(userId, false));
-			dispatch(thunkOnPageChanged(currentPage, userPageSize));
+		.then((data) => {
+			if (data.resultCode === 0) {
+				dispatch(toggleIsButtons(userId, false));
+				dispatch(thunkOnPageChanged(currentPage, userPageSize));
+			}
+
+			dispatch(setIsFetching(false));
 		})
 
 }

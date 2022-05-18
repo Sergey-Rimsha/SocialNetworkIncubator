@@ -14,7 +14,7 @@ type ProfileInfoPropsType = {
 export function ProfileInfo(props: ProfileInfoPropsType) {
 
 	const [editMode, setEditMode] = useState<boolean>(false);
-	const loginId = useSelector<AppRootStateType, number>(state => state.auth.id);
+	const loginId = useSelector<AppRootStateType, number | null>(state => state.auth.id);
 
 	const onDoubleClick = () => {
 		if (props.user.userId === loginId) {

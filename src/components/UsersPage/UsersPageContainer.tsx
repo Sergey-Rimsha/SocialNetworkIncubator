@@ -22,16 +22,19 @@ const UsersPageContainer = () => {
 		users,
 		currentPage,
 		userPageSize,
-		isFetching,
 		totalCount,
 	} = useSelector<AppRootStateType, StateUsersType>((state) => state.usersPage);
 	const toggleUserId = useSelector<AppRootStateType, number>((state) => state.usersPage.toggleIsButtons.userId);
 	const toggleButton = useSelector<AppRootStateType, boolean>((state) => state.usersPage.toggleIsButtons.disableButton);
 
+	const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth);
+
 	const dispatch = useDispatch<DispatchType>();
 
 	useEffect(() => {
-		dispatch(thunkOnPageChanged(currentPage, userPageSize));
+		if (isAuth) {
+			dispatch(thunkOnPageChanged(currentPage, userPageSize));
+		}
 	}, []);
 
 	const onPageChanged = (pageNumber: number, countUsers = 10) => {
@@ -48,7 +51,6 @@ const UsersPageContainer = () => {
 
 	return (
 		<>
-			{isFetching ? <Preloader/> : null}
 			<UsersPage
 				users={users}
 				totalCount={totalCount}

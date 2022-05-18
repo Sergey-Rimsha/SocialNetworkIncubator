@@ -1,17 +1,18 @@
 import {AppThunkType} from "./store";
 import {authApi, AuthDataType} from "../api/api";
+import {setIsFetching} from "./utilsReducer";
 
 export type AuthInitialStateType = {
-	id: number
-	email: string
-	login: string
+	id: number | null
+	email: string | null
+	login: string | null
 	isAuth: boolean
 }
 
 const initialState = {
-	id: 2,
-	email: 'blabla@bla.bla',
-	login: 'samurai',
+	id: null,
+	email: null,
+	login: null,
 	isAuth: false,
 }
 
@@ -65,35 +66,42 @@ export const setIsAuthLogin = (isAuth: boolean) => {
 export const setAuthLoginTC = (): AppThunkType => (dispatch) => {
 
 	dispatch(setIsAuthLogin(false));
+	dispatch(setIsFetching(true));
 
 	authApi.authLoginMe()
 		.then((data) => {
 			if (data.resultCode === 0) {
 				dispatch(setIsAuthLogin(true));
 				dispatch(setAuth(data.data));
-
 			}
 		})
 		.catch((e) => {
 			dispatch(setIsAuthLogin(false));
 			throw new Error(e);
 		})
+		.finally(() => {
+			dispatch(setIsFetching(false));
+		})
 }
 
 
 export const authLoginTC = (data: AuthDataType): AppThunkType => (dispatch) => {
+	dispatch(setIsFetching(true));
 	authApi.authLogin(data)
 		.then((res) => {
 			if (res.data.resultCode === 0) {
 				dispatch(setAuthLoginTC())
+				dispatch(setIsFetching(false));
 			}
 		})
 }
 
 export const authLogout = (): AppThunkType => (dispatch) => {
+	dispatch(setIsFetching(true));
 	authApi.authLogout()
 		.then(res => {
 			if (res.data.resultCode === 0) {
+				dispatch(setIsFetching(false));
 				dispatch(setIsAuthLogin(false))
 			}
 		})

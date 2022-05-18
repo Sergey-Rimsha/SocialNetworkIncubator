@@ -68,19 +68,15 @@ export const usersApi = {
 			})
 	},
 	followUser(userId: number) {
-		return instance.post(`follow/${userId}`)
+		return instance.post<ResponseType<{}>>(`follow/${userId}`)
 			.then((response) => {
-				if (response.data.resultCode === 0) {
-					// console.log(response.data)
-				}
+				return response.data
 			})
 	},
 	unFollowUser(userId: number) {
-		return instance.delete(`follow/${userId}`)
+		return instance.delete<ResponseType<{}>>(`follow/${userId}`)
 			.then((response) => {
-				if (response.data.resultCode === 0) {
-					// console.log(response.data)
-				}
+				return response.data
 			})
 	},
 

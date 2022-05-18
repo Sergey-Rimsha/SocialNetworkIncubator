@@ -1,5 +1,6 @@
 import {usersApi} from "../api/api";
 import {AppThunkType} from "./store";
+import {setIsFetching} from "./utilsReducer";
 
 export type ProfileStateType = {
 	user: UserType
@@ -146,6 +147,7 @@ export const setChangeStatus = (text: string) => {
 // Thunk
 
 export const setUserProfileTC = (userId: string): AppThunkType => (dispatch) => {
+	dispatch(setIsFetching(true));
 	usersApi.getProfile(userId)
 		.then((data) => {
 			dispatch(setUserProfile(data))
@@ -154,21 +156,28 @@ export const setUserProfileTC = (userId: string): AppThunkType => (dispatch) => 
 		.then((userId) => {
 			dispatch(setStatusUserTC(userId))
 		})
+		.finally(() => {
+			dispatch(setIsFetching(false));
+		})
 
 }
 
 export const setStatusUserTC = (userId: number): AppThunkType => (dispatch) => {
+	dispatch(setIsFetching(true));
 	usersApi.getUserStatus(userId)
 		.then((status) => {
-			dispatch(setStatus(status))
+			dispatch(setStatus(status));
+			dispatch(setIsFetching(false));
 		})
 }
 
 export const putStatusUserTC = (status: string, userId: number): AppThunkType => (dispatch) => {
+	dispatch(setIsFetching(true));
 	usersApi.putUserStatus(status)
 		.then((data) => {
 			if (data.resultCode === 0) {
 				dispatch(setStatusUserTC(userId))
+				dispatch(setIsFetching(false));
 			}
 		})
 }

@@ -21,16 +21,23 @@ const ProfileContainer = () => {
 
 	const profilePage = useSelector<AppRootStateType, ProfileStateType>((state) => state.profilePage);
 	const status = useSelector<AppRootStateType, string>(state => state.profilePage.status);
-	const loginId = useSelector<AppRootStateType, number>(state => state.auth.id);
-	const changeStatus = useSelector<AppRootStateType, string>(state => state.profilePage.changeStatus)
+	const changeStatus = useSelector<AppRootStateType, string>(state => state.profilePage.changeStatus);
+
+	const loginId = useSelector<AppRootStateType, number | null>(state => state.auth.id);
+	const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth);
+
 
 	const dispatch = useDispatch<DispatchType>();
 
 	const params = useParams();
 
 	useEffect(() => {
-		const userId = params.userId || loginId.toString();
-		dispatch(setUserProfileTC(userId))
+		if (loginId) {
+			const userId = params.userId || loginId;
+			if (isAuth) {
+				dispatch(setUserProfileTC(userId.toString()));
+			}
+		}
 	}, []);
 
 	const addNewPost = () => {
@@ -47,7 +54,9 @@ const ProfileContainer = () => {
 
 	const addStatus = () => {
 		if (changeStatus !== status) {
-			dispatch(putStatusUserTC(changeStatus,loginId));
+			if (loginId) {
+				dispatch(putStatusUserTC(changeStatus, loginId));
+			}
 		}
 	}
 

@@ -25,11 +25,12 @@ export const LoginContainer = () => {
 		dispatch(authLogout())
 	}
 
-	useEffect(() => {
-		if (isAuth) {
-			navigate('/profile')
-		}
-	}, [isAuth, navigate])
+	// useEffect(() => {
+	// 	if (isAuth === true) {
+	// 		navigate('/profile')
+	// 	}
+	//
+	// }, [isAuth, navigate])
 
 	const onSubmit = (formData: FormDataType) => {
 		dispatch(authLoginTC(formData))

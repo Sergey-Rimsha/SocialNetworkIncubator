@@ -8,12 +8,17 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import UsersPageContainer from "./components/UsersPage/UsersPageContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {LoginContainer} from "./components/Auth/LoginContainer";
+import {Preloader} from "./components/Preloader/Preloader";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "./redux/store";
 
 const App = () => {
+	const isFetching = useSelector<AppRootStateType, boolean>(state => state.utils.isFetching);
 
 	return (
 		<div className="App">
 			<HeaderContainer />
+			{isFetching && <Preloader />}
 			<div className="page">
 				<div className="container">
 					<Sidebar />
