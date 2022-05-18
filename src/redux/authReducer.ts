@@ -24,7 +24,7 @@ export const authReducer = (state:AuthInitialStateType = initialState, action: A
 		case "SET_AUTH": {
 			return {
 				...state,
-				...action.date
+				...action.data
 			}
 		}
 		case "SET_IS_AUTH": {
@@ -45,10 +45,10 @@ type SetAuthDataType = {
 	login: string
 }
 
-export const setAuth = (date: SetAuthDataType) => {
+export const setAuth = (data: SetAuthDataType) => {
 	return {
 		type: 'SET_AUTH',
-		date,
+		data,
 	} as const
 }
 
@@ -71,6 +71,7 @@ export const setAuthLoginTC = (): AppThunkType => (dispatch) => {
 			if (data.resultCode === 0) {
 				dispatch(setIsAuthLogin(true));
 				dispatch(setAuth(data.data));
+
 			}
 		})
 		.catch((e) => {
