@@ -4,12 +4,14 @@ import s from './LoginContainer.module.scss'
 import {FormDataType} from "./LoginContainer";
 
 
-type P = {
+type PropsType = {
 	onClickLogout: () => void
 }
 
+type PropsFormType = InjectedFormProps<FormDataType, PropsType> & PropsType
 
-const LoginForm = (props: InjectedFormProps<FormDataType>) => {
+// InjectedFormProps<FormDataType, any>
+const LoginForm = (props: PropsFormType ) => {
 
 	return (
 		<>
@@ -35,14 +37,14 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
 				</div>
 				<div className={s.auth__btnWrap}>
 					<button type="submit" className={s.auth__btn}>login</button>
-					{/*<button type="button" className={s.auth__btn} onClick={}>logout</button>*/}
+					<button type="button" className={s.auth__btn} onClick={props.onClickLogout}>logout</button>
 				</div>
 			</form>
 		</>
 	)
 }
 
-export const LoginReduxForm = reduxForm<FormDataType>({
+export const LoginReduxForm = reduxForm<FormDataType, PropsType>({
 	// a unique name for the form
 	form: 'login'
 })(LoginForm)

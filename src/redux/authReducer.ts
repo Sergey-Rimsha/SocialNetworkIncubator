@@ -1,5 +1,5 @@
 import {AppThunkType} from "./store";
-import {authApi, AuthDataType, usersApi} from "../api/api";
+import {authApi, AuthDataType} from "../api/api";
 
 export type AuthInitialStateType = {
 	id: number
@@ -49,7 +49,6 @@ export const setAuth = (date: SetAuthDataType) => {
 	return {
 		type: 'SET_AUTH',
 		date,
-
 	} as const
 }
 
@@ -61,7 +60,7 @@ export const setIsAuthLogin = (isAuth: boolean) => {
 }
 
 
-//Thunk
+//Thunk creators
 
 export const setAuthLoginTC = (): AppThunkType => (dispatch) => {
 

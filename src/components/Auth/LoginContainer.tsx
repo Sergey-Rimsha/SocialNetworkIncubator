@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import s from "./LoginContainer.module.scss";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {LoginReduxForm} from "./loginForm";
-import {Dispatch} from "redux";
 import {authLoginTC, authLogout} from "../../redux/authReducer";
+import {AppRootStateType} from "../../redux/store";
+import {useNavigate, useParams} from "react-router-dom";
 
 export type FormDataType = {
 	email: string
@@ -14,19 +15,24 @@ export type FormDataType = {
 
 export const LoginContainer = () => {
 
-	const dispatch = useDispatch<Dispatch<any>>()
+	const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth);
+
+	const navigate = useNavigate()
+
+	const dispatch = useDispatch()
 
 	const onClickLogout = () => {
 		dispatch(authLogout())
 	}
 
-
+	useEffect(() => {
+		if (isAuth) {
+			navigate('/profile')
+		}
+	}, [isAuth, navigate])
 
 	const onSubmit = (formData: FormDataType) => {
-
 		dispatch(authLoginTC(formData))
-
-		console.log(formData)
 	}
 
 	return (
@@ -35,7 +41,7 @@ export const LoginContainer = () => {
 
 			<LoginReduxForm
 				onSubmit={onSubmit}
-				// onClickLogout={onClickLogout}
+				onClickLogout={onClickLogout}
 			/>
 		</div>
 	)
