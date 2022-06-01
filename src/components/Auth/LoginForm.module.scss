@@ -1,3 +1,5 @@
+
+
 .auth {
 	display: flex;
 	flex-direction: column;
@@ -18,12 +20,17 @@
 
 	&__input {
 		height: 45px;
-		border-radius: 5px;
+		border-radius: 10px;
 		margin-bottom: 25px;
-		border: none;
+		border: 2px solid grey;
 		padding: 10px;
 		font-size: 18px;
 		color: #707C97;
+
+		&:focus {
+			outline: none;
+			border-color: #2A8BF2;
+		}
 	}
 
 	&__checkbox {
@@ -48,6 +55,4 @@
 		font-size: 18px;
 		background: linear-gradient(to right, #7CB8F7, #2A8BF2);
 	}
-
-
 }

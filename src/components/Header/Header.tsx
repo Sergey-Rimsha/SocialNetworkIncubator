@@ -1,7 +1,7 @@
 import React from "react";
-import logo from "../../img/logo.svg";
-import {AuthInitialStateType, authLogout} from "../../redux/authReducer";
-import {useDispatch} from "react-redux";
+// @ts-ignore
+import logo from '../../img/logo.svg';
+import {AuthInitialStateType} from "../../redux/authReducer";
 import {NavLink} from "react-router-dom";
 
 

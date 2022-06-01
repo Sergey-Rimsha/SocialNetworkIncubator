@@ -1,6 +1,7 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import s from './LoginContainer.module.scss'
+// @ts-ignore
+import s from './LoginForm.module.scss';
 import {FormDataType} from "./LoginContainer";
 
 

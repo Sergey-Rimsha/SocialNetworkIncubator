@@ -10,7 +10,6 @@ import {
 } from "../../redux/usersReducer";
 import React, {ComponentType, useEffect} from "react";
 import {UsersPage} from "./UsersPage";
-import {Preloader} from "../Preloader/Preloader";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 

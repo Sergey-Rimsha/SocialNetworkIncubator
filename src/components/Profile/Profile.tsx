@@ -1,4 +1,5 @@
 import React from "react";
+// @ts-ignore
 import UserImg from "../../img/ava_default.jpg";
 import {Post} from "./Post/Post";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";

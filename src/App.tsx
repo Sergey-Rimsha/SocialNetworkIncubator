@@ -1,19 +1,23 @@
-import React from 'react';
-import {Route, Routes} from "react-router-dom";
+import React, {useEffect} from 'react';
 
 import './scss/style.scss';
 import {Sidebar} from "./components/Sidebar/Sidebar";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import UsersPageContainer from "./components/UsersPage/UsersPageContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
-import {LoginContainer} from "./components/Auth/LoginContainer";
 import {Preloader} from "./components/Preloader/Preloader";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./redux/store";
+import {Main} from "./components/Main";
+import {initializeApp} from "./redux/utilsReducer";
 
 const App = () => {
+
+	const dispatch = useDispatch();
+
 	const isFetching = useSelector<AppRootStateType, boolean>(state => state.utils.isFetching);
+
+	useEffect(() => {
+		dispatch(initializeApp())
+	},[dispatch])
 
 	return (
 		<div className="App">
@@ -22,35 +26,7 @@ const App = () => {
 			<div className="page">
 				<div className="container">
 					<Sidebar />
-					<div className="content">
-						<Routes>
-							<Route
-								path={'/'}
-								element={<ProfileContainer/>}
-							/>
-							<Route
-								path={`/profile`}
-								element={<ProfileContainer/>}
-							>
-								<Route path={`:userId`} element={<ProfileContainer/>}/>
-							</Route>
-							<Route
-								path={`/dialogs`}
-								element={
-									<DialogsContainer/>}
-							/>
-							<Route
-								path={`/users`}
-								element={
-									<UsersPageContainer/>}
-							/>
-							<Route
-								path={`/auth`}
-								element={
-									<LoginContainer/>}
-							/>
-						</Routes>
-					</div>
+					<Main/>
 				</div>
 			</div>
 		</div>

@@ -68,7 +68,7 @@ export const setAuthLoginTC = (): AppThunkType => (dispatch) => {
 	dispatch(setIsAuthLogin(false));
 	dispatch(setIsFetching(true));
 
-	authApi.authLoginMe()
+	return authApi.authLoginMe()
 		.then((data) => {
 			if (data.resultCode === 0) {
 				dispatch(setIsAuthLogin(true));
