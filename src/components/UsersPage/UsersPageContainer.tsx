@@ -1,17 +1,10 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 
-import {AppRootStateType, AppThunkType} from "../../redux/store";
-import {
-	ActionUsersType,
-	followUsersTC,
-	StateUsersType,
-	thunkOnPageChanged,
-	unFollowUsersTC
-} from "../../redux/usersReducer";
+import {AppDispatch, AppRootStateType} from "../../redux/store";
+import {followUsersTC, StateUsersType, thunkOnPageChanged, unFollowUsersTC} from "../../redux/usersReducer";
 import React, {useEffect} from "react";
 import {UsersPage} from "./UsersPage";
 
-type DispatchType = (arg: AppThunkType) => ActionUsersType
 
 export const UsersPageContainer = () => {
 
@@ -26,7 +19,7 @@ export const UsersPageContainer = () => {
 
 	const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth);
 
-	const dispatch = useDispatch<DispatchType>();
+	const dispatch = AppDispatch();
 
 	useEffect(() => {
 		if (isAuth) {
@@ -63,8 +56,4 @@ export const UsersPageContainer = () => {
 	)
 
 }
-
-
-// export default compose<ComponentType>(withAuthRedirect)(UsersPageContainer)
-
 

@@ -1,10 +1,10 @@
 import React from "react";
 // @ts-ignore
 import s from "./LoginForm.module.scss";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {LoginReduxForm} from "./loginForm";
 import {authLoginTC, authLogout} from "../../redux/authReducer";
-import {AppRootStateType} from "../../redux/store";
+import {AppDispatch, AppRootStateType} from "../../redux/store";
 import {useNavigate} from "react-router-dom";
 
 export type FormDataType = {
@@ -20,7 +20,7 @@ export const LoginContainer = () => {
 
 	const navigate = useNavigate()
 
-	const dispatch = useDispatch()
+	const dispatch = AppDispatch();
 
 	const onClickLogout = () => {
 		dispatch(authLogout())
@@ -34,7 +34,9 @@ export const LoginContainer = () => {
 	// }, [isAuth, navigate])
 
 	const onSubmit = (formData: FormDataType) => {
-		dispatch(authLoginTC(formData))
+		const result = dispatch(authLoginTC(formData));
+
+		// if (result === 'login') navigate('/profile');
 	}
 
 	return (

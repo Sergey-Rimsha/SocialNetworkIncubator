@@ -1,8 +1,7 @@
 import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Profile} from "./Profile";
 import {
-	ActionProfileType,
 	addPost,
 	onChangeMessPost,
 	ProfileStateType,
@@ -10,11 +9,9 @@ import {
 	setChangeStatus,
 	setUserProfileTC
 } from "../../redux/profileReducer";
-import {AppRootStateType} from "../../redux/store";
+import {AppDispatch, AppRootStateType} from "../../redux/store";
 import {useParams} from "react-router-dom";
-import {Dispatch} from "redux";
 
-type DispatchType = Dispatch<ActionProfileType | any>
 
 export const ProfileContainer = () => {
 
@@ -26,7 +23,8 @@ export const ProfileContainer = () => {
 	const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth);
 
 
-	const dispatch = useDispatch<DispatchType>();
+	const dispatch = AppDispatch();
+
 
 	const params = useParams();
 
@@ -74,7 +72,3 @@ export const ProfileContainer = () => {
 		</>
 	)
 }
-
-
-// export default compose<ComponentType>(withAuthRedirect)(ProfileContainer)
-

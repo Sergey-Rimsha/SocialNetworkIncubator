@@ -91,8 +91,10 @@ export const authLoginTC = (data: AuthDataType): AppThunkType => (dispatch) => {
 		.then((res) => {
 			if (res.data.resultCode === 0) {
 				dispatch(setAuthLoginTC())
-				dispatch(setIsFetching(false));
 			}
+		})
+		.finally(() => {
+			dispatch(setIsFetching(false));
 		})
 }
 
@@ -101,8 +103,8 @@ export const authLogout = (): AppThunkType => (dispatch) => {
 	authApi.authLogout()
 		.then(res => {
 			if (res.data.resultCode === 0) {
+				dispatch(setIsAuthLogin(false));
 				dispatch(setIsFetching(false));
-				dispatch(setIsAuthLogin(false))
 			}
 		})
 		.finally(() => {

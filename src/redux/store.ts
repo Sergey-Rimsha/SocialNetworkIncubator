@@ -23,7 +23,7 @@ export type AppActionStateType = ActionProfileType
 
 export const AppDispatch = () => useDispatch<ThunkDispatch<AppRootStateType,void,AnyAction>>();
 
-export type AppThunkType = ThunkAction<void, AppRootStateType, unknown, AppActionStateType>
+export type AppThunkType = ThunkAction<any, AppRootStateType, unknown, AppActionStateType>
 
 let rootStore = combineReducers({
 	dialogsPage: dialogsReducer,

@@ -1,4 +1,4 @@
-import {AppRootStateType} from "../../redux/store";
+import {AppDispatch, AppRootStateType} from "../../redux/store";
 import {Dialogs} from "./Dialogs";
 import {ActionDialogsType, addMessageChatAC, DialogsType, onChangeMessChatAC} from "../../redux/dialogsReducer";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,14 +12,15 @@ export const DialogsContainer = () => {
 	const navigate = useNavigate();
 
 	const dialogsPage = useSelector<AppRootStateType, DialogsType>((state) => state.dialogsPage);
-
 	const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
 
-	const dispatch = useDispatch<Dispatch<ActionDialogsType>>();
+	const dispatch = AppDispatch();
+
 
 	const onChangeHandler = (text: string) => {
 		dispatch(onChangeMessChatAC(text))
 	}
+
 	const sendMessage = () => {
 		dispatch(addMessageChatAC())
 	}
@@ -40,8 +41,3 @@ export const DialogsContainer = () => {
 		</>
 	)
 }
-
-
-// export default compose<ComponentType>(withAuthRedirect)(DialogsContainer)
-
-
