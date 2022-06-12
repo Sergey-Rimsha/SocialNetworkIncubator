@@ -1,4 +1,4 @@
-import React, {ComponentType, useEffect} from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Profile} from "./Profile";
 import {
@@ -12,12 +12,11 @@ import {
 } from "../../redux/profileReducer";
 import {AppRootStateType} from "../../redux/store";
 import {useParams} from "react-router-dom";
-import {compose, Dispatch} from "redux";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {Dispatch} from "redux";
 
 type DispatchType = Dispatch<ActionProfileType | any>
 
-const ProfileContainer = () => {
+export const ProfileContainer = () => {
 
 	const profilePage = useSelector<AppRootStateType, ProfileStateType>((state) => state.profilePage);
 	const status = useSelector<AppRootStateType, string>(state => state.profilePage.status);
@@ -77,5 +76,5 @@ const ProfileContainer = () => {
 }
 
 
-export default compose<ComponentType>(withAuthRedirect)(ProfileContainer)
+// export default compose<ComponentType>(withAuthRedirect)(ProfileContainer)
 

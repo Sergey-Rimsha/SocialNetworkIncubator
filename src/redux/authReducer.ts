@@ -105,4 +105,7 @@ export const authLogout = (): AppThunkType => (dispatch) => {
 				dispatch(setIsAuthLogin(false))
 			}
 		})
+		.finally(() => {
+			dispatch(setIsFetching(false));
+		})
 }

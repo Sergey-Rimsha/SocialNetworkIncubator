@@ -169,6 +169,9 @@ export const setStatusUserTC = (userId: number): AppThunkType => (dispatch) => {
 			dispatch(setStatus(status));
 			dispatch(setIsFetching(false));
 		})
+		.finally(() => {
+			dispatch(setIsFetching(false));
+		})
 }
 
 export const putStatusUserTC = (status: string, userId: number): AppThunkType => (dispatch) => {
@@ -179,5 +182,8 @@ export const putStatusUserTC = (status: string, userId: number): AppThunkType =>
 				dispatch(setStatusUserTC(userId))
 				dispatch(setIsFetching(false));
 			}
+		})
+		.finally(() => {
+			dispatch(setIsFetching(false));
 		})
 }

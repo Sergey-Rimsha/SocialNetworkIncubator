@@ -166,6 +166,9 @@ export const followUsersTC = (userId: number, currentPage: number, userPageSize:
 
 			dispatch(setIsFetching(false));
 		})
+		.finally(() => {
+			dispatch(setIsFetching(false));
+		})
 }
 export const unFollowUsersTC = (userId: number, currentPage: number, userPageSize: number): AppThunkType => (dispatch) => {
 	dispatch(toggleIsButtons(userId, true));
@@ -177,6 +180,9 @@ export const unFollowUsersTC = (userId: number, currentPage: number, userPageSiz
 				dispatch(thunkOnPageChanged(currentPage, userPageSize));
 			}
 
+			dispatch(setIsFetching(false));
+		})
+		.finally(() => {
 			dispatch(setIsFetching(false));
 		})
 

@@ -8,14 +8,12 @@ import {
 	thunkOnPageChanged,
 	unFollowUsersTC
 } from "../../redux/usersReducer";
-import React, {ComponentType, useEffect} from "react";
+import React, {useEffect} from "react";
 import {UsersPage} from "./UsersPage";
-import {compose} from "redux";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type DispatchType = (arg: AppThunkType) => ActionUsersType
 
-const UsersPageContainer = () => {
+export const UsersPageContainer = () => {
 
 	const {
 		users,
@@ -67,6 +65,6 @@ const UsersPageContainer = () => {
 }
 
 
-export default compose<ComponentType>(withAuthRedirect)(UsersPageContainer)
+// export default compose<ComponentType>(withAuthRedirect)(UsersPageContainer)
 
 
