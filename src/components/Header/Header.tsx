@@ -1,7 +1,7 @@
 import React from "react";
 // @ts-ignore
-import logo from '../../img/logo.svg';
-import {AuthInitialStateType} from "../../redux/authReducer";
+import logo from '../../assets/img/logo.svg';
+import {AuthInitialStateType} from "../../store/reducers/authReducer";
 import {NavLink} from "react-router-dom";
 
 

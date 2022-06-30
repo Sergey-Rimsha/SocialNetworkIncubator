@@ -3,8 +3,8 @@ import React from "react";
 import s from "./LoginForm.module.scss";
 import {useSelector} from "react-redux";
 import {LoginReduxForm} from "./loginForm";
-import {authLoginTC, authLogout} from "../../redux/authReducer";
-import {AppDispatch, AppRootStateType} from "../../redux/store";
+import {authLoginTC, authLogout} from "../../store/reducers/authReducer";
+import {AppDispatch, AppRootStateType} from "../../store/store";
 import {useNavigate} from "react-router-dom";
 
 export type FormDataType = {

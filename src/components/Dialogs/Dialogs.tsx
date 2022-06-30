@@ -1,9 +1,9 @@
 import React from "react";
 // @ts-ignore
-import UserImg from '../../img/ava_default.jpg';
+import UserImg from '../../assets/img/ava_default.jpg';
 import {ChatUsers} from "./ChatUsers/ChatUsers";
 import {SendMessage} from "./SendMessage/SendMessage";
-import {DialogsType, InMessage, InUser} from "../../redux/dialogsReducer";
+import {DialogsType, InMessage, InUser} from "../../store/reducers/dialogsReducer";
 
 type PropsType = {
 	dialogsPage: DialogsType

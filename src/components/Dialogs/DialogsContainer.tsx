@@ -1,6 +1,6 @@
-import {AppDispatch, AppRootStateType} from "../../redux/store";
+import {AppDispatch, AppRootStateType} from "../../store/store";
 import {Dialogs} from "./Dialogs";
-import {ActionDialogsType, addMessageChatAC, DialogsType, onChangeMessChatAC} from "../../redux/dialogsReducer";
+import {ActionDialogsType, addMessageChatAC, DialogsType, onChangeMessChatAC} from "../../store/reducers/dialogsReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {Dispatch} from "redux";
 import {useNavigate} from "react-router-dom";

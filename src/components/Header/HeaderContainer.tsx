@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
 import {Header} from "./Header";
 import {useSelector} from "react-redux";
-import {AuthInitialStateType, setAuthLoginTC} from "../../redux/authReducer";
-import {AppDispatch, AppRootStateType} from "../../redux/store";
+import {AuthInitialStateType, setAuthLoginTC} from "../../store/reducers/authReducer";
+import {AppDispatch, AppRootStateType} from "../../store/store";
 
 
 export const HeaderContainer = () => {

@@ -1,5 +1,5 @@
-import {usersApi} from "../api/api";
-import {AppThunkType} from "./store";
+import {usersApi} from "../../api/api";
+import {AppThunkType} from "../store";
 import {setIsFetching} from "./utilsReducer";
 
 export type ProfileStateType = {

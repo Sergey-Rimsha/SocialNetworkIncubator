@@ -1,4 +1,4 @@
-import {AppThunkType} from "./store";
+import {AppThunkType} from "../store";
 import {setAuthLoginTC} from "./authReducer";
 
 

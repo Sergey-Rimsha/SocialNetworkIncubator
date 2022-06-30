@@ -1,6 +1,6 @@
 import React from "react";
 // @ts-ignore
-import UserImg from "../../../img/ava_default.jpg";
+import UserImg from "../../../assets/img/ava_default.jpg";
 import {Link} from "react-router-dom";
 
 type InUser = {

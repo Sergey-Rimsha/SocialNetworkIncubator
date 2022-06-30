@@ -1,36 +1,21 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 import './scss/style.scss';
-import {Sidebar} from "./components/Sidebar/Sidebar";
-import {HeaderContainer} from "./components/Header/HeaderContainer";
-import {Preloader} from "./components/Preloader/Preloader";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./redux/store";
-import {Main} from "./components/Main";
-import {initializeApp} from "./redux/utilsReducer";
+import {Routing} from "./components/Routing/Routing";
+import {store} from "./store/store";
+import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
 
 const App = () => {
 
-	const dispatch = useDispatch();
-
-	const isFetching = useSelector<AppRootStateType, boolean>(state => state.utils.isFetching);
-
-	useEffect(() => {
-		dispatch(initializeApp())
-	},[dispatch])
-
 	return (
-		<div className="App">
-			<HeaderContainer />
-			{isFetching && <Preloader />}
-			<div className="page">
-				<div className="container">
-					<Sidebar />
-					<Main/>
+		<Provider store={store}>
+			<BrowserRouter>
+				<div className="App">
+					<Routing/>
 				</div>
-			</div>
-		</div>
-
+			</BrowserRouter>
+		</Provider>
 	);
 }
 

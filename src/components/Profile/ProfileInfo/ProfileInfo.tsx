@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from "react";
-import {UserType} from "../../../redux/profileReducer";
+import {UserType} from "../../../store/reducers/profileReducer";
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../../redux/store";
+import {AppRootStateType} from "../../../store/store";
 
 type ProfileInfoPropsType = {
 	status: string

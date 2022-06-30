@@ -1,5 +1,5 @@
-import {AppThunkType} from "./store";
-import {authApi, AuthDataType} from "../api/api";
+import {AppThunkType} from "../store";
+import {authApi, AuthDataType} from "../../api/api";
 import {setIsFetching} from "./utilsReducer";
 
 export type AuthInitialStateType = {

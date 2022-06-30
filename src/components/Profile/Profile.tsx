@@ -1,10 +1,10 @@
 import React from "react";
 // @ts-ignore
-import UserImg from "../../img/ava_default.jpg";
+import UserImg from "../../assets/img/ava_default.jpg";
 import {Post} from "./Post/Post";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {NewPost} from "./NewPost/NewPost";
-import {ProfileStateType} from "../../redux/profileReducer";
+import {ProfileStateType} from "../../store/reducers/profileReducer";
 
 
 type StateType = {

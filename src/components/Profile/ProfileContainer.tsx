@@ -8,8 +8,8 @@ import {
 	putStatusUserTC,
 	setChangeStatus,
 	setUserProfileTC
-} from "../../redux/profileReducer";
-import {AppDispatch, AppRootStateType} from "../../redux/store";
+} from "../../store/reducers/profileReducer";
+import {AppDispatch, AppRootStateType} from "../../store/store";
 import {useParams} from "react-router-dom";
 
 

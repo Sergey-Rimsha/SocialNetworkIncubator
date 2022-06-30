@@ -1,11 +1,11 @@
 import {applyMiddleware, combineReducers, createStore, AnyAction} from "redux";
 import { reducer as formReducer } from 'redux-form'
-import {ActionDialogsType, dialogsReducer} from "./dialogsReducer";
-import {ActionProfileType, profileReducer} from "./profileReducer";
-import {ActionUsersType, usersReducer} from "./usersReducer";
-import {ActionAuthType, authReducer} from "./authReducer";
+import {ActionDialogsType, dialogsReducer} from "./reducers/dialogsReducer";
+import {ActionProfileType, profileReducer} from "./reducers/profileReducer";
+import {ActionUsersType, usersReducer} from "./reducers/usersReducer";
+import {ActionAuthType, authReducer} from "./reducers/authReducer";
 import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk";
-import {ActionUtilsType, utilsReducer} from "./utilsReducer";
+import {ActionUtilsType, utilsReducer} from "./reducers/utilsReducer";
 import {useDispatch} from "react-redux";
 
 

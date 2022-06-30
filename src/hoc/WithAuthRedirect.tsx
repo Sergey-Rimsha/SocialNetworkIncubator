@@ -1,6 +1,6 @@
 import React, {DetailedHTMLProps, HTMLAttributes, useEffect} from "react";
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "../redux/store";
+import {AppRootStateType} from "../store/store";
 import {useNavigate} from "react-router-dom";
 
 import { Navigate } from "react-router-dom";

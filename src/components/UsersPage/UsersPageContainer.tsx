@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 
-import {AppDispatch, AppRootStateType} from "../../redux/store";
-import {followUsersTC, StateUsersType, thunkOnPageChanged, unFollowUsersTC} from "../../redux/usersReducer";
+import {AppDispatch, AppRootStateType} from "../../store/store";
+import {followUsersTC, StateUsersType, thunkOnPageChanged, unFollowUsersTC} from "../../store/reducers/usersReducer";
 import React, {useEffect} from "react";
 import {UsersPage} from "./UsersPage";
 
