@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 // @ts-ignore
 import s from "./LoginForm.module.scss";
 import {useSelector} from "react-redux";
@@ -24,10 +24,11 @@ export const LoginContainer = () => {
 
 	const onClickLogout = () => {
 		dispatch(authLogout())
+
 	}
 
 	// useEffect(() => {
-	// 	if (isAuth === true) {
+	// 	if (isAuth) {
 	// 		navigate('/profile')
 	// 	}
 	//
