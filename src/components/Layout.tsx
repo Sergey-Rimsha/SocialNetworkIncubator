@@ -14,10 +14,13 @@ export const Layout = () => {
 	const dispatch = useDispatch();
 
 	const isFetching = useSelector<AppRootStateType, boolean>(state => state.utils.isFetching);
+	const initialized = useSelector<AppRootStateType, boolean>(state => state.utils.initialized);
 
 	useEffect(() => {
-		dispatch(initializeApp())
-	},[dispatch])
+		if (!initialized) dispatch(initializeApp())
+	},[dispatch, initialized])
+
+	// if (!initialized) return <div>loading...</div>
 
 	return (
 		<>
