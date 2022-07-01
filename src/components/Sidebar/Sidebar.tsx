@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 
 export function Sidebar() {
 
-	const setActive = ({isActive}: any) => (isActive ? "menu__item_active" : "");
+	const setActive = ({isActive}: {isActive: boolean}) => (isActive ? "menu__item_active" : "");
 
 	return (
 		<>

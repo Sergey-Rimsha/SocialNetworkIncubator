@@ -64,7 +64,6 @@ export const setIsAuthLogin = (isAuth: boolean) => {
 //Thunk creators
 
 export const setAuthLoginTC = (): AppThunkType => (dispatch) => {
-
 	dispatch(setIsFetching(true));
 
 	return authApi.authLoginMe()

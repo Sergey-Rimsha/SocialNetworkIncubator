@@ -57,6 +57,7 @@ export const initializeApp = ():AppThunkType => (dispatch) => {
 
 	Promise.all([promiseResult])
 		.then(() => {
+
 			dispatch(initializedSuccess(true));
 		})
 		.finally(() => {

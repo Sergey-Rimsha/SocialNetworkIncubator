@@ -77,7 +77,11 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
 			{/*<div className="user__web-site">*/}
 			{/*	<a href="https://github.com/Sergey-Rimsha">https://github.com/Sergey-Rimsha</a>*/}
 			{/*</div>*/}
-			{showContacts()}
+			<div className={"user__link"}>
+				<span>Link:</span>
+				{showContacts()}
+			</div>
+
 		</div>
 	)
 }

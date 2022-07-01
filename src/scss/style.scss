@@ -127,6 +127,23 @@
 			margin-top: 15px;
 		}
 
+		&__link {
+			margin-top: 10px;
+			& span {
+				font-weight: bold;
+			}
+		}
+
+
+		&__web-site {
+			margin-top: 5px;
+			margin-left: 5px;
+
+			& a {
+				text-decoration: none;
+				color: $primaryTextColor;
+			}
+		}
 	}
 
 
