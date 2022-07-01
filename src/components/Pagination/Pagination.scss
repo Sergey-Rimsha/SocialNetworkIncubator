@@ -10,11 +10,13 @@
 
 	& button {
 		color: white;
-		width: 50px;
+		width: 40px;
 		height: 30px;
 		background: linear-gradient(to right, #7CB8F7, #2A8BF2);
 		border: none;
 		border-radius: 10px;
+		font-size: 20px;
+		font-weight: bold;
 	}
 
 	& span {
