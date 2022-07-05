@@ -1,7 +1,7 @@
 import React from "react";
 import {UserType} from "../../store/reducers/usersReducer";
 import {User} from "./User";
-import {Pagination} from "../Pagination/Pagination";
+import {Pagination} from "../../components/Pagination/Pagination";
 
 type UsersPagePropsType = {
     users: Array<UserType>,

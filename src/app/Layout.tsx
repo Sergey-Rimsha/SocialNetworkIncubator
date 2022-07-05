@@ -3,10 +3,10 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
 import {initializeApp} from "../store/reducers/utilsReducer";
-import {HeaderContainer} from "./Header/HeaderContainer";
-import {Preloader} from "./Preloader/Preloader";
-import {Sidebar} from "./Sidebar/Sidebar";
-import {Routing} from "./Routing/Routing";
+import {HeaderContainer} from "../components/Header/HeaderContainer";
+import {Preloader} from "../components/Preloader/Preloader";
+import {Sidebar} from "../components/Sidebar/Sidebar";
+import {Routing} from "../components/Routing/Routing";
 
 
 export const Layout = () => {

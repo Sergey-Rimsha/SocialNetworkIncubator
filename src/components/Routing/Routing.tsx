@@ -1,11 +1,11 @@
 import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import {ProfileContainer} from "../Profile/ProfileContainer";
-import {DialogsContainer} from "../Dialogs/DialogsContainer";
-import {UsersPageContainer} from "../UsersPage/UsersPageContainer";
-import {LoginContainer} from "../Auth/LoginContainer";
-import {Layout} from "../Layout";
+import {ProfileContainer} from "../../pages/Profile/ProfileContainer";
+import {DialogsContainer} from "../../pages/Dialogs/DialogsContainer";
+import {UsersPageContainer} from "../../pages/UsersPage/UsersPageContainer";
+import {LoginContainer} from "../../pages/Auth/LoginContainer";
+import {Layout} from "../../app/Layout";
 
 export const Routing = () => {
 	return (

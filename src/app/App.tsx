@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './scss/style.scss';
-import {Routing} from "./components/Routing/Routing";
-import {store} from "./store/store";
+import '../scss/style.scss';
+import {Routing} from "../components/Routing/Routing";
+import {store} from "../store/store";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
