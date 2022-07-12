@@ -1,5 +1,4 @@
-import {applyMiddleware, combineReducers, createStore, AnyAction} from "redux";
-import { reducer as formReducer } from 'redux-form'
+import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
 import {ActionDialogsType, dialogsReducer} from "./reducers/dialogsReducer";
 import {ActionProfileType, profileReducer} from "./reducers/profileReducer";
 import {ActionUsersType, usersReducer} from "./reducers/usersReducer";
@@ -30,7 +29,6 @@ let rootStore = combineReducers({
 	profilePage: profileReducer,
 	usersPage: usersReducer,
 	auth: authReducer,
-	form: formReducer,
 	utils: utilsReducer,
 })
 
