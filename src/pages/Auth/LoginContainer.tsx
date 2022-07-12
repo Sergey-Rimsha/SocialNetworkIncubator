@@ -1,11 +1,10 @@
 import React, {useEffect} from "react";
-// @ts-ignore
 import s from "./LoginForm.module.scss";
 import {useSelector} from "react-redux";
-import {LoginReduxForm} from "./loginForm";
 import {authLoginTC, authLogout} from "../../store/reducers/authReducer";
 import {AppDispatch, AppRootStateType} from "../../store/store";
 import {useNavigate} from "react-router-dom";
+import {Login} from "./Login";
 
 export type FormDataType = {
 	email: string
@@ -27,26 +26,22 @@ export const LoginContainer = () => {
 
 	}
 
-	// useEffect(() => {
-	// 	if (isAuth) {
-	// 		navigate('/profile')
-	// 	}
-	//
-	// }, [isAuth, navigate])
-
-	const onSubmit = (formData: FormDataType) => {
-		const result = dispatch(authLoginTC(formData));
-
-		// if (result === 'login') navigate('/profile');
+	const onHandlerSubmit = (formData: FormDataType) => {
+		dispatch(authLoginTC(formData));
 	}
 
 	return (
 		<div className={s.auth}>
 			<h3>Login form</h3>
 
-			<LoginReduxForm
-				onSubmit={onSubmit}
+			{/*<LoginReduxForm*/}
+			{/*	onSubmit={onSubmit}*/}
+			{/*	onClickLogout={onClickLogout}*/}
+			{/*/>*/}
+
+			<Login
 				onClickLogout={onClickLogout}
+				onHandlerSubmit={onHandlerSubmit}
 			/>
 		</div>
 	)
