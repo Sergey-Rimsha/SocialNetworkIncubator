@@ -1,7 +1,7 @@
 import {useFormik} from "formik";
 import React from "react";
 
-import s from './LoginForm.module.scss';
+import s from './Login.module.scss';
 
 
 type FormikErrorType = {
@@ -56,19 +56,35 @@ export const Login = (props: PropsLoginType) => {
 
 	return (
 		<>
-			<form className={s.auth__form} onSubmit={formik.handleSubmit} >
+			<form className={s.auth__form} onSubmit={formik.handleSubmit}>
 				<input
 					className={s.auth__input}
 					id='email'
+					placeholder='email'
 					type='email'
 					{...formik.getFieldProps('email')}
 				/>
+				{
+					formik.touched.email &&
+					formik.errors.email	&&
+					<span className={s.auth__error}>
+						{formik.errors.email}
+					</span>
+				}
 				<input
 					className={s.auth__input}
 					id='password'
+					placeholder='password'
 					type='password'
 					{...formik.getFieldProps('password')}
 				/>
+				{
+					formik.touched.email &&
+					formik.errors.password	&&
+					<span className={s.auth__error}>
+						{formik.errors.password}
+					</span>
+				}
 				<div className={s.auth__checkbox}>
 					<input
 						id='rememberMe'

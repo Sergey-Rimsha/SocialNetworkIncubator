@@ -20,7 +20,7 @@ export const Layout = () => {
 		if (!initialized) dispatch(initializeApp())
 	},[dispatch, initialized])
 
-	// if (!initialized) return <div>loading...</div>
+	if (!initialized) return <Preloader />
 
 	return (
 		<>

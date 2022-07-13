@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import s from "./LoginForm.module.scss";
+import s from "./Login.module.scss";
 import {useSelector} from "react-redux";
 import {authLoginTC, authLogout} from "../../store/reducers/authReducer";
 import {AppDispatch, AppRootStateType} from "../../store/store";
@@ -23,22 +23,18 @@ export const LoginContainer = () => {
 
 	const onClickLogout = () => {
 		dispatch(authLogout())
-
 	}
 
 	const onHandlerSubmit = (formData: FormDataType) => {
-		dispatch(authLoginTC(formData));
+		const result = dispatch(authLoginTC(formData));
+
+		if (result) navigate('/profile');
 	}
+
 
 	return (
 		<div className={s.auth}>
 			<h3>Login form</h3>
-
-			{/*<LoginReduxForm*/}
-			{/*	onSubmit={onSubmit}*/}
-			{/*	onClickLogout={onClickLogout}*/}
-			{/*/>*/}
-
 			<Login
 				onClickLogout={onClickLogout}
 				onHandlerSubmit={onHandlerSubmit}

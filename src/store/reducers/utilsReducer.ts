@@ -16,7 +16,7 @@ const initialState: UtilsStateType = {
 	initialized: false,
 }
 
-export const utilsReducer = (state = initialState, action: ActionUtilsType) => {
+export const utilsReducer = (state = initialState, action: ActionUtilsType):UtilsStateType => {
 	switch (action.type) {
 		case "UTILS/TOGGLE_IS_FETCHING": {
 			return {
@@ -27,7 +27,7 @@ export const utilsReducer = (state = initialState, action: ActionUtilsType) => {
 		case "UTILS/INITIALIZED_SUCCESS": {
 			return {
 				...state,
-				isFetching: action.initialized,
+				initialized: action.initialized,
 			}
 		}
 
@@ -57,7 +57,6 @@ export const initializeApp = ():AppThunkType => (dispatch) => {
 
 	Promise.all([promiseResult])
 		.then(() => {
-
 			dispatch(initializedSuccess(true));
 		})
 		.finally(() => {
