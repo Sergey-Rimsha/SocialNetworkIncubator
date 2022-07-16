@@ -33,12 +33,11 @@ export const LoginContainer = () => {
 
 
 	return (
-		<div className={s.auth}>
-			<h3>Login form</h3>
+		<>
 			<Login
 				onClickLogout={onClickLogout}
 				onHandlerSubmit={onHandlerSubmit}
 			/>
-		</div>
+		</>
 	)
 }
