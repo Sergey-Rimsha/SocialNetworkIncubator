@@ -1,10 +1,11 @@
 import React from "react";
-// @ts-ignore
 import UserImg from "../../assets/img/ava_default.jpg";
 import {Post} from "./Post/Post";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {NewPost} from "./NewPost/NewPost";
+import {AddPost} from "./AddPost/AddPost";
 import {ProfileStateType} from "../../store/reducers/profileReducer";
+
+import s from './Profile.module.scss';
 
 
 type StateType = {
@@ -32,9 +33,9 @@ export function Profile(props: StateType) {
 	const userPhoto: string = props.profilePage.user.photos.large;
 
 	return (
-		<section className="profile">
-			<div className="user">
-				<div className="user__img">
+		<section className={s.profile}>
+			<div className={s.user}>
+				<div className={s.user__img}>
 					<img src={userPhoto || UserImg} alt="user-img"/>
 				</div>
 				<ProfileInfo
@@ -46,7 +47,7 @@ export function Profile(props: StateType) {
 				/>
 			</div>
 
-			<NewPost
+			<AddPost
 				changeMessage={props.profilePage.changeMessage}
 				addNewPost={props.addNewPost}
 				oChangeHandlerPostText={props.onChangeHandlerPostText}/>

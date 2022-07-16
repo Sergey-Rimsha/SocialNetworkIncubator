@@ -6,7 +6,7 @@ import {initializeApp} from "../store/reducers/utilsReducer";
 import {HeaderContainer} from "../components/Header/HeaderContainer";
 import {Preloader} from "../components/Preloader/Preloader";
 import {Sidebar} from "../components/Sidebar/Sidebar";
-import {Routing} from "../components/Routing/Routing";
+import {Routing} from "./Routing/Routing";
 
 
 export const Layout = () => {

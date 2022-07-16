@@ -1,7 +1,8 @@
 import React from "react";
-// @ts-ignore
 import UserImg from "../../assets/img/ava_default.jpg";
 import {NavLink} from "react-router-dom";
+
+import s from './User.module.scss';
 
 type UserPropsType = {
 	id: number
@@ -32,16 +33,16 @@ export function User(props: UserPropsType) {
 	const btnActive = props.id === props.toggleUserId ? props.toggleButton : false;
 
 	return (
-		<div className="user-box">
+		<div className={s.userBox}>
 
 			<NavLink to={`/profile/${props.id}`}>
-				<div className="user-img">
+				<div className={s.userImg}>
 					<img src={userPhotoSrc} alt="userPhoto"/>
 				</div>
 			</NavLink>
 
-			<div className="user-info">
-				<div className="user-info__name">{props.name}</div>
+			<div className={s.userInfo}>
+				<div className={s.userInfo__name}>{props.name}</div>
 				<div>status: {props.status}</div>
 			</div>
 			{/*<div className="user-info">*/}

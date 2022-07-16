@@ -1,5 +1,7 @@
 import React from "react";
-// @ts-ignore
+
+import s from './Post.module.scss';
+
 import UserImg from "../../../assets/img/ava_default.jpg";
 
 type InPost = {
@@ -11,15 +13,15 @@ type InPost = {
 export function Post(props: InPost) {
 
 	return (
-		<div className="posts">
-			<div className="user-post">
-				<div className="user-post__user-img">
+		<div className={s.posts}>
+			<div className={s.post}>
+				<div className={s.post__user}>
 					<img src={UserImg} alt="user_img"/>
 				</div>
-				<div className="user-post__text">
+				<div className={s.post__text}>
 					{props.message}
 				</div>
-				<div className="user-post__like">
+				<div className={s.post__like}>
 					{`likes: ${props.likesCount}`}
 				</div>
 			</div>

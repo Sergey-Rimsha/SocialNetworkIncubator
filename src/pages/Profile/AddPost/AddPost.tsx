@@ -1,5 +1,7 @@
 import React from "react";
 
+import s from './AddPost.module.scss';
+
 type PropsType = {
 	changeMessage: string
 	addNewPost: () => void
@@ -7,7 +9,7 @@ type PropsType = {
 }
 
 
-export function NewPost(props: PropsType) {
+export function AddPost(props: PropsType) {
 
 	const onClickHandler = () => {
 		if (props.changeMessage) {
@@ -21,12 +23,17 @@ export function NewPost(props: PropsType) {
 	}
 
 	return (
-		<div className="new-post">
-			<div className="new-post__title">New post</div>
-			<div className="new-post__txt">
-				<textarea onChange={onChangeText} value={props.changeMessage} name="new-post" placeholder="your news..." />
+		<div className={s.addPost}>
+			<div className={s.addPost__title}>New post</div>
+			<div className={s.addPost__txt}>
+				<textarea
+					name="new-post"
+					placeholder="your news..."
+					onChange={onChangeText}
+					value={props.changeMessage}
+				/>
 			</div>
-			<div className="new-post__btn">
+			<div className={s.addPost__btn}>
 				<button onClick={onClickHandler} >Send</button>
 			</div>
 		</div>

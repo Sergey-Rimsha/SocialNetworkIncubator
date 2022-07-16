@@ -1,0 +1,32 @@
+@import "src/scss/variables";
+@import "src/scss/mixins";
+
+
+.sidebar {
+	min-width: 200px;
+	height: 450px;
+	background-color: $bgColor;
+	margin-right: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 1px gray;
+
+	& .menu {
+		margin-top: 20px;
+
+		&__item {
+			margin-top: 5px;
+
+			&_active {
+				background: linear-gradient(to right, #7CB8F7, #ffff 8px);
+			}
+		}
+
+		& a {
+			font-size: 20px;
+			padding-left: 20px;
+			text-decoration: none;
+			color: $primaryTextColor;
+		}
+	}
+
+}

@@ -1,14 +1,6 @@
 @import "./variables";
 @import "./mixins";
 
-@mixin colorWhite {
-	background-color: #FFFFFF;
-}
-
-@mixin textColor {
-	color: #707C97;
-}
-
 * {
 	box-sizing: border-box;
 }
@@ -29,30 +21,6 @@
 	width: 100%;
 }
 
-.header {
-	display: flex;
-	height: 74px;
-	align-items: center;
-	background-color: $bgColor;
-
-	&__block {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	&__logo {
-		width: 95px;
-	}
-
-	&__login {
-
-		& a {
-			text-decoration: none;
-		}
-	}
-}
-
 .page {
 	margin-top: 15px;
 	.container {
@@ -60,166 +28,7 @@
 	}
 }
 
-.sidebar {
-	min-width: 200px;
-	height: 450px;
-	background-color: $bgColor;
-	margin-right: 20px;
-	border-radius: 10px;
-	box-shadow: 0 0 1px gray;
 
-	& .menu {
-		margin-top: 20px;
-
-		&__item {
-			margin-top: 5px;
-
-			&_active {
-				background: linear-gradient(to right, #7CB8F7, #ffff 8px);
-			}
-		}
-
-		& a {
-			font-size: 20px;
-			padding-left: 20px;
-			text-decoration: none;
-			color: $primaryTextColor;
-		}
-	}
-
-}
-
-
-.profile {
-
-	.user {
-		display: flex;
-		background-color: $bgColor;
-		box-shadow: 0 0 1px gray;
-		width: 100%;
-		padding: 15px;
-		border-radius: 15px;
-
-
-		&__img {
-			height: 200px;
-
-			img {
-				width: 200px;
-				height: 200px;
-				border-radius: 15px;
-				margin: 0;
-				padding: 0;
-			}
-		}
-
-		&__info {
-
-			margin-left: 25px;
-			font-weight: 500;
-
-		}
-		&__name {
-			font-size: 24px;
-			font-weight: 700;
-		}
-		&__status {
-			margin-top: 15px;
-		}
-
-		&__link {
-			margin-top: 10px;
-			& span {
-				font-weight: bold;
-			}
-		}
-
-
-		&__web-site {
-			margin-top: 5px;
-			margin-left: 5px;
-
-			& a {
-				text-decoration: none;
-				color: $primaryTextColor;
-			}
-		}
-	}
-
-
-
-	//компонетна NewPost -->
-
-	.new-post {
-		width: 450px;
-		background-color: white;
-		border-radius: 15px;
-		box-shadow: 0 0 1px gray;
-		padding: 10px;
-		margin-top: 15px;
-		font-size: 18px;
-
-		&__txt {
-			margin-top: 15px;
-
-			textarea {
-				width: 100%;
-				border-radius: 5px;
-			}
-		}
-
-		&__btn {
-			display: flex;
-			justify-content: end;
-			margin-top: 15px;
-
-
-			& button {
-				width: 80px;
-				height: 35px;
-				border: none;
-				color: white;
-				text-align: center;
-				text-decoration: none;
-				font-size: 16px;
-				@include bgButtonGradient();
-				border-radius: 10px;
-			}
-		}
-	}
-}
-
-//components Post -->
-
-.posts {
-	width: 100%;
-	
-	.user-post {
-		display: flex;
-		align-items: center;
-		background-color: white;
-		border-radius: 15px;
-		box-shadow: 0 0 1px gray;
-		margin-top: 15px;
-		padding: 10px;
-		position: relative;
-		font-size: 18px;
-
-		&__user-img {
-			margin-right: 25px;
-			img {
-				width: 90px;
-				border-radius: 100%;
-			}
-		}
-
-		&__like {
-			position: absolute;
-			bottom: 10px;
-			right: 10px;
-		}
-	}
-}
 
 //для компонетны Dialogs
 
@@ -375,62 +184,5 @@
 				}
 			}
 		}
-
-
-	}
-}
-
-
-// usersPage --------------------------
-
-
-.user-box {
-	padding: 10px;
-	display: flex;
-	justify-content: space-between;
-	//justify-content: space-around;
-	align-items: center;
-	//border: gray solid 1px;
-	border-radius: 10px;
-	box-shadow: 0 0 1px gray;
-	margin-top: 10px;
-	font-size: 18px;
-	background-color: white;
-
-	.user-img img {
-		width: 60px;
-		border-radius: 10px;
-	}
-
-	.user-info {
-		min-height: 70px;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		margin-left: 15px;
-
-		&__name {
-			font-style: italic;
-			font-weight: bold;
-			font-size: 20px;
-		}
-	}
-
-	& button {
-		width: 120px;
-		height: 40px;
-		border: none;
-		color: white;
-		text-align: center;
-		text-decoration: none;
-		display: inline-block;
-		font-size: 18px;
-		@include bgButtonGradient();
-		border-radius: 10px;
-	}
-
-	& button:disabled {
-		opacity: 70%;
 	}
 }

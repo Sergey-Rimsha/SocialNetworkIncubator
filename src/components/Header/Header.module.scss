@@ -1,0 +1,26 @@
+@import "src/scss/variables";
+@import "src/scss/mixins";
+
+.header {
+	display: flex;
+	height: 74px;
+	align-items: center;
+	background-color: $bgColor;
+
+	&__block {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__logo {
+		width: 95px;
+	}
+
+	&__login {
+
+		& a {
+			text-decoration: none;
+		}
+	}
+}

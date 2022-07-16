@@ -3,6 +3,8 @@ import {UserType} from "../../../store/reducers/profileReducer";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../store/store";
 
+import s from '../Profile.module.scss';
+
 type ProfileInfoPropsType = {
 	status: string
 	user: UserType
@@ -47,7 +49,7 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
 			Object.keys(props.user.contacts).map(key => {
 				if (props.user.contacts[key]) {
 					return (
-						<div key={key} className="user__web-site">
+						<div key={key} className={s.user__website}>
 							<a href={`https://${props.user.contacts[key]}`}>{key}</a>
 						</div>
 					)
@@ -57,18 +59,18 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
 	}
 
 	return (
-		<div className="user__info">
-			<div className="user__name">
+		<div className={s.user__info}>
+			<div className={s.user__name}>
 				{props.user.fullName}
 			</div>
-			<div className="user__status">
+			<div className={s.user__status}>
 				{showStatus()}
 			</div>
-			<div className="user__aboutMe">
+			<div className={s.user__aboutMe}>
 				{props.user.aboutMe || ''}
 			</div>
 
-			<div className="user__lookingForAJob">
+			<div className={s.user__lookingForAJob}>
 				{props.user.lookingForAJob ? props.user.lookingForAJobDescription : ''}
 			</div>
 			{/*<div className="user__education">*/}
@@ -77,7 +79,7 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
 			{/*<div className="user__web-site">*/}
 			{/*	<a href="https://github.com/Sergey-Rimsha">https://github.com/Sergey-Rimsha</a>*/}
 			{/*</div>*/}
-			<div className={"user__link"}>
+			<div className={s.user__link}>
 				<span>Link:</span>
 				{showContacts()}
 			</div>

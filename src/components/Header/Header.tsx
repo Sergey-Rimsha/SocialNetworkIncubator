@@ -1,8 +1,9 @@
 import React from "react";
-// @ts-ignore
 import logo from '../../assets/img/logo.svg';
 import {AuthInitialStateType} from "../../store/reducers/authReducer";
 import {NavLink} from "react-router-dom";
+
+import s from './Header.module.scss';
 
 
 export type HeaderPropsType = {
@@ -13,13 +14,13 @@ export const Header = (props: HeaderPropsType) => {
 
 
 	return (
-		<header className="header">
+		<header className={s.header}>
 			<div className="container">
-				<div className="header__block">
-					<div className="header__logo">
+				<div className={s.header__block}>
+					<div className={s.header__logo}>
 						<img src={logo} alt="logo"/>
 					</div>
-					<div className="header__login">
+					<div className={s.header__login}>
 						<NavLink to={`/auth`}>
 							{props.auth.isAuth ? props.auth.login : 'login'}
 						</NavLink>

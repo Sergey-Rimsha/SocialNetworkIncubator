@@ -5,15 +5,22 @@ import {ProfileContainer} from "../../pages/Profile/ProfileContainer";
 import {DialogsContainer} from "../../pages/Dialogs/DialogsContainer";
 import {UsersPageContainer} from "../../pages/UsersPage/UsersPageContainer";
 import {LoginContainer} from "../../pages/Auth/LoginContainer";
-import {Layout} from "../../app/Layout";
+import {Layout} from "../Layout";
+
+export const PathURL = {
+	profile: 'profile',
+	dialogs: 'dialogs',
+	users: 'users',
+	auth: 'auth',
+}
 
 export const Routing = () => {
 	return (
 		<>
 			<Routes>
 				<Route path={'/'} element={<Layout/>}>
-					<Route index element={<Navigate to={'profile'}/>}/>
-					<Route path={`profile`}
+					<Route index element={<Navigate to={PathURL.profile}/>}/>
+					<Route path={PathURL.profile}
 						   element={
 							   <WithAuthRedirect>
 								   <ProfileContainer/>
@@ -26,19 +33,19 @@ export const Routing = () => {
 								   </WithAuthRedirect>
 							   }/>
 					</Route>
-					<Route path={`dialogs`}
+					<Route path={PathURL.dialogs}
 						   element={
 							   <WithAuthRedirect>
 								   <DialogsContainer/>
 							   </WithAuthRedirect>
 						   }/>
-					<Route path={`users`}
+					<Route path={PathURL.users}
 						   element={
 							   <WithAuthRedirect>
 								   <UsersPageContainer/>
 							   </WithAuthRedirect>
 						   }/>
-					<Route path={`auth`}
+					<Route path={PathURL.auth}
 						   element={<LoginContainer/>}/>
 				</Route>
 			</Routes>

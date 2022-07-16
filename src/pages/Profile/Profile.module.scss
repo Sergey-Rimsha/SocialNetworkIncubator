@@ -1,0 +1,64 @@
+@import "src/scss/variables";
+@import "src/scss/mixins";
+
+
+.profile {
+
+	.user {
+		display: flex;
+		background-color: $bgColor;
+		box-shadow: 0 0 1px gray;
+		width: 100%;
+		padding: 15px;
+		border-radius: 15px;
+
+
+		&__img {
+			height: 200px;
+
+			img {
+				width: 200px;
+				height: 200px;
+				border-radius: 15px;
+				margin: 0;
+				padding: 0;
+			}
+		}
+
+		&__info {
+
+			margin-left: 25px;
+			font-weight: 500;
+
+		}
+
+		&__name {
+			font-size: 24px;
+			font-weight: 700;
+		}
+
+		&__status {
+			margin-top: 15px;
+		}
+
+		&__link {
+			margin-top: 10px;
+
+			& span {
+				font-weight: bold;
+			}
+		}
+
+
+		&__website {
+			margin-top: 5px;
+			margin-left: 5px;
+
+			& a {
+				text-decoration: none;
+				color: $primaryTextColor;
+			}
+		}
+	}
+
+}
