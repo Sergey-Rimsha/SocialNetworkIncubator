@@ -2,6 +2,7 @@ import {useFormik} from "formik";
 import React from "react";
 
 import s from './Login.module.scss';
+import {Button} from "../../components/Button/Button";
 
 
 type FormikErrorType = {
@@ -108,8 +109,21 @@ export const Login = (props: PropsLoginType) => {
 					</span>
 					</div>
 					<div className={s.auth__btnWrap}>
-						<button type='submit' className={s.auth__btn}>login</button>
-						<button type="button" className={s.auth__btn} onClick={props.onClickLogout}>logout</button>
+						<Button
+							color={'primary'}
+							type={'submit'}
+							value={'login'}
+							disabled={false}
+						/>
+						<Button
+							color={'secondary'}
+							type={'submit'}
+							value={'logout'}
+							disabled={false}
+							onClick={props.onClickLogout}
+						/>
+						{/*<button type='submit' className={s.auth__btn}>login</button>*/}
+						{/*<button type="button" className={s.auth__btn} onClick={props.onClickLogout}>logout</button>*/}
 					</div>
 				</form>
 			</div>

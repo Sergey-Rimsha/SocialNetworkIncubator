@@ -1,0 +1,24 @@
+@import "src/scss/variables";
+@import "src/scss/mixins";
+
+
+.button {
+	width: 120px;
+	height: 40px;
+
+	&__item {
+		width: 120px;
+		height: 40px;
+		@include primaryFont(400, 18px, $bgColor);
+		border: none;
+		border-radius: 10px;
+
+		&_primary {
+			@include bgButtonGradient();
+		}
+
+		&_secondary {
+			background-color: grey;
+		}
+	}
+}
