@@ -47,7 +47,9 @@ export const Routing = () => {
 						   }/>
 					<Route path={PathURL.auth}
 						   element={<LoginContainer/>}/>
+					<Route path={'*'} element={<div>Not Found</div>}/>
 				</Route>
+
 			</Routes>
 		</>
 	);

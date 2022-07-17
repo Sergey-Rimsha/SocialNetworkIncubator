@@ -1,9 +1,6 @@
-import React, {useEffect} from "react";
-import s from "./Login.module.scss";
-import {useSelector} from "react-redux";
+import React from "react";
 import {authLoginTC, authLogout} from "../../store/reducers/authReducer";
-import {AppDispatch, AppRootStateType} from "../../store/store";
-import {useNavigate} from "react-router-dom";
+import {AppDispatch} from "../../store/store";
 import {Login} from "./Login";
 
 export type FormDataType = {
@@ -15,10 +12,6 @@ export type FormDataType = {
 
 export const LoginContainer = () => {
 
-	const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth);
-
-	const navigate = useNavigate()
-
 	const dispatch = AppDispatch();
 
 	const onClickLogout = () => {
@@ -26,11 +19,8 @@ export const LoginContainer = () => {
 	}
 
 	const onHandlerSubmit = (formData: FormDataType) => {
-		const result = dispatch(authLoginTC(formData));
-
-		if (result) navigate('/profile');
+		dispatch(authLoginTC(formData));
 	}
-
 
 	return (
 		<>

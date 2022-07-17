@@ -1,6 +1,7 @@
 import React from "react";
 
 import s from './AddPost.module.scss';
+import {Button} from "../../../components/Button/Button";
 
 type PropsType = {
 	changeMessage: string
@@ -34,7 +35,8 @@ export function AddPost(props: PropsType) {
 				/>
 			</div>
 			<div className={s.addPost__btn}>
-				<button onClick={onClickHandler} >Send</button>
+				<Button color={'primary'} onClick={onClickHandler} type={"button"} value={'Send'} />
+				{/*<button onClick={onClickHandler} >Send</button>*/}
 			</div>
 		</div>
 	)

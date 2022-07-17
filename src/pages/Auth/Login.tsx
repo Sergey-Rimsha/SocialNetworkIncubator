@@ -3,6 +3,7 @@ import React from "react";
 
 import s from './Login.module.scss';
 import {Button} from "../../components/Button/Button";
+import SuperCheckbox from "../../components/SuperCheckbox/SuperCheckbox";
 
 
 type FormikErrorType = {
@@ -24,7 +25,6 @@ type PropsLoginType = {
 
 
 export const Login = (props: PropsLoginType) => {
-
 
 	const formik = useFormik({
 		initialValues: {
@@ -50,16 +50,16 @@ export const Login = (props: PropsLoginType) => {
 		},
 		onSubmit: values => {
 			props.onHandlerSubmit(values)
-			// formik.resetForm();
+			formik.resetForm();
 		},
 
 	});
 
 	return (
-		<>
-			<div className={s.auth}>
+		<section className={s.auth}>
+			<div className={s.auth__wrap}>
 				<h3>Login form</h3>
-				<div>
+				<div className={s.auth__description}>
 					Тестовые Email и Password
 					<div>
 						Email: free@samuraijs.com
@@ -92,21 +92,21 @@ export const Login = (props: PropsLoginType) => {
 						{...formik.getFieldProps('password')}
 					/>
 					{
-						formik.touched.email &&
+						formik.touched.password &&
 						formik.errors.password	&&
 						<span className={s.auth__error}>
 						{formik.errors.password}
 					</span>
 					}
 					<div className={s.auth__checkbox}>
-						<input
+						<SuperCheckbox
 							id='rememberMe'
 							type='checkbox'
-							{...formik.getFieldProps('rememberMe')}
-						/>
-						<span>
-						rememberMe
-					</span>
+							name='rememberMe'
+							checked={formik.values.rememberMe}
+							onChange={formik.handleChange}>
+							remember me
+						</SuperCheckbox>
 					</div>
 					<div className={s.auth__btnWrap}>
 						<Button
@@ -117,17 +117,15 @@ export const Login = (props: PropsLoginType) => {
 						/>
 						<Button
 							color={'secondary'}
-							type={'submit'}
+							type={'button'}
 							value={'logout'}
 							disabled={false}
 							onClick={props.onClickLogout}
 						/>
-						{/*<button type='submit' className={s.auth__btn}>login</button>*/}
-						{/*<button type="button" className={s.auth__btn} onClick={props.onClickLogout}>logout</button>*/}
 					</div>
 				</form>
 			</div>
-		</>
+		</section>
 	)
 
 }

@@ -45,7 +45,7 @@ export const authApi = {
 		const newData = {
 			email: data.email,
 			password: data.password,
-			rememberMe: false,
+			rememberMe: data.rememberMe,
 			captcha: null,
 		}
 		return instance.post<ResponseType<{userId: number}>>(`auth/login`,newData)

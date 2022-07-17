@@ -6,10 +6,18 @@
 }
 
 .App {
-	//background-color: #DBDFF3;
-	background: linear-gradient(#DBDFF3, #FDFBFD);
+	background-color: #DBDFF3;
+	//background: linear-gradient(#DBDFF3, #FDFBFD);
 	min-height: 100vh;
 	@include primaryFont(500, 18px, $primaryTextColor);
+}
+
+.page {
+	display: flex;
+	margin-top: 15px;
+	.container {
+		display: flex;
+	}
 }
 
 .container {
@@ -20,14 +28,6 @@
 .content {
 	width: 100%;
 }
-
-.page {
-	margin-top: 15px;
-	.container {
-		display: flex;
-	}
-}
-
 
 
 //для компонетны Dialogs

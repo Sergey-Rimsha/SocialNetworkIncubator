@@ -3,6 +3,7 @@ import UserImg from "../../assets/img/ava_default.jpg";
 import {NavLink} from "react-router-dom";
 
 import s from './User.module.scss';
+import {Button} from "../../components/Button/Button";
 
 type UserPropsType = {
 	id: number
@@ -51,8 +52,18 @@ export function User(props: UserPropsType) {
 			{/*</div>*/}
 			{
 				!props.followed ?
-					<button disabled={btnActive} onClick={onClickHandlerFollow}>follow</button> :
-					<button disabled={btnActive} onClick={onClickHandlerUnFollow}>unfollow</button>
+					<Button
+						color={'primary'}
+						value={'follow'}
+						type={'button'}
+						disabled={btnActive}
+						onClick={onClickHandlerFollow} /> :
+					<Button
+						color={'secondary'}
+						value={'unfollow'}
+						type={'button'}
+						disabled={btnActive}
+						onClick={onClickHandlerUnFollow} />
 			}
 
 		</div>

@@ -5,7 +5,7 @@
 .addPost {
 	width: 450px;
 	background-color: white;
-	border-radius: 15px;
+	border-radius: 10px;
 	box-shadow: 0 0 1px gray;
 	padding: 10px;
 	margin-top: 15px;
@@ -16,7 +16,7 @@
 
 		textarea {
 			width: 100%;
-			border-radius: 5px;
+			border-radius: 10px;
 		}
 	}
 
@@ -24,18 +24,5 @@
 		display: flex;
 		justify-content: end;
 		margin-top: 15px;
-
-
-		& button {
-			width: 80px;
-			height: 35px;
-			border: none;
-			color: white;
-			text-align: center;
-			text-decoration: none;
-			font-size: 16px;
-			@include bgButtonGradient();
-			border-radius: 10px;
-		}
 	}
 }

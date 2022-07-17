@@ -1,0 +1,42 @@
+
+.label {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 190px;
+	height: 25px;
+	cursor: pointer;
+	margin-left: 10px;
+
+	& input {
+		position: absolute;
+		transform: scale(0);
+
+		&:checked ~ span {
+			transform: rotate(45deg);
+			width: 10px;
+			margin-left: 10px;
+			border-color: blue;
+			border-top-color: transparent;
+			border-left-color: transparent;
+			border-radius: 0;
+		}
+	}
+
+	& span {
+		display: block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid gray;
+		border-radius: 6px;
+		transition: all 0.375s;
+	}
+
+	div {
+		margin-left: 15px;
+		font-weight: 500;
+		font-size: 18px;
+		color: gray;
+	}
+}
+

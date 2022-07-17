@@ -14,7 +14,6 @@ export const Button: React.FC<ButtonPropsType> = React.memo(({color, value, ...r
 
 	const styleBtn = color === 'primary' ?
 		`${s.button__item_primary}` : `${s.button__item_secondary}`;
-	console.log(styleBtn)
 
 	return (
 		<div className={s.button}>
