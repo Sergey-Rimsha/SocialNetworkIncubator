@@ -1,0 +1,60 @@
+@import "src/scss/variables";
+@import "src/scss/mixins";
+
+.allChat {
+	padding-right: 10px;
+	max-height: 90vh;
+	overflow-y: scroll;
+
+	&::-webkit-scrollbar {
+		width: 10px;
+	}
+	&::-webkit-scrollbar-track {
+		border-radius: 10px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: #B7BDCB;
+		box-shadow: 4px 4px 15px rgba(112, 124, 151, 0.05), 2px 2px 10px rgba(112, 124, 151, 0.1), 1px 1px 50px rgba(112, 124, 151, 0.15);
+		border-radius: 10px;
+	}
+}
+
+.user {
+	//max-width: 420px;
+	height: 200px;
+	background: $bgColor;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 6px;
+	padding: 15px;
+	margin-top: 20px;
+
+	&__header {
+		display: flex;
+
+	}
+
+	&__ava {
+		width: 54px;
+		height: 54px;
+		& img {
+			width: 54px;
+			height: 54px;
+			border-radius: 50%;
+		}
+	}
+
+	&__name {
+		margin-left: 20px;
+		font-weight: 700;
+		font-size: 18px;
+		line-height: 21px;
+		color: #0D1C2E;
+	}
+
+	&__message {
+		margin-top: 17px;
+		font-size: 16px;
+		line-height: 26px;
+		color: #707C97;
+	}
+}

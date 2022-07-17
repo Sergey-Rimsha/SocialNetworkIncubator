@@ -6,12 +6,14 @@ import {DialogsContainer} from "../../pages/Dialogs/DialogsContainer";
 import {UsersPageContainer} from "../../pages/UsersPage/UsersPageContainer";
 import {LoginContainer} from "../../pages/Auth/LoginContainer";
 import {Layout} from "../Layout";
+import {ChatContainer} from "../../pages/Chat/ChatContainer";
 
 export const PathURL = {
 	profile: 'profile',
 	dialogs: 'dialogs',
 	users: 'users',
 	auth: 'auth',
+	chat: 'chat',
 }
 
 export const Routing = () => {
@@ -43,6 +45,12 @@ export const Routing = () => {
 						   element={
 							   <WithAuthRedirect>
 								   <UsersPageContainer/>
+							   </WithAuthRedirect>
+						   }/>
+					<Route path={PathURL.chat}
+						   element={
+							   <WithAuthRedirect>
+								   <ChatContainer/>
 							   </WithAuthRedirect>
 						   }/>
 					<Route path={PathURL.auth}

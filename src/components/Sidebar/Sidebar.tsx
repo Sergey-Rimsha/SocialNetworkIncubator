@@ -28,6 +28,13 @@ export function Sidebar() {
 					<div className={s.menu__item}>
 						<NavLink
 							className={setActive}
+							to={`/chat`}>
+							Chat
+						</NavLink>
+					</div>
+					<div className={s.menu__item}>
+						<NavLink
+							className={setActive}
 							to={`/users`}>
 							Users
 						</NavLink>
