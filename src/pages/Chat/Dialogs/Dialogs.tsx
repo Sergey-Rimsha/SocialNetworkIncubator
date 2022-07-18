@@ -5,6 +5,8 @@ import {ChangeEvent} from "react";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../store/store";
 import {InMessage} from "../../../store/reducers/dialogsReducer";
+import {useParams} from "react-router-dom";
+import {ChatStateType} from "../../../store/reducers/chatReducer";
 
 
 export type DialogsPropsType = {
@@ -15,8 +17,12 @@ export type DialogsPropsType = {
 
 export const Dialogs = (props: DialogsPropsType) => {
 
-	const messages = useSelector<AppRootStateType, InMessage[]>((state) => state.dialogsPage.messages);
-	const changeMessChat = useSelector<AppRootStateType, string>(state => state.dialogsPage.changeMessChat)
+	const {userChat} = useParams();
+
+	// const messages = useSelector<AppRootStateType, InMessage[]>((state) => state.dialogsPage.messages);
+	const changeMessChat = useSelector<AppRootStateType, string>(state => state.dialogsPage.changeMessChat);
+
+	const chat = useSelector<AppRootStateType, ChatStateType>(state => state.chat);
 
 	const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		props.onChangeHandler(e.currentTarget.value);
@@ -26,7 +32,6 @@ export const Dialogs = (props: DialogsPropsType) => {
 		props.sendMessage()
 	};
 
-
 	return (
 		<section className={s.dialogs}>
 			<div className={s.dialogs__header}>
@@ -35,31 +40,38 @@ export const Dialogs = (props: DialogsPropsType) => {
 						<img src={defaultImg} alt={'ava'}/>
 					</div>
 					<div className={s.dialogs__name}>
-						Nika Jerrardo
+						{userChat || chat[0]}
 					</div>
 				</div>
 			</div>
+
 			<div className={`${s.dialogs__chat} ${s.chat}`}>
+				{
+					userChat ?
+					chat[userChat].map((el) => {
 
-				{messages.map((el) => {
-					return (
-						<div key={el.id} className={`${s.chat__item} ${s.user}`}>
-							<div className={s.user__ava}>
-								<img src={defaultImg} alt={'ava'}/>
+					if (el.user_id !== 'my') {
+						return (
+							<div key={el.id} className={`${s.chat__item} ${s.user}`}>
+								<div className={s.user__ava}>
+									<img src={defaultImg} alt={'ava'}/>
+								</div>
+								<div className={s.user__message}>
+									{el.message}
+								</div>
 							</div>
-							<div className={s.user__message}>
-								{el.message}
+						)
+					} else {
+						return (
+							<div key={el.id} className={`${s.chat__item} ${s.my}`}>
+								<div className={s.my__message}>
+									{el.message}
+								</div>
 							</div>
-						</div>
-					)
-				})}
-
-				<div className={`${s.chat__item} ${s.my}`}>
-					<div className={s.my__message}>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis
-					</div>
-				</div>
-
+						)
+					}
+					}) : ''
+				}
 			</div>
 
 			<div className={s.addMessage}>

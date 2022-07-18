@@ -28,6 +28,7 @@ export const Routing = () => {
 								   <ProfileContainer/>
 							   </WithAuthRedirect>
 						   }>
+
 						<Route path={`:userId`}
 							   element={
 								   <WithAuthRedirect>
@@ -52,7 +53,15 @@ export const Routing = () => {
 							   <WithAuthRedirect>
 								   <ChatContainer/>
 							   </WithAuthRedirect>
-						   }/>
+						   }>
+						<Route path={`:userChat`}
+							   element={
+								   <WithAuthRedirect>
+									   <ChatContainer/>
+								   </WithAuthRedirect>
+							   }>
+						</Route>
+					</Route>
 					<Route path={PathURL.auth}
 						   element={<LoginContainer/>}/>
 					<Route path={'*'} element={<div>Not Found</div>}/>
