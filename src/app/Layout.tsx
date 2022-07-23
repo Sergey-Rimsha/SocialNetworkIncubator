@@ -22,17 +22,20 @@ export const Layout = () => {
 	if (!initialized) return <Preloader />
 
 	return (
-		<>
+		<div className={"layout"}>
 			<HeaderContainer />
 			{isFetching && <Preloader />}
-			<div className="page">
+			{/*<div className="page">*/}
 				<div className="container">
-					<Sidebar />
-					<main className="content">
-						<Outlet />
-					</main>
+					<div className="page">
+						<Sidebar />
+						<main className="main">
+							<Outlet />
+						</main>
+					</div>
+
 				</div>
-			</div>
-		</>
+			{/*</div>*/}
+		</div>
 	)
 };

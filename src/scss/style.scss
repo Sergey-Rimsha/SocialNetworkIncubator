@@ -7,26 +7,28 @@
 
 
 .App {
-	background-color: #DBDFF3;
+
 	//background: linear-gradient(#DBDFF3, #FDFBFD);
+
+}
+
+.layout {
 	min-height: 100vh;
 	@include primaryFont(500, 18px, $primaryTextColor);
+	background-color: #DBDFF3;
 }
 
 .page {
 	display: flex;
 	margin-top: 15px;
-	.container {
-		display: flex;
-	}
 }
 
 .container {
-	width: 1400px;
+	width: 1200px;
 	margin: 0 auto;
 }
 
-.content {
+.main {
 	width: 100%;
 }
 
