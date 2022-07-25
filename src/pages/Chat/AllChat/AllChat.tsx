@@ -5,14 +5,17 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../store/store";
 import {ChatStateType} from "../../../store/reducers/chatReducer";
 import {NavLink} from "react-router-dom";
-import {PathURL} from "../../../app/Routing/Routing";
+import React from "react";
 
-export const AllChat = () => {
-
+export const AllChat = React.memo(() => {
 	const chat = useSelector<AppRootStateType, ChatStateType>(state => state.chat);
 	const chatUsers = Object.keys(chat);
 
-	const setActive = ({isActive}: {isActive: boolean}) => (isActive ? `${s.menu__item_active}` : "");
+	const setActive = ({isActive}: { isActive: boolean }) => {
+		console.log(isActive)
+		return (isActive ? `${s.active}` : `${s.link}`);
+	};
+
 
 	return (
 		<section className={s.allChat}>
@@ -24,8 +27,8 @@ export const AllChat = () => {
 			{
 				chatUsers.map((el) => {
 					return (
-						<NavLink key={el} to={`/chat/${el}`} className={setActive} >
-							<div className={`${s.allChat__item} ${s.user}`}>
+						<div key={el} className={`${s.allChat__item} ${s.user}`}>
+							<NavLink to={`/chat/${el}`} className={setActive}>
 								<div className={s.user__header}>
 									<div className={s.user__ava}>
 										<img src={defaultImg} alt={'ava'}/>
@@ -37,11 +40,11 @@ export const AllChat = () => {
 								<div className={s.user__message}>
 									{chat[el][chat[el].length - 1].message}
 								</div>
-							</div>
-						</NavLink>
+							</NavLink>
+						</div>
 					)
 				})
 			}
 		</section>
 	)
-}
+})

@@ -29,7 +29,21 @@
 	&__item {
 		margin-top: 20px;
 	}
+
 }
+
+
+.link {
+	text-decoration: none;
+}
+
+.active {
+	.user__message {
+		background-color: #2A8BF2;
+	}
+}
+
+
 
 .user {
 	//max-width: 420px;
@@ -67,4 +81,5 @@
 		line-height: 26px;
 		color: #707C97;
 	}
+
 }
