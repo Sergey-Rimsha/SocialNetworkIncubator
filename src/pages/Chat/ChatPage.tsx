@@ -5,7 +5,7 @@ import s from './ChatPage.module.scss';
 
 export type ChatPropsType = {
 	onChangeHandler: (text: string) => void
-	sendMessage: () => void
+	sendMessage: (userChat: string, text: string) => void
 }
 
 export const ChatPage = (props: ChatPropsType) => {

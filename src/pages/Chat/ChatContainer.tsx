@@ -4,11 +4,9 @@ import {addMessageChatAC, onChangeMessChatAC} from "../../store/reducers/dialogs
 import {useSelector} from "react-redux";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {ChatStateType} from "../../store/reducers/chatReducer";
+import {ChatStateType, setMessageChat} from "../../store/reducers/chatReducer";
 
 export const ChatContainer = () => {
-
-	const changeMessage = useSelector<AppRootStateType, string>(state => state.dialogsPage.changeMessChat);
 
 	const chat = useSelector<AppRootStateType, ChatStateType>(state => state.chat);
 	const chatUsers = Object.keys(chat);
@@ -21,9 +19,13 @@ export const ChatContainer = () => {
 		dispatch(onChangeMessChatAC(text))
 	}
 
-	const sendMessage = () => {
-		if (changeMessage) {
-			dispatch(addMessageChatAC())
+	const sendMessage = (userChat: string, text: string) => {
+
+		// test my id
+		const user_id = 'my';
+
+		if (setMessageChat) {
+			dispatch(setMessageChat(userChat, text, user_id))
 		}
 		dispatch(onChangeMessChatAC(''))
 	}

@@ -1,35 +1,36 @@
 import defaultImg from '../../../assets/img/ava_default.jpg';
 import sendImg from '../../../assets/img/send_img.png';
 import s from './Dialog.module.scss';
-import {ChangeEvent} from "react";
+import {ChangeEvent, useState} from "react";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../store/store";
-import {InMessage} from "../../../store/reducers/dialogsReducer";
 import {useParams} from "react-router-dom";
 import {ChatStateType} from "../../../store/reducers/chatReducer";
 
 
 export type DialogsPropsType = {
 	onChangeHandler: (text: string) => void
-	sendMessage: () => void
+	sendMessage: (userChat: string, text: string) => void
 }
 
 
 export const Dialogs = (props: DialogsPropsType) => {
 
-	const {userChat} = useParams();
+	const [newMassage, setNewMassage] = useState('');
 
-	// const messages = useSelector<AppRootStateType, InMessage[]>((state) => state.dialogsPage.messages);
-	const changeMessChat = useSelector<AppRootStateType, string>(state => state.dialogsPage.changeMessChat);
+	const {userChat} = useParams();
 
 	const chat = useSelector<AppRootStateType, ChatStateType>(state => state.chat);
 
 	const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		props.onChangeHandler(e.currentTarget.value);
+		setNewMassage(e.currentTarget.value);
 	}
 
 	const onClickHandlerMessage = () => {
-		props.sendMessage()
+		if (userChat && newMassage) {
+			props.sendMessage(userChat, newMassage);
+			setNewMassage('');
+		}
 	};
 
 	return (
@@ -76,7 +77,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 
 			<div className={s.addMessage}>
 				<textarea
-					value={changeMessChat}
+					value={newMassage}
 					onChange={onChangeMessage}
 					className={s.addMessage__textarea}
 					placeholder={'Type a message here'}
