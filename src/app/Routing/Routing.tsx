@@ -1,12 +1,29 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import {ProfileContainer} from "../../pages/Profile/ProfileContainer";
-import {DialogsContainer} from "../../pages/Dialogs/DialogsContainer";
-import {UsersPageContainer} from "../../pages/UsersPage/UsersPageContainer";
 import {LoginContainer} from "../../pages/Auth/LoginContainer";
 import {Layout} from "../Layout";
-import {ChatContainer} from "../../pages/Chat/ChatContainer";
+
+const ProfileContainer = lazy(() =>
+	import("../../pages/Profile/ProfileContainer")
+		.then(({ ProfileContainer }) => ({ default: ProfileContainer })),
+);
+
+const DialogsContainer = lazy(() =>
+	import("../../pages/Dialogs/DialogsContainer")
+		.then(({ DialogsContainer }) => ({ default: DialogsContainer })),
+);
+
+const UsersPageContainer = lazy(() =>
+	import("../../pages/UsersPage/UsersPageContainer")
+		.then(({ UsersPageContainer }) => ({ default: UsersPageContainer })),
+);
+
+const ChatContainer = lazy(() =>
+	import("../../pages/Chat/ChatContainer")
+		.then(({ ChatContainer }) => ({ default: ChatContainer })),
+);
+
 
 export const PathURL = {
 	profile: 'profile',
@@ -19,55 +36,57 @@ export const PathURL = {
 export const Routing = () => {
 	return (
 		<>
-			<Routes>
-				<Route path={'/'} element={<Layout/>}>
-					<Route index element={<Navigate to={PathURL.profile}/>}/>
-					<Route path={PathURL.profile}
-						   element={
-							   <WithAuthRedirect>
-								   <ProfileContainer/>
-							   </WithAuthRedirect>
-						   }>
-
-						<Route path={`:userId`}
+			<Suspense fallback={<>loading....</>}>
+				<Routes>
+					<Route path={'/'} element={<Layout/>}>
+						<Route index element={<Navigate to={PathURL.profile}/>}/>
+						<Route path={PathURL.profile}
 							   element={
 								   <WithAuthRedirect>
 									   <ProfileContainer/>
 								   </WithAuthRedirect>
+							   }>
+
+							<Route path={`:userId`}
+								   element={
+									   <WithAuthRedirect>
+										   <ProfileContainer/>
+									   </WithAuthRedirect>
+								   }/>
+						</Route>
+						<Route path={PathURL.dialogs}
+							   element={
+								   <WithAuthRedirect>
+									   <DialogsContainer/>
+								   </WithAuthRedirect>
 							   }/>
-					</Route>
-					<Route path={PathURL.dialogs}
-						   element={
-							   <WithAuthRedirect>
-								   <DialogsContainer/>
-							   </WithAuthRedirect>
-						   }/>
-					<Route path={PathURL.users}
-						   element={
-							   <WithAuthRedirect>
-								   <UsersPageContainer/>
-							   </WithAuthRedirect>
-						   }/>
-					<Route path={PathURL.chat}
-						   element={
-							   <WithAuthRedirect>
-								   <ChatContainer/>
-							   </WithAuthRedirect>
-						   }>
-						<Route path={`:userChat`}
+						<Route path={PathURL.users}
+							   element={
+								   <WithAuthRedirect>
+									   <UsersPageContainer/>
+								   </WithAuthRedirect>
+							   }/>
+						<Route path={PathURL.chat}
 							   element={
 								   <WithAuthRedirect>
 									   <ChatContainer/>
 								   </WithAuthRedirect>
 							   }>
+							<Route path={`:userChat`}
+								   element={
+									   <WithAuthRedirect>
+										   <ChatContainer/>
+									   </WithAuthRedirect>
+								   }>
+							</Route>
 						</Route>
+						<Route path={PathURL.auth}
+							   element={<LoginContainer/>}/>
+						<Route path={'*'} element={<div>Not Found</div>}/>
 					</Route>
-					<Route path={PathURL.auth}
-						   element={<LoginContainer/>}/>
-					<Route path={'*'} element={<div>Not Found</div>}/>
-				</Route>
 
-			</Routes>
+				</Routes>
+			</Suspense>
 		</>
 	);
 };

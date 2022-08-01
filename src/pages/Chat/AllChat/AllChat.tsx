@@ -12,7 +12,7 @@ export const AllChat = React.memo(() => {
 	const chatUsers = Object.keys(chat);
 
 	const setActive = ({isActive}: { isActive: boolean }) => {
-		console.log(isActive)
+		// console.log(isActive)
 		return (isActive ? `${s.active}` : `${s.link}`);
 	};
 
@@ -25,10 +25,10 @@ export const AllChat = React.memo(() => {
 			</div>
 
 			{
-				chatUsers.map((el) => {
+				chatUsers.map((el, i) => {
 					return (
-						<div key={el} className={`${s.allChat__item} ${s.user}`}>
-							<NavLink to={`/chat/${el}`} className={setActive}>
+						<NavLink key={i} to={`/chat/${el}`} className={setActive}>
+							<div className={`${s.allChat__item} ${s.user}`}>
 								<div className={s.user__header}>
 									<div className={s.user__ava}>
 										<img src={defaultImg} alt={'ava'}/>
@@ -40,8 +40,8 @@ export const AllChat = React.memo(() => {
 								<div className={s.user__message}>
 									{chat[el][chat[el].length - 1].message}
 								</div>
-							</NavLink>
-						</div>
+							</div>
+						</NavLink>
 					)
 				})
 			}
