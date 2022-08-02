@@ -133,16 +133,3 @@ export function Profile(props: StateType) {
 	)
 }
 
-
-// const posts = props.profilePage.posts.map((post, i) => {
-// 	return (
-// 		<Post
-// 			key={i}
-// 			id={post.id}
-// 			message={post.message}
-// 			likesCount={post.likesCount}
-// 		/>
-// 	)
-// })
-
-
