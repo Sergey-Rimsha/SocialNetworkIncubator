@@ -19,7 +19,7 @@ type AuthUserType = {
 const instance = axios.create ({
 	withCredentials: true,
 	baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-	headers:     {
+	headers: {
 		"API-KEY": "31e5f258-a64c-4753-8a60-acee980643ae"
 	}
 });
@@ -101,4 +101,21 @@ export const usersApi = {
 			})
 	}
 ///*
+}
+
+export const profileApi = {
+	updatePhoto(filePhoto: File) {
+
+		const formData = new FormData();
+		formData.append("image", filePhoto);
+
+		return instance.put<ResponseType<{photos: {small: string, large: string}}>>(`/profile/photo`, formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
+		})
+			.then(res => {
+				return res.data
+			})
+	}
 }

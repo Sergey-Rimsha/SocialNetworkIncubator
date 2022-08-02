@@ -4,13 +4,13 @@ import {Profile} from "./Profile";
 import {
 	addPost,
 	onChangeMessPost,
-	ProfileStateType,
+	ProfileStateType, putPhotoProfileTC,
 	putStatusUserTC,
 	setChangeStatus,
 	setUserProfileTC
 } from "../../store/reducers/profileReducer";
 import {AppDispatch, AppRootStateType} from "../../store/store";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 
 export const ProfileContainer = () => {
@@ -20,22 +20,23 @@ export const ProfileContainer = () => {
 	const changeStatus = useSelector<AppRootStateType, string>(state => state.profilePage.changeStatus);
 
 	const loginId = useSelector<AppRootStateType, number | null>(state => state.auth.id);
-	const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth);
-
 
 	const dispatch = AppDispatch();
 
-
 	const params = useParams();
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (loginId) {
-			const userId = params.userId || loginId;
-			if (isAuth) {
-				dispatch(setUserProfileTC(userId.toString()));
-			}
+		if (!params.userId) {
+			navigate(`/profile/${loginId}`)
 		}
-	}, []);
+	}, [params.userId, navigate, loginId])
+
+	useEffect(() => {
+		if (params.userId) {
+			dispatch(setUserProfileTC(params.userId));
+		}
+	}, [params.userId, dispatch]);
 
 	const addNewPost = () => {
 		dispatch(addPost());
@@ -57,6 +58,10 @@ export const ProfileContainer = () => {
 		}
 	}
 
+	const addPhoto = (filePhoto: File) => {
+		dispatch(putPhotoProfileTC(filePhoto))
+	}
+
 
 	return (
 		<>
@@ -68,6 +73,7 @@ export const ProfileContainer = () => {
 				addStatus={addStatus}
 				onChangeStatusText={onChangeStatusText}
 				onChangeHandlerPostText={onChangeHandlerPostText}
+				addPhoto={addPhoto}
 			/>
 		</>
 	)

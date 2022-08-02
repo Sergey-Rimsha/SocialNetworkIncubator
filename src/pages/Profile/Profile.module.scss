@@ -25,6 +25,27 @@
 			}
 		}
 
+		&__edite {
+			display: flex;
+			justify-content: center;
+			margin-top: 20px;
+			max-width: 200px;
+		}
+
+		&__editeBlock {
+			width: 100%;
+			height: 100px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			align-items: center;
+
+			& input {
+				max-width: 200px;
+			}
+
+		}
+
 		&__info {
 
 			margin-left: 25px;

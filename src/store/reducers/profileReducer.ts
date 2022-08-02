@@ -1,4 +1,4 @@
-import {usersApi} from "../../api/api";
+import {profileApi, usersApi} from "../../api/api";
 import {AppThunkType} from "../store";
 import {setIsFetching} from "./utilsReducer";
 
@@ -31,11 +31,13 @@ export type PostType = {
 	likesCount: number
 }
 
+
 export type ActionProfileType = ReturnType<typeof addPost>
 	| ReturnType<typeof onChangeMessPost>
 	| ReturnType<typeof setUserProfile>
 	| ReturnType<typeof setStatus>
 	| ReturnType<typeof setChangeStatus>
+	| ReturnType<typeof setPhotos>
 
 let initialState: ProfileStateType = {
 	user: {
@@ -104,6 +106,15 @@ export const profileReducer = (state= initialState, action: ActionProfileType ):
 			}
 		}
 
+		case "PROFILE/SET_PHOTOS": {
+			return {
+				...state,
+				user: {
+					...state.user,
+					photos: action.photos
+				}
+			}
+		}
 		default:
 			return state;
 	}
@@ -141,6 +152,13 @@ export const setChangeStatus = (text: string) => {
 	return {
 		type: 'CHANGE_STATUS',
 		text
+	} as const
+}
+
+export const setPhotos = (photos: PhotosType) => {
+	return {
+		type: 'PROFILE/SET_PHOTOS',
+		photos
 	} as const
 }
 
@@ -182,6 +200,21 @@ export const putStatusUserTC = (status: string, userId: number): AppThunkType =>
 				dispatch(setStatusUserTC(userId))
 				dispatch(setIsFetching(false));
 			}
+		})
+		.finally(() => {
+			dispatch(setIsFetching(false));
+		})
+}
+
+export const putPhotoProfileTC = (filePhoto: File): AppThunkType => (dispatch) => {
+	dispatch(setIsFetching(true));
+	profileApi.updatePhoto(filePhoto)
+		.then((data) => {
+			if (data.resultCode === 0) {
+				console.log(data.data.photos)
+				dispatch(setPhotos(data.data.photos))
+			}
+
 		})
 		.finally(() => {
 			dispatch(setIsFetching(false));
