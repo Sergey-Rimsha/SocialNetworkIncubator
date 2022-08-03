@@ -10,6 +10,7 @@ import {Button} from "../../components/Button/Button";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {useParams} from "react-router-dom";
+import {EditeProfile} from "./EditeProfile/EditeProfile";
 
 
 type StateType = {
@@ -104,6 +105,8 @@ export function Profile(props: StateType) {
 					user={props.profilePage.user}
 					onChangeStatusText={props.onChangeStatusText}
 				/>
+
+				<EditeProfile/>
 			</div>
 
 
