@@ -30,6 +30,8 @@ export function Profile(props: StateType) {
 	const [editMode, setEditMode] = useState<boolean>(false);
 	const [showEditMode, setShowEditMode] = useState<boolean>(false);
 
+	const [editeProfile, setEditeProfile] = useState<boolean>(false);
+
 	const loginId = useSelector<AppRootStateType, number | null>(state => state.auth.id);
 
 	const params = useParams();
@@ -40,6 +42,10 @@ export function Profile(props: StateType) {
 		if (e.currentTarget.files) {
 			setPhoto(e.currentTarget.files[0])
 		}
+	}
+
+	const onClickHandlerEditeMode = (edit: boolean) => {
+		setEditeProfile(edit);
 	}
 
 	const saveSettings = () => {
@@ -54,12 +60,11 @@ export function Profile(props: StateType) {
 	}
 
 
-
 	useEffect(() => {
 		if (params.userId + '' === loginId + '') {
 			setShowEditMode(true)
 		}
-	},[params.userId, loginId])
+	}, [params.userId, loginId])
 
 
 	return (
@@ -98,38 +103,42 @@ export function Profile(props: StateType) {
 
 				</div>
 
-				<ProfileInfo
-					status={props.status}
-					changeStatus={props.changeStatus}
-					addStatus={props.addStatus}
-					user={props.profilePage.user}
-					onChangeStatusText={props.onChangeStatusText}
-				/>
-
-				<EditeProfile/>
+				{
+					!editeProfile &&
+					<div>
+						<ProfileInfo
+							status={props.status}
+							changeStatus={props.changeStatus}
+							addStatus={props.addStatus}
+							user={props.profilePage.user}
+							onChangeStatusText={props.onChangeStatusText}
+						/>
+						<Button
+							color={'primary'}
+							value={'edit'}
+							onClick={() => onClickHandlerEditeMode(true)}
+						/>
+					</div>
+				}
+				{editeProfile && <EditeProfile/>}
 			</div>
 
+			<AddPost
+				changeMessage={props.profilePage.changeMessage}
+				addNewPost={props.addNewPost}
+				oChangeHandlerPostText={props.onChangeHandlerPostText}/>
 
 			{
-				!showEditMode ||
-				<>
-					<AddPost
-						changeMessage={props.profilePage.changeMessage}
-						addNewPost={props.addNewPost}
-						oChangeHandlerPostText={props.onChangeHandlerPostText}/>
-					{
-						props.profilePage.posts.map((post, i) => {
-							return (
-								<Post
-									key={i}
-									id={post.id}
-									message={post.message}
-									likesCount={post.likesCount}
-								/>
-							)
-						})
-					}
-				</>
+				props.profilePage.posts.map((post, i) => {
+					return (
+						<Post
+							key={i}
+							id={post.id}
+							message={post.message}
+							likesCount={post.likesCount}
+						/>
+					)
+				})
 			}
 
 		</section>
