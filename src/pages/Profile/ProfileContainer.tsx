@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useCallback, useEffect} from "react";
 import {useSelector} from "react-redux";
 import {Profile} from "./Profile";
 import {
@@ -13,7 +13,9 @@ import {AppDispatch, AppRootStateType} from "../../store/store";
 import {useNavigate, useParams} from "react-router-dom";
 
 
-export const ProfileContainer = () => {
+export const ProfileContainer = React.memo(() => {
+
+	console.log('render ProfileContainer')
 
 	const profilePage = useSelector<AppRootStateType, ProfileStateType>((state) => state.profilePage);
 	const status = useSelector<AppRootStateType, string>(state => state.profilePage.status);
@@ -30,37 +32,39 @@ export const ProfileContainer = () => {
 		if (!params.userId) {
 			navigate(`/profile/${loginId}`)
 		}
+		console.log('render useEffect1 ProfileContainer')
 	}, [params.userId, navigate, loginId])
 
 	useEffect(() => {
 		if (params.userId) {
 			dispatch(setUserProfileTC(params.userId));
 		}
+		console.log('render useEffect2 ProfileContainer')
 	}, [params.userId, dispatch]);
 
-	const addNewPost = () => {
+	const addNewPost = useCallback(() => {
 		dispatch(addPost());
-	};
+	}, [dispatch])
 
-	const onChangeHandlerPostText = (text: string) => {
+	const onChangeHandlerPostText = useCallback((text: string) => {
 		dispatch(onChangeMessPost(text))
-	};
+	},[dispatch])
 
-	const onChangeStatusText = (text: string) => {
+	const onChangeStatusText = useCallback((text: string) => {
 		dispatch(setChangeStatus(text))
-	}
+	},[dispatch])
 
-	const addStatus = () => {
+	const addStatus = useCallback(() => {
 		if (changeStatus !== status) {
 			if (loginId) {
 				dispatch(putStatusUserTC(changeStatus, loginId));
 			}
 		}
-	}
+	},[changeStatus, status, dispatch, loginId])
 
-	const addPhoto = (filePhoto: File) => {
+	const addPhoto = useCallback((filePhoto: File) => {
 		dispatch(putPhotoProfileTC(filePhoto))
-	}
+	}, [dispatch])
 
 
 	return (
@@ -77,4 +81,4 @@ export const ProfileContainer = () => {
 			/>
 		</>
 	)
-}
+})

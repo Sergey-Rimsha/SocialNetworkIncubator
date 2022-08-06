@@ -53,6 +53,8 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
 							<a href={`https://${props.user.contacts[key]}`}>{key}</a>
 						</div>
 					)
+				} else  {
+					return ''
 				}
 			})
 		)

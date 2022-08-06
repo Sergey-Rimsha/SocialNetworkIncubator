@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import UserImg from "../../assets/img/ava_default.jpg";
 import {Post} from "./Post/Post";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
@@ -11,6 +11,7 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {useParams} from "react-router-dom";
 import {EditeProfile} from "./EditeProfile/EditeProfile";
+import {LoadingPhoto} from "./EditeProfile/LoadingPhoto/LoadingPhoto";
 
 
 type StateType = {
@@ -24,11 +25,9 @@ type StateType = {
 	addPhoto: (file: File) => void
 }
 
-export function Profile(props: StateType) {
+export const Profile = React.memo((props: StateType) => {
 
-	const [photo, setPhoto] = useState<File>();
-	const [editMode, setEditMode] = useState<boolean>(false);
-	const [showEditMode, setShowEditMode] = useState<boolean>(false);
+	console.log('render Profile')
 
 	const [editeProfile, setEditeProfile] = useState<boolean>(false);
 
@@ -38,31 +37,20 @@ export function Profile(props: StateType) {
 
 	const userPhoto: string = props.profilePage.user.photos.large;
 
-	const savePhoto = (e: ChangeEvent<HTMLInputElement>) => {
-		if (e.currentTarget.files) {
-			setPhoto(e.currentTarget.files[0])
-		}
-	}
-
 	const onClickHandlerEditeMode = (edit: boolean) => {
 		setEditeProfile(edit);
 	}
 
-	const saveSettings = () => {
+	const saveSettings = (photo: File) => {
 		if (photo) {
 			props.addPhoto(photo);
-			setEditMode(false);
+			setEditeProfile(false);
 		}
 	}
 
-	const onHandlerEditeMode = () => {
-		setEditMode(true);
-	}
-
-
 	useEffect(() => {
 		if (params.userId + '' === loginId + '') {
-			setShowEditMode(true)
+			// setEditeProfile(true)
 		}
 	}, [params.userId, loginId])
 
@@ -75,32 +63,9 @@ export function Profile(props: StateType) {
 						<img src={userPhoto || UserImg} alt="user-img"/>
 					</div>
 
-					{
-						!showEditMode ||
-						<div className={s.user__edite}>
-							{
-								!editMode ?
-									<Button
-										onClick={onHandlerEditeMode}
-										color={'primary'}
-										value={'Edit'}/> :
-									<div className={s.user__editeBlock}>
-										<input
-											id='photo'
-											name={'photo'}
-											type={"file"}
-											accept='image/png, image/jpeg'
-											onChange={savePhoto}
-										/>
-										<Button
-											onClick={saveSettings}
-											color={'secondary'}
-											value={'save'}/>
-									</div>
-							}
-						</div>
-					}
-
+					<div className={s.user__edite}>
+						<LoadingPhoto saveSettings={saveSettings}/>
+					</div>
 				</div>
 
 				{
@@ -127,7 +92,6 @@ export function Profile(props: StateType) {
 				changeMessage={props.profilePage.changeMessage}
 				addNewPost={props.addNewPost}
 				oChangeHandlerPostText={props.onChangeHandlerPostText}/>
-
 			{
 				props.profilePage.posts.map((post, i) => {
 					return (
@@ -143,5 +107,5 @@ export function Profile(props: StateType) {
 
 		</section>
 	)
-}
+})
 

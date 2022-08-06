@@ -2,6 +2,7 @@ import React from "react";
 
 import s from './EditeProfile.module.scss';
 import {EditeProfileForm} from "./EditeProfileForm/EditeProfileForm";
+import {Button} from "../../../components/Button/Button";
 
 
 export const EditeProfile = () => {
