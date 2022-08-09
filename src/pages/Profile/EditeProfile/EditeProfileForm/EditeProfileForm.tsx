@@ -15,22 +15,23 @@ export const EditeProfileForm = () => {
 
 	const user = useSelector<AppRootStateType, UserType>(state => state.profilePage.user);
 
+
+	const refContacts = {
+		...contacts,
+	}
+
+	for (let key in refContacts) {
+		if (refContacts[key] === null) {
+			refContacts[key] = '';
+		}
+	}
+
 	const formik = useFormik({
 		initialValues: {
 			fullName: user.fullName,
 			lookingForAJob: user.lookingForAJob,
 			lookingForAJobDescription: user.lookingForAJobDescription,
-			contacts: {
-				"github": '',
-				"vk": '',
-				"facebook": '',
-				"instagram": '',
-				"twitter": '',
-				"website": '',
-				"youtube": '',
-				"mainLink": '',
-				// ...contacts
-			},
+			...refContacts,
 		},
 		validate: (values) => {
 			const errors: FormikErrorType = {};
@@ -100,7 +101,8 @@ export const EditeProfileForm = () => {
 				Contacts:
 				<div>
 					{
-						Object.keys(formik.values.contacts).map((key, i) => {
+						Object.keys(contacts).map((key, i) => {
+
 							return (
 								<div key={i}>
 									<span className={s.editeProfile__contact}>
@@ -112,7 +114,7 @@ export const EditeProfileForm = () => {
 										type="text"
 										placeholder={key}
 										onChange={formik.handleChange}
-										value={formik.values.contacts[key]}
+										// value={formik.values[key]}
 									/>
 								</div>
 							)
