@@ -1,8 +1,12 @@
 import s from "../EditeProfile.module.scss";
 import React from "react";
-import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../../../store/store";
-import {ContactsType, UserType} from "../../../../store/reducers/profileReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, AppRootStateType} from "../../../../store/store";
+import {
+	ContactsType,
+	putProfileTC,
+	UserType
+} from "../../../../store/reducers/profileReducer";
 import {useFormik} from "formik";
 
 export type FormikErrorType = {}
@@ -14,6 +18,10 @@ export const EditeProfileForm = () => {
 	const contacts = useSelector<AppRootStateType, ContactsType>(state => state.profilePage.user.contacts);
 
 	const user = useSelector<AppRootStateType, UserType>(state => state.profilePage.user);
+
+	const userId = useSelector<AppRootStateType, number | null>(state => state.auth.id)
+
+	const dispatch = AppDispatch();
 
 
 	const refContacts = {
@@ -52,6 +60,12 @@ export const EditeProfileForm = () => {
 		onSubmit: values => {
 			// props.onHandlerSubmit(values)
 			console.log(values)
+
+			dispatch(putProfileTC({
+				...values,
+				userId: userId + '',
+			}))
+
 			formik.resetForm();
 		},
 	});
@@ -60,48 +74,15 @@ export const EditeProfileForm = () => {
 		<form onSubmit={formik.handleSubmit}>
 
 			<div className={s.editeProfile__subTitle}>
-				Profile:
-				<>
-					<div>
-						<span className={s.editeProfile__contact}>
-							fullName:
-						</span>
-
-						<input
-							type={"checkbox"}
-							placeholder={'fullName'}
-							{...formik.getFieldProps(`fullName`)}
-						/>
-					</div>
-
-					<div>
-						<span className={s.editeProfile__contact}>
-							lookingForAJob:
-						</span>
-						<input
-							placeholder={'lookingForAJob'}
-							{...formik.getFieldProps(`lookingForAJob`)}
-						/>
-					</div>
-
-					<div>
-						<span className={s.editeProfile__contact}>
-							lookingForAJobDescription:
-						</span>
-						<input
-							placeholder={'lookingForAJobDescription'}
-							{...formik.getFieldProps(`lookingForAJobDescription`)}
-						/>
-					</div>
-				</>
-			</div>
-
-
-			<div className={s.editeProfile__subTitle}>
 				Contacts:
 				<div>
 					{
-						Object.keys(contacts).map((key, i) => {
+						Object.keys(formik.values).map((key, i) => {
+
+							let typeInput = 'text';
+							if (key === 'lookingForAJob') {
+								typeInput = 'checkbox';
+							}
 
 							return (
 								<div key={i}>
@@ -109,12 +90,9 @@ export const EditeProfileForm = () => {
 										{key}:
 									</span>
 									<input
-										id={key}
-										name={key}
-										type="text"
+										type={typeInput}
 										placeholder={key}
-										onChange={formik.handleChange}
-										// value={formik.values[key]}
+										{...formik.getFieldProps(`${key}`)}
 									/>
 								</div>
 							)
