@@ -30,6 +30,27 @@ export type AuthDataType = {
 	rememberMe: boolean
 }
 
+export type UpdateProfileType = {
+	userId: string
+	lookingForAJob: boolean | null
+	lookingForAJobDescription: string | null
+	fullName: string | null
+	contacts: UpdateContactsType
+}
+
+export type UpdateContactsType = {
+	github: string | null
+	vk: string | null
+	facebook: string | null
+	instagram: string | null
+	twitter: string | null
+	website: string | null
+	youtube: string | null
+	mainLink: string | null
+}
+
+
+
 export const authApi = {
 
 	authLoginMe() {
@@ -117,5 +138,14 @@ export const profileApi = {
 			.then(res => {
 				return res.data
 			})
+	},
+
+	updateProfile(profileData: UpdateProfileType) {
+
+		return instance.put<ResponseType<{}>>('/profile', profileData)
+			.then((resolve) => {
+				console.log(resolve);
+			})
 	}
 }
+

@@ -14,9 +14,7 @@ export const EditeProfile = () => {
 			</div>
 			<div className={s.editeProfile__block}>
 				<div className={s.editeProfile__contacts}>
-					<div className={s.editeProfile__subTitle}>
-						Contacts:
-					</div>
+
 					<EditeProfileForm/>
 				</div>
 			</div>

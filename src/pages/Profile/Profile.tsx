@@ -27,8 +27,6 @@ type StateType = {
 
 export const Profile = React.memo((props: StateType) => {
 
-	console.log('render Profile')
-
 	const [editeProfile, setEditeProfile] = useState<boolean>(false);
 
 	const loginId = useSelector<AppRootStateType, number | null>(state => state.auth.id);

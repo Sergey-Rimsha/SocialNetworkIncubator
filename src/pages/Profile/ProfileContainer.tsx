@@ -15,8 +15,6 @@ import {useNavigate, useParams} from "react-router-dom";
 
 export const ProfileContainer = React.memo(() => {
 
-	console.log('render ProfileContainer')
-
 	const profilePage = useSelector<AppRootStateType, ProfileStateType>((state) => state.profilePage);
 	const status = useSelector<AppRootStateType, string>(state => state.profilePage.status);
 	const changeStatus = useSelector<AppRootStateType, string>(state => state.profilePage.changeStatus);
@@ -32,14 +30,12 @@ export const ProfileContainer = React.memo(() => {
 		if (!params.userId) {
 			navigate(`/profile/${loginId}`)
 		}
-		console.log('render useEffect1 ProfileContainer')
 	}, [params.userId, navigate, loginId])
 
 	useEffect(() => {
 		if (params.userId) {
 			dispatch(setUserProfileTC(params.userId));
 		}
-		console.log('render useEffect2 ProfileContainer')
 	}, [params.userId, dispatch]);
 
 	const addNewPost = useCallback(() => {

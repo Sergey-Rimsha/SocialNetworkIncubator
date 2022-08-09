@@ -8,8 +8,6 @@ type LoadingPhotoPropsType = {
 
 export const LoadingPhoto = React.memo((props: LoadingPhotoPropsType) => {
 
-	console.log('render LoadingPhoto')
-
 	const [photo, setPhoto] = useState<File>();
 	const [editMode, setEditMode] = useState<boolean>(false);
 

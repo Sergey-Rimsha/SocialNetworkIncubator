@@ -1,4 +1,4 @@
-import {profileApi, usersApi} from "../../api/api";
+import {profileApi, UpdateProfileType, usersApi} from "../../api/api";
 import {AppThunkType} from "../store";
 import {setIsFetching} from "./utilsReducer";
 
@@ -218,5 +218,14 @@ export const putPhotoProfileTC = (filePhoto: File): AppThunkType => (dispatch) =
 		})
 		.finally(() => {
 			dispatch(setIsFetching(false));
+		})
+}
+
+export const putProfileTC = (profileData: UpdateProfileType): AppThunkType => (dispatch) => {
+
+	dispatch(setIsFetching(true));
+	profileApi.updateProfile(profileData)
+		.then((data) => {
+			console.log(`${data} - TC`)
 		})
 }
