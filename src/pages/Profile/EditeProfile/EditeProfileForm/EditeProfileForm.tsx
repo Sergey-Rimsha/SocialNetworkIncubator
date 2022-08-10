@@ -11,8 +11,12 @@ import {useFormik} from "formik";
 
 export type FormikErrorType = {}
 
+type EditeProfileFormPropsType = {
+	onClickHandlerEditeMode: (edite: boolean) => void
+}
 
-export const EditeProfileForm = () => {
+
+export const EditeProfileForm = (props: EditeProfileFormPropsType) => {
 
 
 	const contacts = useSelector<AppRootStateType, ContactsType>(state => state.profilePage.user.contacts);
@@ -37,8 +41,17 @@ export const EditeProfileForm = () => {
 	const formik = useFormik({
 		initialValues: {
 			fullName: user.fullName,
+			aboutMe: user.aboutMe,
 			lookingForAJob: user.lookingForAJob,
 			lookingForAJobDescription: user.lookingForAJobDescription,
+			github: '',
+			vk: '',
+			facebook: '',
+			instagram: '',
+			twitter: '',
+			website: '',
+			youtube: '',
+			mainLink: '',
 			...refContacts,
 		},
 		validate: (values) => {
@@ -58,21 +71,30 @@ export const EditeProfileForm = () => {
 			return errors;
 		},
 		onSubmit: values => {
-			// props.onHandlerSubmit(values)
-			console.log(values)
-
 			dispatch(putProfileTC({
-				...values,
 				userId: userId + '',
+				fullName: values.fullName,
+				aboutMe: values.aboutMe || '',
+				lookingForAJob: values.lookingForAJob,
+				lookingForAJobDescription: values.lookingForAJobDescription,
+				contacts: {
+					github: values.github,
+					vk: values.vk,
+					facebook: values.facebook,
+					instagram: values.instagram,
+					twitter: values.twitter,
+					website: values.website,
+					youtube: values.youtube,
+					mainLink: values.mainLink,
+				},
 			}))
-
 			formik.resetForm();
+			props.onClickHandlerEditeMode(false);
 		},
 	});
 
 	return (
 		<form onSubmit={formik.handleSubmit}>
-
 			<div className={s.editeProfile__subTitle}>
 				Contacts:
 				<div>
@@ -100,7 +122,6 @@ export const EditeProfileForm = () => {
 					}
 				</div>
 			</div>
-
 
 			<button type='submit'>save</button>
 		</form>

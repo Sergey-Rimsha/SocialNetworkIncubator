@@ -83,7 +83,7 @@ export const Profile = React.memo((props: StateType) => {
 						/>
 					</div>
 				}
-				{editeProfile && <EditeProfile/>}
+				{editeProfile && <EditeProfile onClickHandlerEditeMode={onClickHandlerEditeMode} />}
 			</div>
 
 			<AddPost

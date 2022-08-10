@@ -50,7 +50,12 @@ export function ProfileInfo(props: ProfileInfoPropsType) {
 				if (props.user.contacts[key]) {
 					return (
 						<div key={key} className={s.user__website}>
-							<a href={`https://${props.user.contacts[key]}`}>{key}</a>
+							<a href={`${props.user.contacts[key]}`}>
+								{key}
+							</a>
+							{/*<span>*/}
+							{/*	{props.user.contacts[key]}*/}
+							{/*</span>*/}
 						</div>
 					)
 				} else  {

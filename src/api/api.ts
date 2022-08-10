@@ -32,6 +32,7 @@ export type AuthDataType = {
 
 export type UpdateProfileType = {
 	userId: string
+	aboutMe: string
 	lookingForAJob?: boolean | null
 	lookingForAJobDescription?: string | null
 	fullName?: string | null
@@ -144,7 +145,7 @@ export const profileApi = {
 
 		return instance.put<ResponseType<{}>>('/profile', profileData)
 			.then((resolve) => {
-				console.log(resolve);
+				return resolve.data
 			})
 	}
 }
