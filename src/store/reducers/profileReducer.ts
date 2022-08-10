@@ -226,8 +226,9 @@ export const putProfileTC = (profileData: UpdateProfileType): AppThunkType => (d
 	dispatch(setIsFetching(true));
 	profileApi.updateProfile(profileData)
 		.then((data) => {
-			console.log(`${data} - TC`)
-			dispatch(setUserProfileTC(profileData.userId))
+			if (data.resultCode === 0) {
+				dispatch(setUserProfileTC(profileData.userId))
+			}
 		}).catch((err) => {
 			console.log(err)
 		})
