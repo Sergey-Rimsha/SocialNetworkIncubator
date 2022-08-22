@@ -1,12 +1,13 @@
 Social_Network
 
 Stack: 
-  SCSS, 
-  JavaScript, 
   React / hooks, 
   Redux, Redux-thunk, 
-  Redux-form, 
-  Axios; 
+  SCSS / module.scss, 
+  TypeScript, 
+  Formik, 
+  Axios,
+  Jest
   
 Using TypeScript for best code control; 
 
