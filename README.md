@@ -1,5 +1,7 @@
 Social_Network
 
+
+
 Stack: 
   React / hooks, 
   Redux, Redux-thunk, 
@@ -7,7 +9,8 @@ Stack:
   TypeScript, 
   Formik, 
   Axios,
-  Jest
+  Jest,
+  hoc,
   
 Using TypeScript for best code control; 
 
