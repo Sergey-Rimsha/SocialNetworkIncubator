@@ -1,31 +1,25 @@
-import React, {DetailedHTMLProps, HTMLAttributes, useEffect} from "react";
-import {useSelector} from "react-redux";
-import {AppRootStateType} from "../store/store";
-import {useNavigate} from "react-router-dom";
+import { DetailedHTMLProps, FC, HTMLAttributes, useEffect } from 'react';
 
-import { Navigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-type DivPropsType = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+import { AppRootStateType } from '../store/store';
 
-export const WithAuthRedirect = (props: DivPropsType) => {
+type DivPropsType = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
-	const {children} = props;
+export const WithAuthRedirect: FC<DivPropsType> = ({ children }) => {
+  const navigate = useNavigate();
 
-	const navigate = useNavigate();
+  const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth);
 
-	const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth);
+  const redirect = '/auth';
 
-	const redirect = '/auth';
-	//
-	useEffect(() => {
-		if (!isAuth) navigate(redirect)
-	}, [isAuth, navigate]);
+  useEffect(() => {
+    if (!isAuth) navigate(redirect);
+  }, [isAuth, navigate]);
 
-	if (!isAuth) return <Navigate to={redirect}/>
+  if (!isAuth) return <Navigate to={redirect} />;
 
-	return (
-		<>
-			{children}
-		</>
-	);
-}
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{children}</>;
+};

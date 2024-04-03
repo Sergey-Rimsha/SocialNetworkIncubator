@@ -1,80 +1,91 @@
-import React, {useCallback, useEffect} from "react";
-import {useSelector} from "react-redux";
-import {Profile} from "./Profile";
+import { FC, memo, useCallback, useEffect } from 'react';
+
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { Profile } from './Profile';
+
 import {
-	addPost,
-	onChangeMessPost,
-	ProfileStateType, putPhotoProfileTC,
-	putStatusUserTC,
-	setChangeStatus,
-	setUserProfileTC
-} from "../../store/reducers/profileReducer";
-import {AppDispatch, AppRootStateType} from "../../store/store";
-import {useNavigate, useParams} from "react-router-dom";
+  addPost,
+  onChangeMessPost,
+  ProfileStateType,
+  putPhotoProfileTC,
+  putStatusUserTC,
+  setChangeStatus,
+  setUserProfileTC,
+} from '@/store/reducers/profileReducer.ts';
+import { AppDispatch, AppRootStateType } from '@/store/store.ts';
 
+export const ProfileContainer: FC = memo(() => {
+  const profilePage = useSelector<AppRootStateType, ProfileStateType>(state => state.profilePage);
+  const status = useSelector<AppRootStateType, string>(state => state.profilePage.status);
+  const changeStatus = useSelector<AppRootStateType, string>(state => state.profilePage.changeStatus);
 
-export const ProfileContainer = React.memo(() => {
+  const loginId = useSelector<AppRootStateType, number | null>(state => state.auth.id);
 
-	const profilePage = useSelector<AppRootStateType, ProfileStateType>((state) => state.profilePage);
-	const status = useSelector<AppRootStateType, string>(state => state.profilePage.status);
-	const changeStatus = useSelector<AppRootStateType, string>(state => state.profilePage.changeStatus);
+  const dispatch = AppDispatch();
 
-	const loginId = useSelector<AppRootStateType, number | null>(state => state.auth.id);
+  const params = useParams();
+  const navigate = useNavigate();
 
-	const dispatch = AppDispatch();
+  useEffect(() => {
+    if (!params.userId) {
+      navigate(`/profile/${loginId}`);
+    }
+  }, [params.userId, navigate, loginId]);
 
-	const params = useParams();
-	const navigate = useNavigate();
+  useEffect(() => {
+    if (params.userId) {
+      // @ts-ignore
+      dispatch(setUserProfileTC(params.userId));
+    }
+  }, [params.userId, dispatch]);
 
-	useEffect(() => {
-		if (!params.userId) {
-			navigate(`/profile/${loginId}`)
-		}
-	}, [params.userId, navigate, loginId])
+  const addNewPost = useCallback(() => {
+    dispatch(addPost());
+  }, [dispatch]);
 
-	useEffect(() => {
-		if (params.userId) {
-			dispatch(setUserProfileTC(params.userId));
-		}
-	}, [params.userId, dispatch]);
+  const onChangeHandlerPostText = useCallback(
+    (text: string) => {
+      dispatch(onChangeMessPost(text));
+    },
+    [dispatch],
+  );
 
-	const addNewPost = useCallback(() => {
-		dispatch(addPost());
-	}, [dispatch])
+  const onChangeStatusText = useCallback(
+    (text: string) => {
+      dispatch(setChangeStatus(text));
+    },
+    [dispatch],
+  );
 
-	const onChangeHandlerPostText = useCallback((text: string) => {
-		dispatch(onChangeMessPost(text))
-	},[dispatch])
+  const addStatus = useCallback(() => {
+    if (changeStatus !== status) {
+      if (loginId) {
+        // @ts-ignore
+        dispatch(putStatusUserTC(changeStatus, loginId));
+      }
+    }
+  }, [changeStatus, status, dispatch, loginId]);
 
-	const onChangeStatusText = useCallback((text: string) => {
-		dispatch(setChangeStatus(text))
-	},[dispatch])
+  const addPhoto = useCallback(
+    (filePhoto: File) => {
+      // @ts-ignore
+      dispatch(putPhotoProfileTC(filePhoto));
+    },
+    [dispatch],
+  );
 
-	const addStatus = useCallback(() => {
-		if (changeStatus !== status) {
-			if (loginId) {
-				dispatch(putStatusUserTC(changeStatus, loginId));
-			}
-		}
-	},[changeStatus, status, dispatch, loginId])
-
-	const addPhoto = useCallback((filePhoto: File) => {
-		dispatch(putPhotoProfileTC(filePhoto))
-	}, [dispatch])
-
-
-	return (
-		<>
-			<Profile
-				status={status}
-				changeStatus={changeStatus}
-				profilePage={profilePage}
-				addNewPost={addNewPost}
-				addStatus={addStatus}
-				onChangeStatusText={onChangeStatusText}
-				onChangeHandlerPostText={onChangeHandlerPostText}
-				addPhoto={addPhoto}
-			/>
-		</>
-	)
-})
+  return (
+    <Profile
+      status={status}
+      changeStatus={changeStatus}
+      profilePage={profilePage}
+      addNewPost={addNewPost}
+      addStatus={addStatus}
+      onChangeStatusText={onChangeStatusText}
+      onChangeHandlerPostText={onChangeHandlerPostText}
+      addPhoto={addPhoto}
+    />
+  );
+});

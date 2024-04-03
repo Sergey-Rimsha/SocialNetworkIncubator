@@ -1,33 +1,28 @@
-import React from "react";
-import {authLoginTC, authLogout} from "../../store/reducers/authReducer";
-import {AppDispatch} from "../../store/store";
-import {Login} from "./Login";
+import { FC } from 'react';
+
+import { Login } from './Login';
+
+import { authLoginTC, authLogout } from '@/store/reducers/authReducer.ts';
+import { AppDispatch } from '@/store/store.ts';
 
 export type FormDataType = {
-	email: string
-	password: string
-	rememberMe: boolean
-}
+  email: string;
+  password: string;
+  rememberMe: boolean;
+};
 
+export const LoginContainer: FC = () => {
+  const dispatch = AppDispatch();
 
-export const LoginContainer = () => {
+  const onClickLogout = (): void => {
+    // @ts-ignore
+    dispatch(authLogout());
+  };
 
-	const dispatch = AppDispatch();
+  const onHandlerSubmit = (formData: FormDataType): void => {
+    // @ts-ignore
+    dispatch(authLoginTC(formData));
+  };
 
-	const onClickLogout = () => {
-		dispatch(authLogout())
-	}
-
-	const onHandlerSubmit = (formData: FormDataType) => {
-		dispatch(authLoginTC(formData));
-	}
-
-	return (
-		<>
-			<Login
-				onClickLogout={onClickLogout}
-				onHandlerSubmit={onHandlerSubmit}
-			/>
-		</>
-	)
-}
+  return <Login onClickLogout={onClickLogout} onHandlerSubmit={onHandlerSubmit} />;
+};

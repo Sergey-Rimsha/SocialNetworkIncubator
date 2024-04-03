@@ -1,28 +1,29 @@
-@import "src/scss/variables";
-@import "src/scss/mixins";
-
+@import 'src/scss/variables';
+@import 'src/scss/mixins';
 
 .addPost {
-	width: 450px;
-	background-color: white;
-	border-radius: 10px;
-	box-shadow: 0 0 1px gray;
-	padding: 10px;
-	margin-top: 15px;
-	font-size: 18px;
+  width: 450px;
+  margin-top: 15px;
+  padding: 10px;
 
-	&__txt {
-		margin-top: 15px;
+  font-size: 18px;
 
-		textarea {
-			width: 100%;
-			border-radius: 10px;
-		}
-	}
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 1px gray;
 
-	&__btn {
-		display: flex;
-		justify-content: end;
-		margin-top: 15px;
-	}
+  &__txt {
+    margin-top: 15px;
+
+    textarea {
+      width: 100%;
+      border-radius: 10px;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: end;
+    margin-top: 15px;
+  }
 }

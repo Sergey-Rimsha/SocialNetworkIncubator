@@ -1,41 +1,49 @@
-@import "src/scss/variables";
-@import "src/scss/mixins";
-
+@import 'src/scss/variables';
+@import 'src/scss/mixins';
 
 .button {
-	width: 130px;
-	height: 45px;
-	display: flex;
-	text-align: center;
-	justify-content: center;
-	position: relative;
+  position: relative;
 
-	&__item {
-		width: 120px;
-		height: 40px;
-		@include primaryFont(400, 18px, $bgColor);
-		border: none;
-		border-radius: 10px;
-		cursor: pointer;
-		position: relative;
-		transition: 0.2s;
-		align-items: center;
+  display: flex;
+  justify-content: center;
 
-		&_primary {
-			@include bgButtonGradient();
-		}
+  width: 130px;
+  height: 45px;
 
-		&_secondary {
-			background-color: grey;
-		}
+  text-align: center;
 
-		&:not([disabled]):hover {
-			width: 130px;
-			height: 45px;
-		}
+  &__item {
+    @include primaryFont(400, 18px, $bgColor);
 
-		&:disabled {
-			opacity: 0.7;
-		}
-	}
+    cursor: pointer;
+
+    position: relative;
+
+    align-items: center;
+
+    width: 120px;
+    height: 40px;
+
+    border: none;
+    border-radius: 10px;
+
+    transition: 0.2s;
+
+    &_primary {
+      @include bgButtonGradient;
+    }
+
+    &_secondary {
+      background-color: grey;
+    }
+
+    &:not([disabled]):hover {
+      width: 130px;
+      height: 45px;
+    }
+
+    & :disabled {
+      opacity: 0.7;
+    }
+  }
 }

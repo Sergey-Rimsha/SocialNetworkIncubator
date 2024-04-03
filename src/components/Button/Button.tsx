@@ -1,28 +1,20 @@
+import { ComponentPropsWithoutRef, FC, memo } from 'react';
 
 import s from './Button.module.scss';
-import React, {ButtonHTMLAttributes, DetailedHTMLProps} from "react";
 
+type ButtonPropsType = ComponentPropsWithoutRef<'button'> & {
+  variant: 'primary' | 'secondary';
+};
 
-type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+// eslint-disable-next-line react/prop-types
+export const Button: FC<ButtonPropsType> = memo(({ variant, children, ...restProps }) => {
+  const styleBtn = variant === 'primary' ? `${s.button__item_primary}` : `${s.button__item_secondary}`;
 
-type ButtonPropsType = DefaultButtonPropsType & {
-	color: 'primary' | 'secondary'
-}
-
-export const Button: React.FC<ButtonPropsType> = React.memo(({color, value, ...restProps}) => {
-
-
-	const styleBtn = color === 'primary' ?
-		`${s.button__item_primary}` : `${s.button__item_secondary}`;
-
-	return (
-		<div className={s.button}>
-			<button
-				className={`${s.button__item} ${styleBtn}`}
-				{...restProps}
-			>
-				{value}
-			</button>
-		</div>
-	)
+  return (
+    <div className={s.button}>
+      <button className={`${s.button__item} ${styleBtn}`} type="button" {...restProps}>
+        {children}
+      </button>
+    </div>
+  );
 });

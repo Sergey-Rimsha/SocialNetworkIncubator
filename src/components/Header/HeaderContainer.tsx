@@ -1,17 +1,14 @@
-import React from "react";
-import {Header} from "./Header";
-import {useSelector} from "react-redux";
-import {AuthInitialStateType} from "../../store/reducers/authReducer";
-import {AppRootStateType} from "../../store/store";
+import { FC } from 'react';
 
+import { useSelector } from 'react-redux';
 
-export const HeaderContainer = () => {
+import { Header } from './Header';
 
-	const auth = useSelector<AppRootStateType, AuthInitialStateType>(state => state.auth);
+import { AuthInitialStateType } from '@/store/reducers/authReducer.ts';
+import { AppRootStateType } from '@/store/store.ts';
 
-	return (
-		<>
-			<Header auth={auth}/>
-		</>
-	)
-}
+export const HeaderContainer: FC = () => {
+  const auth = useSelector<AppRootStateType, AuthInitialStateType>(state => state.auth);
+
+  return <Header auth={auth} />;
+};

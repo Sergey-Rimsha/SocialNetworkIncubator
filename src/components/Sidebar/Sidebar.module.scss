@@ -1,32 +1,31 @@
-@import "src/scss/variables";
-@import "src/scss/mixins";
-
+@import 'src/scss/variables';
+@import 'src/scss/mixins';
 
 .sidebar {
-	width: 200px;
-	height: 450px;
-	background-color: $bgColor;
-	margin-right: 20px;
-	border-radius: 10px;
-	box-shadow: 0 0 1px gray;
+  width: 200px;
+  height: 450px;
+  margin-right: 20px;
 
-	& .menu {
-		margin-top: 20px;
+  background-color: $bgColor;
+  border-radius: 10px;
+  box-shadow: 0 0 1px gray;
 
-		&__item {
-			margin-top: 5px;
+  & .menu {
+    margin-top: 20px;
 
-			&_active {
-				background: linear-gradient(to right, #7CB8F7, #ffff 8px);
-			}
-		}
+    &__item {
+      margin-top: 5px;
 
-		& a {
-			font-size: 20px;
-			padding-left: 20px;
-			text-decoration: none;
-			color: $primaryTextColor;
-		}
-	}
+      &_active {
+        background: linear-gradient(to right, #7cb8f7, #ffff 8px);
+      }
+    }
 
+    & a {
+      padding-left: 20px;
+      font-size: 20px;
+      color: $primaryTextColor;
+      text-decoration: none;
+    }
+  }
 }

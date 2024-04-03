@@ -1,28 +1,25 @@
-import {AppDispatch, AppRootStateType} from "../../store/store";
-import {Dialogs} from "./Dialogs";
-import {addMessageChatAC, DialogsType, onChangeMessChatAC} from "../../store/reducers/dialogsReducer";
-import {useSelector} from "react-redux";
+import { FC } from 'react';
 
+import './dialogs.scss';
 
-export const DialogsContainer = () => {
+import { useSelector } from 'react-redux';
 
-	const dialogsPage = useSelector<AppRootStateType, DialogsType>((state) => state.dialogsPage);
-	const dispatch = AppDispatch();
+import { Dialogs } from './Dialogs';
 
-	const onChangeHandler = (text: string) => {
-		dispatch(onChangeMessChatAC(text))
-	}
+import { addMessageChatAC, DialogsType, onChangeMessChatAC } from '@/store/reducers/dialogsReducer.ts';
+import { AppDispatch, AppRootStateType } from '@/store/store.ts';
 
-	const sendMessage = () => {
-		dispatch(addMessageChatAC())
-	}
+export const DialogsContainer: FC = () => {
+  const dialogsPage = useSelector<AppRootStateType, DialogsType>(state => state.dialogsPage);
+  const dispatch = AppDispatch();
 
-	return (
-		<>
-			<Dialogs
-				dialogsPage={dialogsPage}
-				sendMessage={sendMessage}
-				onChangeHandler={onChangeHandler}/>
-		</>
-	)
-}
+  const onChangeHandler = (text: string): void => {
+    dispatch(onChangeMessChatAC(text));
+  };
+
+  const sendMessage = (): void => {
+    dispatch(addMessageChatAC());
+  };
+
+  return <Dialogs dialogsPage={dialogsPage} sendMessage={sendMessage} onChangeHandler={onChangeHandler} />;
+};

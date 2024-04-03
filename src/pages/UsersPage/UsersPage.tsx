@@ -1,52 +1,62 @@
-import React from "react";
-import {UserType} from "../../store/reducers/usersReducer";
-import {User} from "./User";
-import {Pagination} from "../../components/Pagination/Pagination";
+import { FC } from 'react';
+
+import { User } from './User';
+
+import { Pagination } from '@/components/Pagination/Pagination.tsx';
+import { UserType } from '@/store/reducers/usersReducer.ts';
 
 type UsersPagePropsType = {
-    users: Array<UserType>,
-    totalCount: number
-    userPageSize: number
-    currentPage: number
-    toggleUserId: number
-    toggleButton: boolean
-    onFollowUsers: (userId: number) => void
-    unFollowUsers: (userId: number) => void
-    onPageChanged: (pageNumber:number, countUsers?: number) => void
-}
+  users: Array<UserType>;
+  totalCount: number;
+  userPageSize: number;
+  currentPage: number;
+  toggleUserId: number;
+  toggleButton: boolean;
+  onFollowUsers: (userId: number) => void;
+  unFollowUsers: (userId: number) => void;
+  onPageChanged: (pageNumber: number, countUsers?: number) => void;
+};
 
-export const UsersPage = (props: UsersPagePropsType) => {
-    return (
-        <div>
-            <div>
-                <Pagination
-                    totalCount={props.totalCount}
-                    userPageSize={props.userPageSize}
-                    currentPage={props.currentPage}
-                    onPageChanged={props.onPageChanged}
-                />
-            </div>
+export const UsersPage: FC<UsersPagePropsType> = ({
+  users,
+  userPageSize,
+  onPageChanged,
+  onFollowUsers,
+  unFollowUsers,
+  toggleUserId,
+  currentPage,
+  toggleButton,
+  totalCount,
+}) => {
+  return (
+    <div>
+      <div>
+        <Pagination
+          totalCount={totalCount}
+          userPageSize={userPageSize}
+          currentPage={currentPage}
+          onPageChanged={onPageChanged}
+        />
+      </div>
 
-            {
-                props.users.map((u) => {
-                    return (
-                       <User
-                           key={u.id}
-                           id={u.id}
-                           toggleUserId={props.toggleUserId}
-                           toggleButton={props.toggleButton}
-                           name={u.name}
-                           status={u.status}
-                           userPhoto={u.photos.small}
-                           // country={u.country}
-                           // city={u.city}
-                           followed={u.followed}
-                           onFollowUsers={props.onFollowUsers}
-                           unFollowUsers={props.unFollowUsers}
-                       />
-                    )
-                })
-            }
-        </div>
-    )
-}
+      {users.map(u => {
+        return (
+          <User
+            key={u.id}
+            id={u.id}
+            toggleUserId={toggleUserId}
+            toggleButton={toggleButton}
+            name={u.name}
+            status={u.status}
+            userPhoto={u.photos.small}
+            // country={u.country}
+            // city={u.city}
+            followed={u.followed}
+            onFollowUsers={onFollowUsers}
+            unFollowUsers={unFollowUsers}
+          />
+        );
+      })}
+    </div>
+  );
+};

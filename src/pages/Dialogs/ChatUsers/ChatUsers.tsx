@@ -1,22 +1,21 @@
-import React from "react";
-// @ts-ignore
-import UserImg from "../../../assets/img/ava_default.jpg";
-import {Link} from "react-router-dom";
+import { FC } from 'react';
+
+import { Link } from 'react-router-dom';
+
+import UserImg from '../../../assets/img/ava_default.jpg';
 
 type InUser = {
-	userId: number
-	userName: string
-}
+  userId: number;
+  userName: string;
+};
 
-export function ChatUsers(props: InUser) {
-	return (
-		<>
-			<Link to={`/${props.userId}`}>
-				<div className="chat-users">
-					<img src={UserImg} alt="user_img"/>
-					<div className="user-name">{props.userName}</div>
-				</div>
-			</Link>
-		</>
-	)
-}
+export const ChatUsers: FC<InUser> = ({ userId, userName }) => {
+  return (
+    <Link to={`/${userId}`}>
+      <div className="chat-users">
+        <img src={UserImg} alt="user_img" />
+        <div className="user-name">{userName}</div>
+      </div>
+    </Link>
+  );
+};

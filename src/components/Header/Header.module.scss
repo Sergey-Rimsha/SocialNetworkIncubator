@@ -1,25 +1,24 @@
-@import "src/scss/variables";
-@import "src/scss/mixins";
+@import 'src/scss/variables';
+@import 'src/scss/mixins';
 
 .header {
-	display: flex;
-	align-items: center;
-	background-color: $bgColor;
+  display: flex;
+  align-items: center;
+  background-color: $bgColor;
 
-	&__block {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
+  &__block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-	&__logo {
-		width: 95px;
-	}
+  &__logo {
+    width: 95px;
+  }
 
-	&__login {
-
-		& a {
-			text-decoration: none;
-		}
-	}
+  &__login {
+    & a {
+      text-decoration: none;
+    }
+  }
 }

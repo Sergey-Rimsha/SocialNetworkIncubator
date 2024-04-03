@@ -1,17 +1,13 @@
-import React from "react";
 import './Preloader.scss';
+import { FC } from 'react';
 
-export const Preloader = () => {
-    return (
-        <div className="preloader">
-            <div className="dot">
-            </div>
-            <div className="dot">
-            </div>
-            <div className="dot">
-            </div>
-            <div className="dot">
-            </div>
-        </div>
-    )
-}
+export const Preloader: FC = () => {
+  return (
+    <div className="preloader">
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+    </div>
+  );
+};

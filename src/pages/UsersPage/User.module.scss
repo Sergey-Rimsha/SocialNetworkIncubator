@@ -1,40 +1,40 @@
-@import "src/scss/variables";
-@import "src/scss/mixins";
-
+@import 'src/scss/variables';
+@import 'src/scss/mixins';
 
 .userBox {
-	padding: 10px;
-	display: flex;
-	justify-content: space-between;
-	//justify-content: space-around;
-	align-items: center;
-	//border: gray solid 1px;
-	border-radius: 10px;
-	box-shadow: 0 0 1px gray;
-	margin-top: 10px;
-	font-size: 18px;
-	background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-	.userImg {
+  margin-top: 10px;
+  padding: 10px;
 
-		& img {
-			width: 60px;
-			border-radius: 10px;
-		}
-	}
+  font-size: 18px;
 
-	.userInfo {
-		min-height: 70px;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		margin-left: 15px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 1px gray;
 
-		&__name {
-			font-style: italic;
-			font-weight: bold;
-			font-size: 20px;
-		}
-	}
+  .userImg {
+    & img {
+      width: 60px;
+      border-radius: 10px;
+    }
+  }
+
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 100%;
+    min-height: 70px;
+    margin-left: 15px;
+
+    &__name {
+      font-size: 20px;
+      font-weight: bold;
+      font-style: italic;
+    }
+  }
 }

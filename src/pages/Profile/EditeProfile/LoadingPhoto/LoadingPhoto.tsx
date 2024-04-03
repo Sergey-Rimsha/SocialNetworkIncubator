@@ -1,59 +1,54 @@
-import {Button} from "../../../../components/Button/Button";
-import React, {ChangeEvent, useState} from "react";
-import s from "../../Profile.module.scss";
+import { ChangeEvent, memo, useState } from 'react';
+
+import s from '../../Profile.module.scss';
+
+import { Button } from '@/components/Button/Button.tsx';
 
 type LoadingPhotoPropsType = {
-	saveSettings: (photo: File) => void
-}
+  saveSettings: (photo: File) => void;
+};
 
-export const LoadingPhoto = React.memo((props: LoadingPhotoPropsType) => {
+export const LoadingPhoto = memo((props: LoadingPhotoPropsType) => {
+  const [photo, setPhoto] = useState<File>();
+  const [editMode, setEditMode] = useState<boolean>(false);
 
-	const [photo, setPhoto] = useState<File>();
-	const [editMode, setEditMode] = useState<boolean>(false);
+  const savePhoto = (e: ChangeEvent<HTMLInputElement>): void => {
+    if (e.currentTarget.files) {
+      setPhoto(e.currentTarget.files[0]);
+    }
+  };
 
-	const savePhoto = (e: ChangeEvent<HTMLInputElement>) => {
-		if (e.currentTarget.files) {
-			setPhoto(e.currentTarget.files[0])
-		}
-	}
+  const onSaveSettings = (photo: File): void => {
+    props.saveSettings(photo);
+  };
 
-	const onSaveSettings =(photo: File) => {
-		props.saveSettings(photo);
-	}
+  const onHandleClickSaveSettings = (): void => {
+    if (photo) {
+      onSaveSettings(photo);
+      setEditMode(false);
+      setPhoto(undefined);
+    }
+  };
 
-	const onHandleClickSaveSettings =() => {
-		if (photo) {
-			onSaveSettings(photo);
-			setEditMode(false);
-			setPhoto(undefined);
-		}
-	}
+  const onHandlerEditeMode = (): void => {
+    setEditMode(true);
+  };
 
-	const onHandlerEditeMode = () => {
-		setEditMode(true);
-	}
-	return (
-		<>
-			{
-				!editMode ?
-					<Button
-						onClick={onHandlerEditeMode}
-						color={'primary'}
-						value={'Edit'}/> :
-					<div className={s.user__editeBlock}>
-						<input
-							id='photo'
-							name={'photo'}
-							type={"file"}
-							accept='image/png, image/jpeg'
-							onChange={savePhoto}
-						/>
-						<Button
-							onClick={onHandleClickSaveSettings}
-							color={'secondary'}
-							value={'save'}/>
-					</div>
-			}
-		</>
-	)
-})
+  return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
+      {!editMode ? (
+        <Button variant="primary" onClick={onHandlerEditeMode}>
+          Edit
+        </Button>
+      ) : (
+        <div className={s.user__editeBlock}>
+          <input id="photo" name="photo" type="file" accept="image/png, image/jpeg" onChange={savePhoto} />
+          <Button variant="secondary" onClick={onHandleClickSaveSettings}>
+            save
+          </Button>
+        </div>
+      )}
+    </>
+  );
+});

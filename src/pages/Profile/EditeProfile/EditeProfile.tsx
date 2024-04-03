@@ -1,29 +1,24 @@
-import React from "react";
+import { FC } from 'react';
 
 import s from './EditeProfile.module.scss';
-import {EditeProfileForm} from "./EditeProfileForm/EditeProfileForm";
+import { EditeProfileForm } from './EditeProfileForm/EditeProfileForm';
 
 export type EditeProfilePropsType = {
-	onClickHandlerEditeMode: (edite: boolean) => void
-}
+  onClickHandlerEditeMode: (edite: boolean) => void;
+};
 
-
-export const EditeProfile = (props: EditeProfilePropsType) => {
-
-	return (
-		<div className={s.editeProfile}>
-			<div className={s.editeProfile__title}>
-				Edite Mode
-			</div>
-			<div className={s.editeProfile__block}>
-				<div className={s.editeProfile__contacts}>
-
-					<EditeProfileForm onClickHandlerEditeMode={props.onClickHandlerEditeMode}/>
-				</div>
-			</div>
-		</div>
-	)
-}
+export const EditeProfile: FC<EditeProfilePropsType> = ({ onClickHandlerEditeMode }) => {
+  return (
+    <div className={s.editeProfile}>
+      <div className={s.editeProfile__title}>Edite Mode</div>
+      <div className={s.editeProfile__block}>
+        <div className={s.editeProfile__contacts}>
+          <EditeProfileForm onClickHandlerEditeMode={onClickHandlerEditeMode} />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 // userId: required(integer)
 // lookingForAJob: required(boolean)

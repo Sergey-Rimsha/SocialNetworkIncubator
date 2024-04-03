@@ -1,32 +1,37 @@
-@import "src/scss/variables";
-@import "src/scss/mixins";
+@import 'src/scss/variables';
+@import 'src/scss/mixins';
 
 .posts {
-	width: 100%;
+  width: 100%;
 
-	.post {
-		display: flex;
-		align-items: center;
-		background-color: white;
-		border-radius: 10px;
-		box-shadow: 0 0 1px gray;
-		margin-top: 15px;
-		padding: 10px;
-		position: relative;
-		font-size: 18px;
+  .post {
+    position: relative;
 
-		&__user {
-			margin-right: 25px;
-			img {
-				width: 90px;
-				border-radius: 100%;
-			}
-		}
+    display: flex;
+    align-items: center;
 
-		&__like {
-			position: absolute;
-			bottom: 10px;
-			right: 10px;
-		}
-	}
+    margin-top: 15px;
+    padding: 10px;
+
+    font-size: 18px;
+
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 1px gray;
+
+    &__user {
+      margin-right: 25px;
+
+      img {
+        width: 90px;
+        border-radius: 100%;
+      }
+    }
+
+    &__like {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+    }
+  }
 }

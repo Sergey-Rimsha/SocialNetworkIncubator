@@ -1,46 +1,43 @@
-import {ChatPage} from "./ChatPage";
-import {AppDispatch, AppRootStateType} from "../../store/store";
-import {addMessageChatAC, onChangeMessChatAC} from "../../store/reducers/dialogsReducer";
-import {useSelector} from "react-redux";
-import {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
-import {ChatStateType, setMessageChat} from "../../store/reducers/chatReducer";
+import { FC, useEffect } from 'react';
 
-export const ChatContainer = () => {
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-	const chat = useSelector<AppRootStateType, ChatStateType>(state => state.chat);
-	const chatUsers = Object.keys(chat);
+import { ChatPage } from './ChatPage';
 
-	const navigate = useNavigate()
+import { ChatStateType, setMessageChat } from '@/store/reducers/chatReducer.ts';
+import { onChangeMessChatAC } from '@/store/reducers/dialogsReducer.ts';
+import { AppDispatch, AppRootStateType } from '@/store/store.ts';
 
-	const dispatch = AppDispatch();
+export const ChatContainer: FC = () => {
+  const chat = useSelector<AppRootStateType, ChatStateType>(state => state.chat);
+  const chatUsers = Object.keys(chat);
 
-	const onChangeHandler = (text: string) => {
-		dispatch(onChangeMessChatAC(text))
-	}
+  const navigate = useNavigate();
 
-	const sendMessage = (userChat: string, text: string) => {
+  const dispatch = AppDispatch();
 
-		// test my id
-		const user_id = 'my';
+  const onChangeHandler = (text: string): void => {
+    // @ts-ignore
+    dispatch(onChangeMessChatAC(text));
+  };
 
-		if (setMessageChat) {
-			dispatch(setMessageChat(userChat, text, user_id))
-		}
-		dispatch(onChangeMessChatAC(''))
-	}
+  const sendMessage = (userChat: string, text: string): void => {
+    // test my id
+    // eslint-disable-next-line camelcase
+    const user_id = 'my';
 
-	useEffect(() => {
-		if (chatUsers[0]) {
-			navigate(`/chat/${chatUsers[0]}`)
-		}
-	},[])
+    if (setMessageChat) {
+      dispatch(setMessageChat(userChat, text, user_id));
+    }
+    dispatch(onChangeMessChatAC(''));
+  };
 
-	return (
-		<>
-			<ChatPage
-				onChangeHandler={onChangeHandler}
-				sendMessage={sendMessage}/>
-		</>
-	)
+  useEffect(() => {
+    if (chatUsers[0]) {
+      navigate(`/chat/${chatUsers[0]}`);
+    }
+  }, [chatUsers, navigate]);
+
+  return <ChatPage onChangeHandler={onChangeHandler} sendMessage={sendMessage} />;
 };

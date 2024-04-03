@@ -1,34 +1,26 @@
-import React from "react";
+import { FC } from 'react';
+
+import UserImg from '../../../assets/img/ava_default.jpg';
 
 import s from './Post.module.scss';
 
-import UserImg from "../../../assets/img/ava_default.jpg";
-
 type InPost = {
-	id: number
-	message: string
-	likesCount: number
-}
+  // eslint-disable-next-line react/no-unused-prop-types
+  id: number;
+  message: string;
+  likesCount: number;
+};
 
-export function Post(props: InPost) {
-
-	return (
-		<div className={s.posts}>
-			<div className={s.post}>
-				<div className={s.post__user}>
-					<img src={UserImg} alt="user_img"/>
-				</div>
-				<div className={s.post__text}>
-					{props.message}
-				</div>
-				<div className={s.post__like}>
-					{`likes: ${props.likesCount}`}
-				</div>
-			</div>
-		</div>
-	)
-}
-
-
-
-
+export const Post: FC<InPost> = ({ message, likesCount }) => {
+  return (
+    <div className={s.posts}>
+      <div className={s.post}>
+        <div className={s.post__user}>
+          <img src={UserImg} alt="user_img" />
+        </div>
+        <div className={s.post__text}>{message}</div>
+        <div className={s.post__like}>{`likes: ${likesCount}`}</div>
+      </div>
+    </div>
+  );
+};
