@@ -3,19 +3,19 @@ import { ChangeEvent, FC, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import defaultImg from '../../../assets/img/ava_default.jpg';
-import sendImg from '../../../assets/img/send_img.png';
-
 import s from './Dialog.module.scss';
 
+import defaultImg from '@/shared/assets/img/ava_default.jpg';
+import sendImg from '@/shared/assets/img/send_img.png';
 import { ChatStateType } from '@/store/reducers/chatReducer.ts';
 import { AppRootStateType } from '@/store/store.ts';
 
 export type DialogsPropsType = {
   sendMessage: (userChat: string, text: string) => void;
+  onChangeHandler: (text: string) => void;
 };
 
-export const Dialogs: FC<DialogsPropsType> = ({ sendMessage }) => {
+export const Dialogs: FC<DialogsPropsType> = ({ onChangeHandler, sendMessage }) => {
   const [newMassage, setNewMassage] = useState('');
 
   const { userChat } = useParams();
@@ -24,6 +24,7 @@ export const Dialogs: FC<DialogsPropsType> = ({ sendMessage }) => {
 
   const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     setNewMassage(e.currentTarget.value);
+    onChangeHandler(e.currentTarget.value);
   };
 
   const onClickHandlerMessage = (): void => {

@@ -1,18 +1,17 @@
 import { FC } from 'react';
 
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import logo from '../../assets/img/logo.svg';
+import s from './header.module.scss';
 
-import s from './Header.module.scss';
-
+import logo from '@/shared/assets/img/logo.svg';
 import { AuthInitialStateType } from '@/store/reducers/authReducer.ts';
+import { AppRootStateType } from '@/store/store.ts';
 
-export type HeaderPropsType = {
-  auth: AuthInitialStateType;
-};
+export const Header: FC = () => {
+  const auth = useSelector<AppRootStateType, AuthInitialStateType>(state => state.auth);
 
-export const Header: FC<HeaderPropsType> = ({ auth }) => {
   return (
     <header className={s.header}>
       <div className="container">

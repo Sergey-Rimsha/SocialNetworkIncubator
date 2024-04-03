@@ -3,7 +3,7 @@ import { DetailedHTMLProps, FC, HTMLAttributes, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-import { AppRootStateType } from '../store/store';
+import { AppRootStateType } from '@/store/store.ts';
 
 type DivPropsType = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 

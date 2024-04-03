@@ -3,8 +3,6 @@ import { FC, memo, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import UserImg from '../../assets/img/ava_default.jpg';
-
 import { AddPost } from './AddPost/AddPost';
 import { EditeProfile } from './EditeProfile/EditeProfile';
 import { LoadingPhoto } from './EditeProfile/LoadingPhoto/LoadingPhoto';
@@ -12,7 +10,8 @@ import { Post } from './Post/Post';
 import s from './Profile.module.scss';
 import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
-import { Button } from '@/components/Button/Button.tsx';
+import UserImg from '@/shared/assets/img/ava_default.jpg';
+import { Button } from '@/shared/ui';
 import { ProfileStateType } from '@/store/reducers/profileReducer.ts';
 import { AppRootStateType } from '@/store/store.ts';
 

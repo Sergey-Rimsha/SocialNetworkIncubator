@@ -3,11 +3,10 @@ import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
-import { HeaderContainer } from '../components/Header/HeaderContainer';
-import { Preloader } from '../components/Preloader/Preloader';
-import { Sidebar } from '../components/Sidebar/Sidebar';
 import { initializeApp } from '../store/reducers/utilsReducer';
 import { AppRootStateType } from '../store/store';
+
+import { Header, Preloader, Sidebar } from '@/shared/ui';
 
 export const Layout: FC = () => {
   const dispatch = useDispatch();
@@ -26,7 +25,7 @@ export const Layout: FC = () => {
 
   return (
     <div className="layout">
-      <HeaderContainer />
+      <Header />
       {isFetching && <Preloader />}
       {/* <div className="page"> */}
       <div className="container">

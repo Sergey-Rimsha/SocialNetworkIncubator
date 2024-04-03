@@ -2,9 +2,10 @@ import { FC, lazy, Suspense } from 'react';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { WithAuthRedirect } from '../../hoc/WithAuthRedirect';
 import { LoginContainer } from '../../pages/Auth/LoginContainer';
 import { Layout } from '../Layout';
+
+import { WithAuthRedirect } from '@/shared/utils/hoc/WithAuthRedirect';
 
 const ProfileContainer = lazy(() =>
   import('../../pages/Profile/ProfileContainer').then(({ ProfileContainer }) => ({ default: ProfileContainer })),

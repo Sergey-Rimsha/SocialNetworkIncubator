@@ -2,11 +2,10 @@ import { FC } from 'react';
 
 import { NavLink } from 'react-router-dom';
 
-import UserImg from '../../assets/img/ava_default.jpg';
-
 import s from './User.module.scss';
 
-import { Button } from '@/components/Button/Button.tsx';
+import UserImg from '@/shared/assets/img/ava_default.jpg';
+import { Button } from '@/shared/ui';
 
 type UserPropsType = {
   id: number;
@@ -60,15 +59,13 @@ export const User: FC<UserPropsType> = ({
       {/*	<div>city: {"props.city"}</div> */}
       {/* </div> */}
       {!followed ? (
-        <Button variant="primary" value="follow" type="button" disabled={btnActive} onClick={onClickHandlerFollow} />
+        <Button variant="primary" disabled={btnActive} onClick={onClickHandlerFollow}>
+          follow
+        </Button>
       ) : (
-        <Button
-          variant="secondary"
-          value="unfollow"
-          type="button"
-          disabled={btnActive}
-          onClick={onClickHandlerUnFollow}
-        />
+        <Button variant="secondary" disabled={btnActive} onClick={onClickHandlerUnFollow}>
+          unfollow
+        </Button>
       )}
     </div>
   );

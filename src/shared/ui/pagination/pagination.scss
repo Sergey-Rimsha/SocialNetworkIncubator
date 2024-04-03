@@ -1,0 +1,39 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  font-size: 20px;
+
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 1px gray;
+
+  & button {
+    width: 40px;
+    height: 30px;
+
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+
+    background: linear-gradient(to right, #7cb8f7, #2a8bf2);
+    border: none;
+    border-radius: 10px;
+  }
+
+  &__page {
+    display: flex;
+  }
+
+  & span {
+    margin: 0 5px;
+  }
+
+  .active {
+    font-weight: bold;
+    transition: 0.4s;
+  }
+}

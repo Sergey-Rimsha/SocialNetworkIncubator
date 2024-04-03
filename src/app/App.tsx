@@ -1,4 +1,4 @@
-import '../scss/style.scss';
+import '@/shared/scss/style.scss';
 import { FC } from 'react';
 
 import { Provider } from 'react-redux';

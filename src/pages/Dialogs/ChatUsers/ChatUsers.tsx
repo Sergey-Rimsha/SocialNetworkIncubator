@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import UserImg from '../../../assets/img/ava_default.jpg';
+import UserImg from '@/shared/assets/img/ava_default.jpg';
 
 type InUser = {
   userId: number;

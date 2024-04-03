@@ -1,6 +1,6 @@
-import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import { ChangeEvent, DetailedHTMLProps, FC, InputHTMLAttributes } from 'react';
 
-import s from './SuperCheckbox.module.scss';
+import s from './super-checkbox.module.scss';
 
 // тип пропсов обычного инпута
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
@@ -10,7 +10,7 @@ type SuperCheckboxPropsType = DefaultInputPropsType & {
   spanClassName?: string;
 };
 
-const SuperCheckbox: React.FC<SuperCheckboxPropsType> = ({
+export const SuperCheckbox: FC<SuperCheckboxPropsType> = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   type, // достаём и игнорируем чтоб нельзя было задать другой тип инпута
   onChange,
@@ -45,5 +45,3 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = ({
     </label>
   );
 };
-
-export default SuperCheckbox;

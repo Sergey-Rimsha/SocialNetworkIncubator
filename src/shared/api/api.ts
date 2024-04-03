@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-// const axios = require('axios');
-
 export type ResponseType<T> = {
   data: T;
   resultCode: number;

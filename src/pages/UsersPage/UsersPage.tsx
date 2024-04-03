@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { User } from './User';
 
-import { Pagination } from '@/components/Pagination/Pagination.tsx';
+import { Pagination } from '@/shared/ui';
 import { UserType } from '@/store/reducers/usersReducer.ts';
 
 type UsersPagePropsType = {

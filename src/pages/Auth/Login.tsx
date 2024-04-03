@@ -4,8 +4,7 @@ import { useFormik } from 'formik';
 
 import s from './Login.module.scss';
 
-import { Button } from '@/components/Button/Button.tsx';
-import SuperCheckbox from '@/components/SuperCheckbox/SuperCheckbox.tsx';
+import { Button, SuperCheckbox } from '@/shared/ui';
 
 type FormikErrorType = {
   email?: string;
@@ -96,8 +95,12 @@ export const Login: FC<PropsLoginType> = ({ onHandlerSubmit, onClickLogout }) =>
             </SuperCheckbox>
           </div>
           <div className={s.auth__btnWrap}>
-            <Button variant="primary" type="submit" value="login" disabled={false} />
-            <Button variant="secondary" type="button" value="logout" disabled={false} onClick={onClickLogout} />
+            <Button variant="primary" type="submit" disabled={false}>
+              login
+            </Button>
+            <Button variant="secondary" type="button" disabled={false} onClick={onClickLogout}>
+              logout
+            </Button>
           </div>
         </form>
       </div>

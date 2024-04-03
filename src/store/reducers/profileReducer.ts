@@ -1,4 +1,4 @@
-import { profileApi, UpdateProfileType, usersApi } from '@/api/api.ts';
+import { profileApi, UpdateProfileType, usersApi } from '@/shared/api/api.ts';
 // eslint-disable-next-line import/no-cycle
 import { setIsFetching } from '@/store/reducers/utilsReducer.ts';
 import { AppThunkType } from '@/store/store.ts';

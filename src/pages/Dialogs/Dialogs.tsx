@@ -1,10 +1,9 @@
 import { FC } from 'react';
 
-import UserImg from '../../assets/img/ava_default.jpg';
-
 import { ChatUsers } from './ChatUsers/ChatUsers';
 import { SendMessage } from './SendMessage/SendMessage';
 
+import UserImg from '@/shared/assets/img/ava_default.jpg';
 import { DialogsType, InMessage, InUser } from '@/store/reducers/dialogsReducer.ts';
 
 type PropsType = {

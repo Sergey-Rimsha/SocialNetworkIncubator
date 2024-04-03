@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, FC, ReactElement, useState } from 'react';
 
-import './Pagination.scss';
+import './pagination.scss';
 
 type PaginationPropsType = {
   totalCount: number;
@@ -98,7 +98,7 @@ export const Pagination: FC<PaginationPropsType> = ({ totalCount, currentPage, o
       <button type="button" disabled={prevBtn} onClick={() => onClickPrevHandler(currentPage)}>
         {'<'}
       </button>
-      <div>{renderPagination()}</div>
+      <div className="pagination__page">{renderPagination()}</div>
       <button type="button" disabled={nextBtn} onClick={() => onClickNextHandler(currentPage)}>
         {'>'}
       </button>

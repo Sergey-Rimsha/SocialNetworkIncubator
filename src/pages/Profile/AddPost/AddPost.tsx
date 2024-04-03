@@ -2,7 +2,7 @@ import { ChangeEvent, FC } from 'react';
 
 import s from './AddPost.module.scss';
 
-import { Button } from '@/components/Button/Button.tsx';
+import { Button } from '@/shared/ui';
 
 type PropsType = {
   changeMessage: string;

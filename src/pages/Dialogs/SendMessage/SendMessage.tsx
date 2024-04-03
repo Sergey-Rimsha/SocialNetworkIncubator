@@ -1,6 +1,6 @@
 import { ChangeEvent, FC } from 'react';
 
-import UserImg from '../../../assets/img/ava_default.jpg';
+import UserImg from '@/shared/assets/img/ava_default.jpg';
 
 type NewMessagesPropsType = {
   changeMessChat: string;

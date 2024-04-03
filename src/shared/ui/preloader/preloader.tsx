@@ -1,4 +1,4 @@
-import './Preloader.scss';
+import './preloader.scss';
 import { FC } from 'react';
 
 export const Preloader: FC = () => {

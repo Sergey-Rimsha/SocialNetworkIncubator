@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { NavLink } from 'react-router-dom';
 
-import s from './Sidebar.module.scss';
+import s from './sidebar.module.scss';
 
 export const Sidebar: FC = () => {
   const setActive = ({ isActive }: { isActive: boolean }): string => (isActive ? `${s.menu__item_active}` : '');

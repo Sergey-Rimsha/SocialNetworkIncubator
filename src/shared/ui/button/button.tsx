@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, FC, memo } from 'react';
 
-import s from './Button.module.scss';
+import s from './button.module.scss';
 
 type ButtonPropsType = ComponentPropsWithoutRef<'button'> & {
   variant: 'primary' | 'secondary';

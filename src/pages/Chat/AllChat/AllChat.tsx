@@ -3,10 +3,9 @@ import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import defaultImg from '../../../assets/img/ava_default.jpg';
-
 import s from './AllChat.module.scss';
 
+import defaultImg from '@/shared/assets/img/ava_default.jpg';
 import { ChatStateType } from '@/store/reducers/chatReducer.ts';
 import { AppRootStateType } from '@/store/store.ts';
 

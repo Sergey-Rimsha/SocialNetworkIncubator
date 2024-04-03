@@ -1,4 +1,4 @@
-import { authApi, AuthDataType } from '@/api/api.ts';
+import { authApi, AuthDataType } from '@/shared/api/api.ts';
 // eslint-disable-next-line import/no-cycle
 import { setIsFetching } from '@/store/reducers/utilsReducer.ts';
 // eslint-disable-next-line import/no-cycle

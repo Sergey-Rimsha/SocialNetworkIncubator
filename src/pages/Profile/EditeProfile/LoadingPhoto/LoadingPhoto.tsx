@@ -2,7 +2,7 @@ import { ChangeEvent, memo, useState } from 'react';
 
 import s from '../../Profile.module.scss';
 
-import { Button } from '@/components/Button/Button.tsx';
+import { Button } from '@/shared/ui';
 
 type LoadingPhotoPropsType = {
   saveSettings: (photo: File) => void;
