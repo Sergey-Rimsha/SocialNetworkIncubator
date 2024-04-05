@@ -5,7 +5,6 @@
   box-sizing: border-box;
 }
 
-
 .layout {
   @include primaryFont(500, 18px, $primaryTextColor);
 
@@ -19,7 +18,7 @@
 }
 
 .container {
-  width: 1200px;
+  width: 1440px;
   margin: 0 auto;
 }
 

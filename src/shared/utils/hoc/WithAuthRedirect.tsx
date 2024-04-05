@@ -1,24 +1,18 @@
-import { DetailedHTMLProps, FC, HTMLAttributes, useEffect } from 'react';
+import { ComponentPropsWithoutRef, FC } from 'react';
 
 import { useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { AppRootStateType } from '@/store/store.ts';
 
-type DivPropsType = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
-
-export const WithAuthRedirect: FC<DivPropsType> = ({ children }) => {
-  const navigate = useNavigate();
-
+export const WithAuthRedirect: FC<ComponentPropsWithoutRef<'div'>> = ({ children }) => {
   const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth);
 
-  const redirect = '/auth';
+  const redirect = '/auth/login';
 
-  useEffect(() => {
-    if (!isAuth) navigate(redirect);
-  }, [isAuth, navigate]);
-
-  if (!isAuth) return <Navigate to={redirect} />;
+  if (!isAuth) {
+    return <Navigate to={redirect} />;
+  }
 
   // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{children}</>;

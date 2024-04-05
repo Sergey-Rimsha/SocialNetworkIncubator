@@ -1,21 +1,22 @@
 import '@/shared/scss/style.scss';
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 
 import { store } from '../store/store';
 
-import { Routing } from './Routing/Routing';
+import { router } from '@/app/router.tsx';
+import { Preloader } from '@/shared/ui';
 
 const App: FC = () => {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <div className="App">
-          <Routing />
-        </div>
-      </BrowserRouter>
+      <div className="App">
+        <Suspense fallback={<Preloader />}>
+          <RouterProvider router={router} />
+        </Suspense>
+      </div>
     </Provider>
   );
 };
